@@ -1,0 +1,27 @@
+buildscript {
+    repositories {
+        maven {
+            allowInsecureProtocol = true
+            url = "http://maven.aliyun.com/nexus/content/groups/public"
+        }
+        maven {
+            url = "https://maven.aliyun.com/repository/jcenter"
+        }
+    }
+}
+
+allprojects {
+
+    group = "org.example.alvin"
+    version = "1.0.0-SNAPSHOT"
+
+    repositories {
+        maven {
+            allowInsecureProtocol = true
+            url = "http://maven.aliyun.com/nexus/content/groups/public"
+        }
+        maven {
+            url = "https://maven.aliyun.com/repository/jcenter"
+        }
+    }
+}
