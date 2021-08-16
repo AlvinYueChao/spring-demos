@@ -3,8 +3,18 @@ plugins {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    annotationProcessor("org.projectlombok:lombok:${lombok_version}")
+    compileOnly("org.projectlombok:lombok:${lombok_version}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombok_version}")
+    testCompileOnly("org.projectlombok:lombok:${lombok_version}")
+
+    implementation("org.springframework:spring-context:${spring_version}")
+
+    implementation("org.apache.logging.log4j:log4j-api:${log4j_version}")
+    implementation("org.apache.logging.log4j:log4j-core:${log4j_version}")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${jupiter_version}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${jupiter_version}")
 }
 
 test {
