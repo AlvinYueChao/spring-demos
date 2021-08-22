@@ -21,7 +21,7 @@ class TestStudentBean {
   @Test
   void test2() {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
-    SayHiClass sayHiClass = (SayHiClass) applicationContext.getBean("sayHiClass");
+    SayHiClass sayHiClass = applicationContext.getBean(SayHiClass.class);
     Assertions.assertEquals("Hi, I'm a woman", sayHiClass.sayHi());
   }
 }
