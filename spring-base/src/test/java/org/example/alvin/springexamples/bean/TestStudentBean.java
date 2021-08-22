@@ -25,4 +25,11 @@ class TestStudentBean {
     SayHiClass sayHiClass = applicationContext.getBean(SayHiClass.class);
     Assertions.assertEquals("Hi, I'm a woman", sayHiClass.sayHi());
   }
+
+  @Test
+  void test3() {
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+    BeanWithoutComponent bean = applicationContext.getBean(BeanWithoutComponent.class);
+    Assertions.assertEquals("overrideName", bean.getName());
+  }
 }
