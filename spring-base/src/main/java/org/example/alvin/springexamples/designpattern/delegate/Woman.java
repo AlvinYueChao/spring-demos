@@ -1,4 +1,4 @@
-package org.example.alvin.springexamples.bean;
+package org.example.alvin.springexamples.designpattern.delegate;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

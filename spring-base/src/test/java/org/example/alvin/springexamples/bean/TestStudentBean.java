@@ -2,6 +2,7 @@ package org.example.alvin.springexamples.bean;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.alvin.springexamples.designpattern.delegate.SayHiClass;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
