@@ -9,8 +9,8 @@
 
   <bean id="student" name="alias1,alias2" class="org.example.alvin.springexamples.bean.Student"/>
 
-  <bean id="woman" class="org.example.alvin.springexamples.designpattern.delegate.Woman" />
-  <bean id="sayHiClass" class="org.example.alvin.springexamples.designpattern.delegate.SayHiClass">
+  <bean id="woman" class="org.example.alvin.springexamples.designpattern.Woman" />
+  <bean id="sayHiClass" class="org.example.alvin.springexamples.designpattern.SayHiClass">
     <lookup-method name="getPeople" bean="woman" />
   </bean>
 

@@ -1,4 +1,4 @@
-package org.example.alvin.springexamples.designpattern.delegate;
+package org.example.alvin.springexamples.designpattern;
 
 public abstract class SayHiClass {
 
