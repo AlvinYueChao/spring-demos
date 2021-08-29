@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 class TestBean {
@@ -29,13 +28,14 @@ class TestBean {
   @Test
   void test3() {
     ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
-    /**
+    /*
      * if MyApplicationListener has @Component tag, then {@link MyApplicationListener#onApplicationEvent(MyApplicationEvent)} will be triggered twice
      * Observe Pattern
      * {@link ApplicationEventMulticaster#addApplicationListener(org.springframework.context.ApplicationListener)}
+     * 1. @Component => register the subscriber during the spring container startup
+     * 2. addApplicationListener => register the subscriber after the spring container startup completely
      */
     applicationContext.addApplicationListener(new MyApplicationListener());
     applicationContext.publishEvent(new MyApplicationEvent("Alvin"));
-    applicationContext.start();
   }
 }
