@@ -30,11 +30,11 @@ class TestBean {
   void test3() {
     ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
     /**
-     * 如果给MyApplicationListener加上@Component注解，则{@link MyApplicationListener#onApplicationEvent(MyApplicationEvent)}会被执行两次
-     * 观察者模式
+     * if MyApplicationListener has @Component tag, then {@link MyApplicationListener#onApplicationEvent(MyApplicationEvent)} will be triggered twice
+     * Observe Pattern
      * {@link ApplicationEventMulticaster#addApplicationListener(org.springframework.context.ApplicationListener)}
      */
-//    applicationContext.addApplicationListener(new MyApplicationListener());
+    applicationContext.addApplicationListener(new MyApplicationListener());
     applicationContext.publishEvent(new MyApplicationEvent("Alvin"));
     applicationContext.start();
   }

@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class MyApplicationListener implements ApplicationListener<MyApplicationEvent> {
 
   private static final Logger LOGGER = LogManager.getLogger(MyApplicationListener.class);
