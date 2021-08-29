@@ -15,7 +15,7 @@ class TestBean {
   void test1() {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
     Student student = applicationContext.getBean(Student.class);
-    Assertions.assertEquals("alvin", student.getName());
+    Assertions.assertEquals("Alvin", student.getName());
   }
 
   @Test
@@ -23,5 +23,13 @@ class TestBean {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
     BeanWithoutComponent bean = applicationContext.getBean(BeanWithoutComponent.class);
     Assertions.assertEquals("overrideName", bean.getName());
+  }
+
+  @Test
+  void test3() {
+    ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+    applicationContext.addApplicationListener(new MyApplicationListener());
+    applicationContext.publishEvent(new MyApplicationEvent("Alvin"));
+    applicationContext.start();
   }
 }
