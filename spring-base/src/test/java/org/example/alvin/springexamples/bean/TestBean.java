@@ -38,4 +38,11 @@ class TestBean {
     applicationContext.addApplicationListener(new MyApplicationListener());
     applicationContext.publishEvent(new MyApplicationEvent("Alvin"));
   }
+
+  @Test
+  void test4() {
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+    CustomBean bean = applicationContext.getBean(CustomBean.class);
+    Assertions.assertEquals("Alvin", bean.getName());
+  }
 }
