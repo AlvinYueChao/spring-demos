@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 class TestBean {
 
-  private static final Logger LOGGER = LogManager.getLogger(TestBean.class);
+  private final Logger logger = LogManager.getLogger(TestBean.class);
 
   @Test
   void test1() {

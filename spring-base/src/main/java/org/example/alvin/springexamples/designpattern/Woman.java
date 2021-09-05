@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Woman implements People {
 
-  private static final Logger LOGGER = LogManager.getLogger(Woman.class);
+  private final Logger logger = LogManager.getLogger(Woman.class);
 
   @Override
   public String sayHi() {

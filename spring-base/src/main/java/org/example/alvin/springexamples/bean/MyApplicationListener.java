@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 //@Component
 public class MyApplicationListener implements ApplicationListener<MyApplicationEvent> {
 
-  private static final Logger LOGGER = LogManager.getLogger(MyApplicationListener.class);
+  private final Logger logger = LogManager.getLogger(MyApplicationListener.class);
 
   @Override
   public void onApplicationEvent(MyApplicationEvent event) {
-    LOGGER.info("Received application event: {}", event.getSource());
+    logger.info("Received application event: {}", event.getSource());
   }
 }

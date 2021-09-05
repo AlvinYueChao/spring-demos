@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AutowiredConstructorBean {
-  private static final Logger LOGGER = LogManager.getLogger(AutowiredConstructorBean.class);
+  private final Logger logger = LogManager.getLogger(AutowiredConstructorBean.class);
 
   @Autowired
   public AutowiredConstructorBean(BeanA beanA, BeanB beanB) {
-    LOGGER.info("Parameters: {}, {}", beanA, beanB);
+    logger.info("Parameters: {}, {}", beanA, beanB);
   }
 }

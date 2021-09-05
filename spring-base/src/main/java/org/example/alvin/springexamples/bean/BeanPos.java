@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class BeanPos implements BeanDefinitionRegistryPostProcessor {
 
-  private static final Logger LOGGER = LogManager.getLogger(BeanPos.class);
+  private final Logger logger = LogManager.getLogger(BeanPos.class);
 
   @Override
   public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-    LOGGER.info("Invoked into postProcessBeanDefinitionRegistry, params: {}", registry);
+    logger.info("Invoked into postProcessBeanDefinitionRegistry, params: {}", registry);
 
     // 增删改查 beanDefinition
     GenericBeanDefinition genericBeanDefinition = new GenericBeanDefinition();
@@ -30,12 +30,12 @@ public class BeanPos implements BeanDefinitionRegistryPostProcessor {
     String[] beanDefinitionNames = registry.getBeanDefinitionNames();
     for (String beanDefinitionName : beanDefinitionNames) {
       BeanDefinition beanDefinition = registry.getBeanDefinition(beanDefinitionName);
-      LOGGER.info("BeanDefinition: {}", beanDefinition);
+      logger.info("BeanDefinition: {}", beanDefinition);
     }
   }
 
   @Override
   public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-    LOGGER.info("Invoked into postProcessBeanFactory, params: {}", beanFactory);
+    logger.info("Invoked into postProcessBeanFactory, params: {}", beanFactory);
   }
 }
