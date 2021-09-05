@@ -1,5 +1,6 @@
 package org.example.alvin.springexamples.bean.circularref;
 
+import javax.annotation.PostConstruct;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,5 +16,10 @@ public class CircularRefB {
 
   public CircularRefB() {
     logger.info("============== CircularRefB() ============");
+  }
+
+  @PostConstruct
+  public void postConstruct() {
+    logger.info("Dependency injection completed successfully. {}", this);
   }
 }

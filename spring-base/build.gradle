@@ -3,6 +3,8 @@ plugins {
 }
 
 dependencies {
+    implementation("javax.annotation:javax.annotation-api:1.3.2")
+
     annotationProcessor("org.projectlombok:lombok:${lombok_version}")
     compileOnly("org.projectlombok:lombok:${lombok_version}")
     testAnnotationProcessor("org.projectlombok:lombok:${lombok_version}")
