@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -44,5 +45,22 @@ class TestBean {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
     CustomBean bean = applicationContext.getBean(CustomBean.class);
     Assertions.assertEquals("Alvin", bean.getName());
+  }
+
+  @Test
+  void test5() {
+    ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+    ConfigurableListableBeanFactory beanFactory = applicationContext.getBeanFactory();
+    BeanA beanBeforeDestroy = beanFactory.getBean(BeanA.class);
+    beanFactory.destroyBean(beanBeforeDestroy);
+    Student student = beanFactory.getBean(Student.class);
+    beanFactory.destroyBean(student);
+    /*
+    容器关闭时，会触发destroy方法，触发顺序:
+    1. @PreDestroy 所标注的方法
+    2. 实现了 DisposableBean 接口的 bean 的 destroy()方法
+    3. 在 <bean/> 中声明的 destroy-method 方法
+     */
+    beanFactory.destroySingletons();
   }
 }

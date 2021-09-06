@@ -7,7 +7,7 @@
   http://www.springframework.org/schema/context
   http://www.springframework.org/schema/context/spring-context.xsd">
 
-  <bean id="student" name="alias1,alias2" class="org.example.alvin.springexamples.bean.Student"/>
+  <bean id="student" name="alias1,alias2" class="org.example.alvin.springexamples.bean.Student" destroy-method="destroyMethod"/>
 
   <bean id="woman" class="org.example.alvin.springexamples.designpattern.Woman" />
   <bean id="sayHiClass" class="org.example.alvin.springexamples.designpattern.SayHiClass">
