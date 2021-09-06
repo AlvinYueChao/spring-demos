@@ -19,4 +19,13 @@
   <bean id="factoryBean" class="org.example.alvin.springexamples.bean.MyFactoryBean"/>
   <bean id="alvin" factory-bean="factoryBean" factory-method="getObject"/>
 
+  <bean id="propertyResolver" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+    <property name="location" value="application.properties" />
+  </bean>
+
+  <bean id="propertiesBean" class="org.example.alvin.springexamples.bean.PropertiesBean">
+    <property name="name" value="${propertiesBean.name}"/>
+    <property name="password" value="${propertiesBean.password}"/>
+  </bean>
+
 </beans>

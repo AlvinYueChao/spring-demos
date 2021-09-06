@@ -63,4 +63,12 @@ class TestBean {
      */
     beanFactory.destroySingletons();
   }
+
+  @Test
+  void test6() {
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+    PropertiesBean bean = applicationContext.getBean(PropertiesBean.class);
+    Assertions.assertEquals("test", bean.getName());
+    Assertions.assertEquals("123456", bean.getPassword());
+  }
 }
