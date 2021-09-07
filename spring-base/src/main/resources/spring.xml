@@ -19,9 +19,7 @@
   <bean id="factoryBean" class="org.example.alvin.springexamples.bean.MyFactoryBean"/>
   <bean id="alvin" factory-bean="factoryBean" factory-method="getObject"/>
 
-  <bean id="propertyResolver" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
-    <property name="location" value="application.properties" />
-  </bean>
+  <context:property-placeholder location="classpath:application.properties"/>
 
   <bean id="propertiesBean" class="org.example.alvin.springexamples.bean.PropertiesBean">
     <property name="name" value="${propertiesBean.name}"/>
