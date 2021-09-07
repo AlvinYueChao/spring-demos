@@ -1,5 +1,7 @@
 package org.example.alvin.springexamples.bean;
 
+import java.util.Properties;
+import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -7,6 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.MutablePropertySources;
+import org.springframework.core.env.PropertySource;
+import org.springframework.core.env.PropertySources;
 
 class TestBean {
 
@@ -70,5 +77,14 @@ class TestBean {
     PropertiesBean bean = applicationContext.getBean(PropertiesBean.class);
     Assertions.assertEquals("test", bean.getName());
     Assertions.assertEquals("123456", bean.getPassword());
+  }
+
+  @Test
+  void test7() {
+    ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+    PropertySourcesPlaceholderConfigurer bean = applicationContext.getBean(PropertySourcesPlaceholderConfigurer.class);
+    // 默认属性加载优先级: 环境变量(系统变量) > 本地配置文件
+    PropertySources propertySources = bean.getAppliedPropertySources();
+    logger.info("Properties: {}", propertySources);
   }
 }

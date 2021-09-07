@@ -9,6 +9,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -37,5 +38,7 @@ public class BeanPos implements BeanDefinitionRegistryPostProcessor {
   @Override
   public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
     logger.info("Invoked into postProcessBeanFactory, params: {}", beanFactory);
+    PropertySourcesPlaceholderConfigurer placeholderConfigurer = beanFactory.getBean(PropertySourcesPlaceholderConfigurer.class);
+    placeholderConfigurer.setLocalOverride(true);
   }
 }
