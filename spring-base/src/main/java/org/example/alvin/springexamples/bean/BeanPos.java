@@ -1,15 +1,19 @@
 package org.example.alvin.springexamples.bean;
 
+import java.io.IOException;
+import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,7 +25,7 @@ public class BeanPos implements BeanDefinitionRegistryPostProcessor {
   public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
     logger.info("Invoked into postProcessBeanDefinitionRegistry, params: {}", registry);
 
-    // 澧炲垹鏀规煡 beanDefinition
+    // 增删改查 beanDefinition
     GenericBeanDefinition genericBeanDefinition = new GenericBeanDefinition();
     genericBeanDefinition.setBeanClass(BeanWithoutComponent.class);
     MutablePropertyValues propertyValues = genericBeanDefinition.getPropertyValues();

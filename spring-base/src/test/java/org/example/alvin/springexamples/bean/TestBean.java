@@ -82,4 +82,11 @@ class TestBean {
     PropertySources propertySources = bean.getAppliedPropertySources();
     logger.info("Properties: {}", propertySources);
   }
+
+  @Test
+  void test8() {
+    ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+    PlaceHolderBean1 bean = applicationContext.getBean(PlaceHolderBean1.class);
+    Assertions.assertNotNull(bean);
+  }
 }
