@@ -15,6 +15,7 @@ import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ClassUtils;
 
 @Component
 public class BeanPos implements BeanDefinitionRegistryPostProcessor {
@@ -37,12 +38,26 @@ public class BeanPos implements BeanDefinitionRegistryPostProcessor {
       BeanDefinition beanDefinition = registry.getBeanDefinition(beanDefinitionName);
       logger.info("BeanDefinition: {}", beanDefinition);
     }
+
+    // 配置文件 + 占位符 实例化 bean
+    logger.info("Start initializing custom bean...");
+    try {
+      Properties properties = PropertiesLoaderUtils.loadAllProperties("application.properties", ClassUtils.getDefaultClassLoader());
+      String placeHolderBeanClasses = properties.getProperty("placeHolderBeanClasses");
+      String[] classNames = placeHolderBeanClasses.split(",");
+      for (String className : classNames) {
+        BeanDefinition beanDefinition = new GenericBeanDefinition();
+        beanDefinition.setBeanClassName(className);
+        String beanName = BeanDefinitionReaderUtils.generateBeanName(beanDefinition, registry);
+        registry.registerBeanDefinition(beanName, beanDefinition);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
     logger.info("Invoked into postProcessBeanFactory, params: {}", beanFactory);
-    PropertySourcesPlaceholderConfigurer placeholderConfigurer = beanFactory.getBean(PropertySourcesPlaceholderConfigurer.class);
-    placeholderConfigurer.setLocalOverride(true);
   }
 }
