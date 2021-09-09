@@ -1,4 +1,4 @@
-package org.example.alvin.springexamples.bean;
+package org.example.alvin.springexamples.bean.applicationeventlistener;
 
 import org.springframework.context.ApplicationEvent;
 

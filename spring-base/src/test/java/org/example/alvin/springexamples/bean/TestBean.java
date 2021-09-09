@@ -2,6 +2,9 @@ package org.example.alvin.springexamples.bean;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.alvin.springexamples.bean.applicationeventlistener.MyApplicationEvent;
+import org.example.alvin.springexamples.bean.applicationeventlistener.MyApplicationListener;
+import org.example.alvin.springexamples.bean.placeholderbean.PlaceHolderBean1;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
