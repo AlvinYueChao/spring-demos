@@ -1,4 +1,4 @@
-package org.example.alvin.springexamples.bean;
+package org.example.alvin.springexamples.bean.factorybean;
 
 import lombok.Data;
 

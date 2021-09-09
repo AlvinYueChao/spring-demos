@@ -4,6 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.alvin.springexamples.bean.applicationeventlistener.MyApplicationEvent;
 import org.example.alvin.springexamples.bean.applicationeventlistener.MyApplicationListener;
+import org.example.alvin.springexamples.bean.factorybean.AnnotationFactoryBean;
+import org.example.alvin.springexamples.bean.factorybean.CustomBean;
 import org.example.alvin.springexamples.bean.placeholderbean.PlaceHolderBean1;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -91,5 +93,14 @@ class TestBean {
     ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
     PlaceHolderBean1 bean = applicationContext.getBean(PlaceHolderBean1.class);
     Assertions.assertNotNull(bean);
+  }
+
+  @Test
+  void test9() {
+    ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+    Object bean = applicationContext.getBean("annotationFactoryBean");
+    Assertions.assertTrue(bean instanceof CustomBean);
+    Object bean1 = applicationContext.getBean("&annotationFactoryBean");
+    Assertions.assertTrue(bean1 instanceof AnnotationFactoryBean);
   }
 }
