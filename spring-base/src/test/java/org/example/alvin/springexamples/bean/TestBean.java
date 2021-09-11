@@ -105,4 +105,12 @@ class TestBean {
     Object bean1 = applicationContext.getBean("&annotationFactoryBean");
     Assertions.assertTrue(bean1 instanceof AnnotationFactoryBean);
   }
+
+  @Test
+  void test10() {
+    ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+    applicationContext.getBeanFactory().registerSingleton("student", new Student());
+    Student student = applicationContext.getBean(Student.class);
+    Assertions.assertNotNull(student);
+  }
 }
