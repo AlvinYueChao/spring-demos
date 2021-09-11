@@ -16,8 +16,8 @@
 
   <context:component-scan base-package="org.example.alvin.springexamples" />
 
-  <bean id="factoryBean" class="org.example.alvin.springexamples.bean.factorybean.MyFactoryBean"/>
-  <bean id="alvin" factory-bean="factoryBean" factory-method="getObject"/>
+  <!--<bean id="factoryBean" class="org.example.alvin.springexamples.bean.factorybean.MyFactoryBean"/>
+  <bean id="alvin" factory-bean="factoryBean" factory-method="getObject"/>-->
 
   <context:property-placeholder location="classpath:application.properties"/>
 

@@ -24,6 +24,8 @@ class TestBean {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
     Student student = applicationContext.getBean(Student.class);
     Assertions.assertEquals("Alvin", student.getName());
+    CustomBean customBean = applicationContext.getBean(CustomBean.class);
+    Assertions.assertEquals("test", customBean.getName());
   }
 
   @Test
