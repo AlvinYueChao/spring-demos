@@ -7,6 +7,7 @@ import org.example.alvin.springexamples.bean.applicationeventlistener.MyApplicat
 import org.example.alvin.springexamples.bean.factorybean.AnnotationFactoryBean;
 import org.example.alvin.springexamples.bean.factorybean.CustomBean;
 import org.example.alvin.springexamples.bean.placeholderbean.PlaceHolderBean1;
+import org.example.alvin.springexamples.bean.scope.CustomScopeBean;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -112,5 +113,12 @@ class TestBean {
     applicationContext.getBeanFactory().registerSingleton("student", new Student());
     Student student = applicationContext.getBean(Student.class);
     Assertions.assertNotNull(student);
+  }
+
+  @Test
+  void test11() {
+    ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+    CustomScopeBean bean = applicationContext.getBean(CustomScopeBean.class);
+    Assertions.assertNotNull(bean);
   }
 }
