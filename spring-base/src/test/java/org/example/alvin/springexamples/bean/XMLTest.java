@@ -16,9 +16,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.PropertySources;
 
-class TestBean {
+class XMLTest {
 
-  private final Logger logger = LogManager.getLogger(TestBean.class);
+  private final Logger logger = LogManager.getLogger(XMLTest.class);
 
   @Test
   void test1() {
