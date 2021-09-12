@@ -4,7 +4,7 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AnnotationFactoryBean implements FactoryBean<CustomBean> {
+public class AnnotationFactoryBean implements FactoryBean<CustomBeanForAnnotation> {
 
   /*
   触发条件：
@@ -12,12 +12,12 @@ public class AnnotationFactoryBean implements FactoryBean<CustomBean> {
   2. 当调用 getBean(CustomBean.class) 且 CustomBean 是单例对象
    */
   @Override
-  public CustomBean getObject() {
-    return new CustomBean("test");
+  public CustomBeanForAnnotation getObject() {
+    return new CustomBeanForAnnotation("test");
   }
 
   @Override
   public Class<?> getObjectType() {
-    return CustomBean.class;
+    return CustomBeanForAnnotation.class;
   }
 }

@@ -5,7 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.example.alvin.springexamples.xml.bean.applicationeventlistener.MyApplicationEvent;
 import org.example.alvin.springexamples.xml.bean.applicationeventlistener.MyApplicationListener;
 import org.example.alvin.springexamples.xml.bean.factorybean.AnnotationFactoryBean;
-import org.example.alvin.springexamples.xml.bean.factorybean.CustomBean;
+import org.example.alvin.springexamples.xml.bean.factorybean.CustomBeanForAnnotation;
+import org.example.alvin.springexamples.xml.bean.factorybean.CustomBeanForXml;
 import org.example.alvin.springexamples.xml.bean.placeholderbean.PlaceHolderBean1;
 import org.example.alvin.springexamples.xml.bean.scope.CustomScopeBean;
 import org.junit.jupiter.api.Assertions;
@@ -23,10 +24,10 @@ class XMLTest {
   @Test
   void test1() {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
-    Student student = applicationContext.getBean(Student.class);
+    StudentForBeanXmlTag student = applicationContext.getBean(StudentForBeanXmlTag.class);
     Assertions.assertEquals("Alvin", student.getName());
-    CustomBean customBean = applicationContext.getBean(CustomBean.class);
-    Assertions.assertEquals("test", customBean.getName());
+    CustomBeanForXml customBeanForXml = applicationContext.getBean(CustomBeanForXml.class);
+    Assertions.assertEquals("Alvin", customBeanForXml.getName());
   }
 
   @Test
@@ -53,7 +54,7 @@ class XMLTest {
   @Test
   void test4() {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
-    CustomBean bean = applicationContext.getBean(CustomBean.class);
+    CustomBeanForXml bean = applicationContext.getBean(CustomBeanForXml.class);
     Assertions.assertEquals("Alvin", bean.getName());
   }
 
@@ -63,7 +64,7 @@ class XMLTest {
     ConfigurableListableBeanFactory beanFactory = applicationContext.getBeanFactory();
     BeanA beanBeforeDestroy = beanFactory.getBean(BeanA.class);
     beanFactory.destroyBean(beanBeforeDestroy);
-    Student student = beanFactory.getBean(Student.class);
+    StudentForBeanXmlTag student = beanFactory.getBean(StudentForBeanXmlTag.class);
     beanFactory.destroyBean(student);
     /*
     容器关闭时，会触发destroy方法，触发顺序:
@@ -102,7 +103,7 @@ class XMLTest {
   void test9() {
     ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
     Object bean = applicationContext.getBean("annotationFactoryBean");
-    Assertions.assertTrue(bean instanceof CustomBean);
+    Assertions.assertTrue(bean instanceof CustomBeanForAnnotation);
     Object bean1 = applicationContext.getBean("&annotationFactoryBean");
     Assertions.assertTrue(bean1 instanceof AnnotationFactoryBean);
   }
