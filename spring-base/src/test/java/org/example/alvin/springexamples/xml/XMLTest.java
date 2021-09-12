@@ -1,7 +1,12 @@
-package org.example.alvin.springexamples.xml.bean;
+package org.example.alvin.springexamples.xml;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.alvin.springexamples.xml.bean.BeanA;
+import org.example.alvin.springexamples.xml.bean.BeanWithoutComponent;
+import org.example.alvin.springexamples.xml.bean.PropertiesBean;
+import org.example.alvin.springexamples.xml.bean.Student;
+import org.example.alvin.springexamples.xml.bean.StudentForBeanXmlTag;
 import org.example.alvin.springexamples.xml.bean.applicationeventlistener.MyApplicationEvent;
 import org.example.alvin.springexamples.xml.bean.applicationeventlistener.MyApplicationListener;
 import org.example.alvin.springexamples.xml.bean.factorybean.AnnotationFactoryBean;

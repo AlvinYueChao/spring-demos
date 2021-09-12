@@ -1,5 +1,6 @@
-package org.example.alvin.springexamples.xml.designpattern;
+package org.example.alvin.springexamples.xml;
 
+import org.example.alvin.springexamples.xml.designpattern.SayHiClass;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
