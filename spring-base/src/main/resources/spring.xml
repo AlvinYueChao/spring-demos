@@ -7,21 +7,21 @@
   http://www.springframework.org/schema/context
   http://www.springframework.org/schema/context/spring-context.xsd">
 
-<!--  <bean id="student" name="alias1,alias2" class="org.example.alvin.springexamples.bean.Student" destroy-method="destroyMethod"/>-->
+<!--  <bean id="student" name="alias1,alias2" class="org.example.alvin.springexamples.xml.bean.Student" destroy-method="destroyMethod"/>-->
 
-  <bean id="woman" class="org.example.alvin.springexamples.designpattern.Woman" />
-  <bean id="sayHiClass" class="org.example.alvin.springexamples.designpattern.SayHiClass">
+  <bean id="woman" class="org.example.alvin.springexamples.xml.designpattern.Woman" />
+  <bean id="sayHiClass" class="org.example.alvin.springexamples.xml.designpattern.SayHiClass">
     <lookup-method name="getPeople" bean="woman" />
   </bean>
 
-  <context:component-scan base-package="org.example.alvin.springexamples" />
+  <context:component-scan base-package="org.example.alvin.springexamples.xml" />
 
-  <!--<bean id="factoryBean" class="org.example.alvin.springexamples.bean.factorybean.MyFactoryBean"/>
+  <!--<bean id="factoryBean" class="org.example.alvin.springexamples.xml.bean.factorybean.MyFactoryBean"/>
   <bean id="alvin" factory-bean="factoryBean" factory-method="getObject"/>-->
 
   <context:property-placeholder location="classpath:application.properties"/>
 
-  <bean id="propertiesBean" class="org.example.alvin.springexamples.bean.PropertiesBean">
+  <bean id="propertiesBean" class="org.example.alvin.springexamples.xml.bean.PropertiesBean">
     <property name="name" value="${propertiesBean.name}"/>
     <property name="password" value="${propertiesBean.password}"/>
   </bean>
