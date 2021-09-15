@@ -19,4 +19,10 @@ class AnnotationTest {
     Assertions.assertEquals("test", bean.getName());
     Assertions.assertEquals("123456", bean.getPassword());
   }
+
+  @Test
+  void test2() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
+    
+  }
 }
