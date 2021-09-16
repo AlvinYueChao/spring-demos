@@ -2,6 +2,7 @@ package org.example.alvin.springexamples.annotation;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.alvin.springexamples.annotation.deferredimport.SelectImportBean;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -23,6 +24,7 @@ class AnnotationTest {
   @Test
   void test2() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
-    
+    SelectImportBean bean = applicationContext.getBean(SelectImportBean.class);
+    Assertions.assertNotNull(bean);
   }
 }
