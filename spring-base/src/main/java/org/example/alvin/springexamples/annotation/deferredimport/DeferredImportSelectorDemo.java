@@ -13,6 +13,8 @@ public class DeferredImportSelectorDemo implements DeferredImportSelector {
 
   /*
   返回类的完整限定名，该类会被实例化并交给spring管理
+  MetadataReaderFactory 根据类的完整限定名获取 MetadataReader
+  metadataReader.getAnnotationMetadata() 拿到 AnnotationMetadata 对象，然后包装成 SourceClass 对象
    */
   @Override
   public String[] selectImports(AnnotationMetadata importingClassMetadata) {
