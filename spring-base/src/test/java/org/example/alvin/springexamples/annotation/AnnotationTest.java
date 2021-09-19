@@ -2,6 +2,7 @@ package org.example.alvin.springexamples.annotation;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.alvin.springexamples.annotation.condition.ClassesConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ConditionalBean;
 import org.example.alvin.springexamples.annotation.deferredimport.SelectImportBean;
 import org.junit.jupiter.api.Assertions;
@@ -33,8 +34,16 @@ class AnnotationTest {
   @Test
   void test3() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
+    // 当 matches() 返回为 false 时，@Component 所在的 bean 类型并未被注册到 spring 容器中，所以 getBean() 会报错
     Assertions.assertThrows(NoSuchBeanDefinitionException.class, () -> applicationContext.getBean(ConditionalBean.class));
 //    ConditionalBean beanWithMatchedCondition = applicationContext.getBean(ConditionalBean.class);
 //    Assertions.assertNotNull(beanWithMatchedCondition);
+  }
+
+  @Test
+  void test4() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
+    ClassesConditionalBean bean = applicationContext.getBean(ClassesConditionalBean.class);
+    Assertions.assertNotNull(bean);
   }
 }
