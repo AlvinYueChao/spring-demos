@@ -2,6 +2,7 @@ package org.example.alvin.springexamples.annotation;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.alvin.springexamples.annotation.condition.BeanConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ClassesConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ConditionalBean;
 import org.example.alvin.springexamples.annotation.deferredimport.SelectImportBean;
@@ -44,6 +45,13 @@ class AnnotationTest {
   void test4() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
     ClassesConditionalBean bean = applicationContext.getBean(ClassesConditionalBean.class);
+    Assertions.assertNotNull(bean);
+  }
+
+  @Test
+  void test5() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
+    BeanConditionalBean bean = applicationContext.getBean(BeanConditionalBean.class);
     Assertions.assertNotNull(bean);
   }
 }
