@@ -2,9 +2,11 @@ package org.example.alvin.springexamples.annotation;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.alvin.springexamples.annotation.condition.ConditionalBean;
 import org.example.alvin.springexamples.annotation.deferredimport.SelectImportBean;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 class AnnotationTest {
@@ -26,5 +28,13 @@ class AnnotationTest {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
     SelectImportBean bean = applicationContext.getBean(SelectImportBean.class);
     Assertions.assertNotNull(bean);
+  }
+
+  @Test
+  void test3() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
+    Assertions.assertThrows(NoSuchBeanDefinitionException.class, () -> applicationContext.getBean(ConditionalBean.class));
+//    ConditionalBean beanWithMatchedCondition = applicationContext.getBean(ConditionalBean.class);
+//    Assertions.assertNotNull(beanWithMatchedCondition);
   }
 }
