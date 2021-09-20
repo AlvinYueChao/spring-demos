@@ -51,6 +51,9 @@ class AnnotationTest {
   @Test
   void test5() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
+    /*
+    ConditionalOnBean 失败原因：matches() 发生在 beanDefinition 注册之前
+     */
     BeanConditionalBean bean = applicationContext.getBean(BeanConditionalBean.class);
     Assertions.assertNotNull(bean);
   }
