@@ -57,4 +57,13 @@ class AnnotationTest {
     BeanConditionalBean bean = applicationContext.getBean(BeanConditionalBean.class);
     Assertions.assertNotNull(bean);
   }
+
+  @Test
+  void test6() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
+    Object bean1 = applicationContext.getBean("innerBean1");
+    Object bean2 = applicationContext.getBean("innerBean2");
+    Assertions.assertNotNull(bean1);
+    Assertions.assertNotNull(bean2);
+  }
 }
