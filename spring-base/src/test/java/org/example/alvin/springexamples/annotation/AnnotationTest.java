@@ -2,6 +2,8 @@ package org.example.alvin.springexamples.annotation;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.alvin.springexamples.annotation.AnnotationBean.InnerBean;
+import org.example.alvin.springexamples.annotation.AnnotationBean.InnerBeanFactory;
 import org.example.alvin.springexamples.annotation.condition.BeanConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ClassesConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ConditionalBean;
@@ -65,5 +67,19 @@ class AnnotationTest {
     Object bean2 = applicationContext.getBean("innerBean2");
     Assertions.assertNotNull(bean1);
     Assertions.assertNotNull(bean2);
+  }
+
+  @Test
+  void test7() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
+    Object bean1 = applicationContext.getBean("innerBean1");
+    Object factoryBean = applicationContext.getBean("innerBeanFactory");
+    int hashCode1 = bean1.hashCode();
+    InnerBean innerBeanViaFactory = ((InnerBeanFactory) factoryBean).getInnerBean();
+    int hashCode2 = innerBeanViaFactory.hashCode();
+    // 外部类使用 @Component 时，同一 beanMethod 产生的两个 bean 的 hashCode 不相同，因为方法被调用了两次
+//    Assertions.assertNotEquals(hashCode1, hashCode2);
+    // 外部类使用 @Configuration 时，hashCode相同
+    Assertions.assertEquals(hashCode1, hashCode2);
   }
 }
