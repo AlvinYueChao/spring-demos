@@ -4,6 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.alvin.springexamples.annotation.AnnotationBean.InnerBean;
 import org.example.alvin.springexamples.annotation.AnnotationBean.InnerBeanFactory;
+import org.example.alvin.springexamples.annotation.aop.cglib.CglibBeanFactory;
+import org.example.alvin.springexamples.annotation.aop.cglib.UserService;
 import org.example.alvin.springexamples.annotation.condition.BeanConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ClassesConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ConditionalBean;
@@ -81,5 +83,12 @@ class AnnotationTest {
 //    Assertions.assertNotEquals(hashCode1, hashCode2);
     // 外部类使用 @Configuration 时，hashCode相同
     Assertions.assertEquals(hashCode1, hashCode2);
+  }
+
+  @Test
+  void test8() {
+    UserService userService = (UserService) CglibBeanFactory.getInstance();
+    String result = userService.doSomething0("Alvin");
+    logger.info("result: {}", result);
   }
 }
