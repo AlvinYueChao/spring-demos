@@ -82,6 +82,7 @@ class AnnotationTest {
     // 外部类使用 @Component 时，同一 beanMethod 产生的两个 bean 的 hashCode 不相同，因为方法被调用了两次
 //    Assertions.assertNotEquals(hashCode1, hashCode2);
     // 外部类使用 @Configuration 时，hashCode相同
+    // @Configuration 中解析 @Bean 时，会使用切面，因此都会从 beanFactory 中获取 bean，所以两次调用得到的 bean 是同一个
     Assertions.assertEquals(hashCode1, hashCode2);
   }
 
