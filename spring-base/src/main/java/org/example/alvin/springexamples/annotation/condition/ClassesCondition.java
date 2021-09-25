@@ -16,8 +16,8 @@ public class ClassesCondition implements Condition {
   @Override
   public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
     boolean isMatched = false;
-    if (metadata.isAnnotated(ConditionalOnClasses.class.getName())) {
-      Map<String, Object> annotationAttributes = metadata.getAnnotationAttributes(ConditionalOnClasses.class.getName());
+    if (metadata.isAnnotated(ConditionOnClasses.class.getName())) {
+      Map<String, Object> annotationAttributes = metadata.getAnnotationAttributes(ConditionOnClasses.class.getName());
       try {
         Object value = Objects.requireNonNull(annotationAttributes).get("classNames");
         if (value instanceof String[]) {

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Conditional;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Conditional(value = {ClassesCondition.class})
-public @interface ConditionalOnClasses {
+public @interface ConditionOnClasses {
 
   Class<?>[] value() default {};
   String[] classNames() default {};

@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Conditional;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Conditional(value = {BeansCondition.class})
-public @interface ConditionalOnBean {
+@Conditional(value = {PropertiesCondition.class})
+public @interface ConditionOnProperties {
 
-  Class<?>[] value() default {};
+  String[] propertyNames() default {};
 }

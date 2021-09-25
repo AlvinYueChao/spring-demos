@@ -6,9 +6,10 @@ import org.example.alvin.springexamples.annotation.AnnotationBean.InnerBean;
 import org.example.alvin.springexamples.annotation.AnnotationBean.InnerBeanFactory;
 import org.example.alvin.springexamples.annotation.aop.cglib.CglibBeanFactory;
 import org.example.alvin.springexamples.annotation.aop.cglib.UserService;
-import org.example.alvin.springexamples.annotation.condition.BeanConditionalBean;
+import org.example.alvin.springexamples.annotation.condition.BeansConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ClassesConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ConditionalBean;
+import org.example.alvin.springexamples.annotation.condition.PropertiesConditionalBean;
 import org.example.alvin.springexamples.annotation.deferredimport.SelectImportBean;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -58,7 +59,7 @@ class AnnotationTest {
     /*
     ConditionalOnBean 失败原因：matches() 发生在 beanDefinition 注册之前
      */
-    BeanConditionalBean bean = applicationContext.getBean(BeanConditionalBean.class);
+    BeansConditionalBean bean = applicationContext.getBean(BeansConditionalBean.class);
     Assertions.assertNotNull(bean);
   }
 
@@ -88,6 +89,13 @@ class AnnotationTest {
 
   @Test
   void test8() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
+    PropertiesConditionalBean bean = applicationContext.getBean(PropertiesConditionalBean.class);
+    Assertions.assertNotNull(bean);
+  }
+
+  @Test
+  void test9() {
     UserService userService = (UserService) CglibBeanFactory.getInstance();
     String result = userService.doSomething0("Alvin");
     logger.info("result: {}", result);

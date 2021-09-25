@@ -17,9 +17,9 @@ public class BeansCondition implements Condition {
   @Override
   public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
     boolean isMatched = false;
-    if (metadata.isAnnotated(ConditionalOnBean.class.getName())) {
+    if (metadata.isAnnotated(ConditionOnBeans.class.getName())) {
       MergedAnnotations annotations = metadata.getAnnotations();
-      MergedAnnotation<ConditionalOnBean> cob = annotations.get(ConditionalOnBean.class);
+      MergedAnnotation<ConditionOnBeans> cob = annotations.get(ConditionOnBeans.class);
       Optional<Object> valueOpt = cob.getValue("value");
       ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
       if (valueOpt.isPresent() && beanFactory != null) {
