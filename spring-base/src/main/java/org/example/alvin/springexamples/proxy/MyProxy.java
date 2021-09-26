@@ -18,5 +18,5 @@ public class MyProxy {
 
   // 4. 使用自定义类加载器将编译好的 $Proxy0.class 加载到 JVM 内存中
 
-  // 5. 实例化内存中的 $Proxy0.class，然后返回
+  // 5. 实例化内存中的 $Proxy0.class，然后把实例返回
 }

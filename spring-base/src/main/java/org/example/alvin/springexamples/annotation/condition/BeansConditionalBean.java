@@ -1,9 +1,8 @@
 package org.example.alvin.springexamples.annotation.condition;
 
-import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 @ConditionOnBeans(value = {ExistingBean.class})
-@Order
 public class BeansConditionalBean {
 }
