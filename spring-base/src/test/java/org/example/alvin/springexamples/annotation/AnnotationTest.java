@@ -11,6 +11,8 @@ import org.example.alvin.springexamples.annotation.condition.ClassesConditionalB
 import org.example.alvin.springexamples.annotation.condition.ConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.PropertiesConditionalBean;
 import org.example.alvin.springexamples.annotation.deferredimport.SelectImportBean;
+import org.example.alvin.springexamples.annotation.scanbean.ScanBean;
+import org.example.alvin.springexamples.annotation.scanbean.mybasepackage.Teacher;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -99,5 +101,12 @@ class AnnotationTest {
     UserService userService = (UserService) CglibBeanFactory.getInstance();
     String result = userService.doSomething0("Alvin");
     logger.info("result: {}", result);
+  }
+
+  @Test
+  void test10() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(ScanBean.class);
+    Teacher bean = applicationContext.getBean(Teacher.class);
+    Assertions.assertNotNull(bean);
   }
 }
