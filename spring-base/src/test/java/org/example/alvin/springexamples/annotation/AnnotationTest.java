@@ -13,6 +13,7 @@ import org.example.alvin.springexamples.annotation.condition.PropertiesCondition
 import org.example.alvin.springexamples.annotation.deferredimport.SelectImportBean;
 import org.example.alvin.springexamples.annotation.scanbean.ScanBean;
 import org.example.alvin.springexamples.annotation.scanbean.mybasepackage.Teacher;
+import org.example.alvin.springexamples.annotation.spi.service.AreaService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -108,5 +109,13 @@ class AnnotationTest {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(ScanBean.class);
     Teacher bean = applicationContext.getBean(Teacher.class);
     Assertions.assertNotNull(bean);
+  }
+
+  @Test
+  void test11() {
+    String basePackage = "org.example.alvin.springexamples.annotation.spi";
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(basePackage);
+    AreaService areaServiceImpl = applicationContext.getBean(AreaService.class);
+    areaServiceImpl.queryAreaFromDB();
   }
 }

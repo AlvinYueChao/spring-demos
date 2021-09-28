@@ -10,7 +10,7 @@ public class AreaServiceImpl1 implements AreaService {
 
   private final Logger logger = LogManager.getLogger(AreaServiceImpl1.class);
 
-  @DI(value = "all", serverIds = {"accountServiceImpl1", "accountServiceImpl2"})
+  @DI(value = "Assigned", serviceIds = {"accountServiceImpl1"})
   private AccountService accountService;
 
   @Override

@@ -1,0 +1,1 @@
+org.example.alvin.springexamples.annotation.spi.handler.InvokeHandler=org.example.alvin.springexamples.annotation.spi.handler.InvokeAllHandlerImpl,org.example.alvin.springexamples.annotation.spi.handler.InvokeAssignedHandlerImpl

@@ -18,11 +18,16 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.InjectionMetadata;
 import org.springframework.beans.factory.annotation.InjectionMetadata.InjectedElement;
-import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcessor;
 import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.BridgeMethodResolver;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -38,14 +43,16 @@ import org.springframework.util.StringUtils;
 注解收集：模仿 org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyMergedBeanDefinitionPostProcessors，需要实现 MergedBeanDefinitionPostProcessor 接口
 依赖注入：模仿 org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean, 需要实现 InstantiationAwareBeanPostProcessor 接口
  */
-public class DIAnnotationBeanPostProcessor implements MergedBeanDefinitionPostProcessor, InstantiationAwareBeanPostProcessor {
+public class DIAnnotationBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter implements MergedBeanDefinitionPostProcessor, BeanFactoryAware, ApplicationContextAware {
 
   private final Logger logger = LogManager.getLogger(DIAnnotationBeanPostProcessor.class);
 
+  private ApplicationContext applicationContext;
   private final Map<String, InjectionMetadata> injectionMetadataCache = new ConcurrentHashMap<>(256);
   private final Set<Class<? extends Annotation>> diAnnotationTypes = new LinkedHashSet<>(4);
   private String requiredParameterName = "required";
   private boolean requiredParameterValue = true;
+  private ConfigurableListableBeanFactory beanFactory;
 
   public DIAnnotationBeanPostProcessor() {
     this.diAnnotationTypes.add(DI.class);
@@ -172,7 +179,17 @@ public class DIAnnotationBeanPostProcessor implements MergedBeanDefinitionPostPr
     return pvs;
   }
 
-  private static class DIFieldElement extends InjectedElement {
+  @Override
+  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    this.applicationContext = applicationContext;
+  }
+
+  @Override
+  public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+    this.beanFactory = (ConfigurableListableBeanFactory) beanFactory;
+  }
+
+  private class DIFieldElement extends InjectedElement {
 
     private final boolean required;
 
@@ -182,8 +199,17 @@ public class DIAnnotationBeanPostProcessor implements MergedBeanDefinitionPostPr
     }
 
     @Override
-    protected void inject(Object target, String requestingBeanName, PropertyValues pvs) throws Throwable {
-      // todo
+    protected void inject(Object bean, @Nullable String requestingBeanName, @Nullable PropertyValues pvs) throws Throwable {
+      // 给 field 注入多个代理对象的实现逻辑
+      Field field = (Field) this.member;
+      Object value = null;
+      if (field.getType().isInterface()) {
+        value = InvokeProxy.newProxy(field, applicationContext);
+      }
+      if (value != null) {
+        ReflectionUtils.makeAccessible(field);
+        field.set(bean, value);
+      }
     }
   }
 
