@@ -113,8 +113,8 @@ class AnnotationTest {
 
   @Test
   void test11() {
-    String basePackage = "org.example.alvin.springexamples.annotation.spi";
-    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(basePackage);
+//    String basePackage = "org.example.alvin.springexamples.annotation.spi";
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
     AreaService areaServiceImpl = applicationContext.getBean(AreaService.class);
     areaServiceImpl.queryAreaFromDB();
   }
