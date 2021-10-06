@@ -1,5 +1,6 @@
 package org.example.alvin.springexamples.annotation.aop;
 
+import org.aopalliance.intercept.MethodInvocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
@@ -11,6 +12,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.aop.interceptor.ExposeInvocationInterceptor;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -42,6 +44,9 @@ public class AspectAnnotation {
 
   @AfterReturning("pc1()")
   private void afterReturning(JoinPoint joinPoint) {
+    MethodInvocation methodInvocation = ExposeInvocationInterceptor.currentInvocation();
+    Object[] arguments = methodInvocation.getArguments();
+    Object[] args = joinPoint.getArgs();
     logger.info("====== AspectAnnotation afterReturning 通知, 被增强方法: {} ======", joinPoint.getSignature().getName());
   }
 
