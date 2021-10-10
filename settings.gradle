@@ -9,3 +9,5 @@
 
 rootProject.name = 'spring-demos'
 include 'spring-base'
+include 'cache-annotation'
+
