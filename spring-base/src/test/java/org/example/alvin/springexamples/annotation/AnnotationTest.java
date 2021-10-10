@@ -118,4 +118,9 @@ class AnnotationTest {
     AreaService areaServiceImpl = applicationContext.getBean(AreaService.class);
     areaServiceImpl.queryAreaFromDB();
   }
+
+  @Test
+  void test12() {
+
+  }
 }

@@ -1,6 +1,10 @@
 package org.example.alvin.springexamples.annotation.aop.proxy;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import javax.tools.JavaCompiler;
@@ -20,7 +24,7 @@ public class MyProxy {
 
   private final static Logger logger = LogManager.getLogger(MyProxy.class);
 
-  protected static Object newProxyInstance(ClassLoader loader, Class<?>[] interfaces, MyInvocationHandler h) {
+  public static Object newProxyInstance(ClassLoader loader, Class<?>[] interfaces, MyInvocationHandler h) {
     // 1. 通过拼凑字符串的形式拼凑出一个代理类 $Proxy0
     String javaStr = getJavaStr(interfaces);
     // 2. 将拼凑出的代理类以流的形式写入到磁盘中的 $Proxy0.java 文件中
@@ -29,12 +33,26 @@ public class MyProxy {
     compiler();
     // 4. 使用自定义类加载器将编译好的 $Proxy0.class 加载到 JVM 内存中
     // 5. 实例化内存中的 $Proxy0.class，然后把实例返回
+    MyClassLoader myClassLoader = new MyClassLoader(PATH);
+    try {
+      Class<?> $Proxy0 = myClassLoader.findClass("$Proxy0");
+      Constructor<?> constructor = $Proxy0.getConstructor(MyInvocationHandler.class);
+      return constructor.newInstance(h);
+    } catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
+      logger.warn("Caught exception when trying to get the instance for the class", e);
+    }
 
     return null;
   }
 
   private static void createFile(String javaStr) {
-
+    File file = new File(PATH + "\\$Proxy0.java");
+    try (FileWriter fw = new FileWriter(file)) {
+      fw.write(javaStr);
+      fw.flush();
+    } catch (IOException e) {
+      logger.warn("Caught exception when trying to write to the java file: {}", file, e);
+    }
   }
 
   private static String getJavaStr(Class<?>[] interfaces) {
