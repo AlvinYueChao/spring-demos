@@ -20,7 +20,7 @@ public class MyClassLoader extends ClassLoader {
 
   @Override
   protected Class<?> findClass(String name) throws ClassNotFoundException {
-    File classFile = new File(this.dir, name + ".class");
+    File classFile = new File(this.dir, "\\" + name + ".class");
     if (classFile.exists()) {
       try {
         FileInputStream inputStream = new FileInputStream(classFile);
@@ -31,7 +31,7 @@ public class MyClassLoader extends ClassLoader {
           byteArrayOutputStream.write(buffer, 0, length);
         }
         // 将 class 文件加载进 JVM 内存中后，返回反射对象
-        return defineClass("org.example.alvin.springexamples.annotation.aop.proxy" + name, byteArrayOutputStream.toByteArray(), 0,
+        return defineClass("org.example.alvin.springexamples.annotation.aop.proxy." + name, byteArrayOutputStream.toByteArray(), 0,
             byteArrayOutputStream.size());
       } catch (FileNotFoundException e) {
         logger.warn("Cannot find the path: {}", classFile, e);

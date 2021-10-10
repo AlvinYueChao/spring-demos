@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class MyProxy {
 
-  private final static String PATH = "";
+  private final static String PATH = "D:\\WorkSpace\\Java\\Gradle\\spring-demos\\spring-base\\src\\main\\java\\org\\example\\alvin\\springexamples\\annotation\\aop\\proxy";
 
   private final static Logger logger = LogManager.getLogger(MyProxy.class);
 
@@ -62,7 +62,7 @@ public class MyProxy {
         + "public class $Proxy0 implements " + interfaces[0].getName() + "{" + System.lineSeparator()
         + "MyInvocationHandler h;" + System.lineSeparator()
         + "public $Proxy0(MyInvocationHandler h) {" + System.lineSeparator()
-        + "this.h = h" + System.lineSeparator() + "}"
+        + "this.h = h;" + System.lineSeparator() + "}"
         + getMethodStr(methods, interfaces[0]) + System.lineSeparator() + "}";
   }
 

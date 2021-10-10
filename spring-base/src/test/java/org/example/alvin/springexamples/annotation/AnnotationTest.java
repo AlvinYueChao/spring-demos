@@ -1,11 +1,16 @@
 package org.example.alvin.springexamples.annotation;
 
+import java.util.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.alvin.springexamples.annotation.AnnotationBean.InnerBean;
 import org.example.alvin.springexamples.annotation.AnnotationBean.InnerBeanFactory;
 import org.example.alvin.springexamples.annotation.aop.cglib.CglibBeanFactory;
 import org.example.alvin.springexamples.annotation.aop.cglib.UserService;
+import org.example.alvin.springexamples.annotation.aop.proxy.MyProxy;
+import org.example.alvin.springexamples.annotation.aop.proxy.Parent;
+import org.example.alvin.springexamples.annotation.aop.proxy.People;
+import org.example.alvin.springexamples.annotation.aop.proxy.XiaoMing;
 import org.example.alvin.springexamples.annotation.condition.BeansConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ClassesConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ConditionalBean;
@@ -18,6 +23,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.util.ClassUtils;
 
 class AnnotationTest {
 
@@ -120,7 +126,8 @@ class AnnotationTest {
   }
 
   @Test
-  void test12() {
-
+  void test12() throws Throwable {
+    People people = (People) MyProxy.newProxyInstance(ClassUtils.getDefaultClassLoader(), new Class<?>[]{People.class}, new Parent(new XiaoMing()));
+    Objects.requireNonNull(people).findMM();
   }
 }
