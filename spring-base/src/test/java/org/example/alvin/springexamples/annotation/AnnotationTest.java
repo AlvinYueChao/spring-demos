@@ -1,5 +1,9 @@
 package org.example.alvin.springexamples.annotation;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +23,7 @@ import org.example.alvin.springexamples.annotation.deferredimport.SelectImportBe
 import org.example.alvin.springexamples.annotation.scanbean.ScanBean;
 import org.example.alvin.springexamples.annotation.scanbean.mybasepackage.Teacher;
 import org.example.alvin.springexamples.annotation.spi.service.AreaService;
+import org.example.alvin.springexamples.annotation.transaction.ConnectionUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -129,5 +134,10 @@ class AnnotationTest {
   void test12() throws Throwable {
     People people = (People) MyProxy.newProxyInstance(ClassUtils.getDefaultClassLoader(), new Class<?>[]{People.class}, new Parent(new XiaoMing()));
     Objects.requireNonNull(people).findMM();
+  }
+
+  @Test
+  void test13() {
+
   }
 }
