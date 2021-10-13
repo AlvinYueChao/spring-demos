@@ -1,4 +1,4 @@
-package org.example.alvin.springexamples.annotation.transaction;
+package org.example.alvin.springexamples.annotation.aop.transaction;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,6 +19,8 @@ public class ConnectionUtil {
     Connection connection = null;
     Class.forName(DB_DRIVER_CLASS);
     connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+    // 如果多个 DML 操作处于同一个事务中，那么它们持有的 connection 是同一个。在同一个事务的前提是关闭自动提交
+    logger.info("DB connection established successfully");
     return connection;
   }
 }
