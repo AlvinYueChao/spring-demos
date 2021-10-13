@@ -133,6 +133,7 @@ class AnnotationTest {
 
   @Test
   void test13() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
 
   }
 }
