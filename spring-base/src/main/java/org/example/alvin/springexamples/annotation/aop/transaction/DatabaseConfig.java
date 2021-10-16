@@ -2,14 +2,12 @@ package org.example.alvin.springexamples.annotation.aop.transaction;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import javax.sql.DataSource;
-import org.example.alvin.springexamples.annotation.PropertySourceBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 @PropertySource(value = "application.properties")
 public class DatabaseConfig {
 

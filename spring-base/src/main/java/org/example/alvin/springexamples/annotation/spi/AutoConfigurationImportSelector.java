@@ -13,6 +13,7 @@ public class AutoConfigurationImportSelector implements ImportSelector {
   @Override
   public String[] selectImports(AnnotationMetadata importingClassMetadata) {
     List<String> invokeHandlerClassNames = SpringFactoriesLoader.loadFactoryNames(InvokeHandler.class, ClassUtils.getDefaultClassLoader());
+    invokeHandlerClassNames.add(DIAnnotationBeanPostProcessor.class.getName());
     return StringUtils.toStringArray(invokeHandlerClassNames);
   }
 }
