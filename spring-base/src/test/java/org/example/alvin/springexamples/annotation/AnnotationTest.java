@@ -11,6 +11,7 @@ import org.example.alvin.springexamples.annotation.aop.proxy.MyProxy;
 import org.example.alvin.springexamples.annotation.aop.proxy.Parent;
 import org.example.alvin.springexamples.annotation.aop.proxy.People;
 import org.example.alvin.springexamples.annotation.aop.proxy.XiaoMing;
+import org.example.alvin.springexamples.annotation.aop.transaction.service.ServiceC;
 import org.example.alvin.springexamples.annotation.condition.BeansConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ClassesConditionalBean;
 import org.example.alvin.springexamples.annotation.condition.ConditionalBean;
@@ -134,6 +135,7 @@ class AnnotationTest {
   @Test
   void test13() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
-
+    ServiceC beanC = applicationContext.getBean(ServiceC.class);
+    beanC.doSomethingOneForC();
   }
 }

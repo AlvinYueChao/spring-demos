@@ -23,8 +23,10 @@ public class ServiceC {
   }
 
   @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
-  public void doSomethingOneForA() {
+  public void doSomethingOneForC() {
     logger.info("====== using {} doSomethingForC ======", this.serviceA);
+    this.serviceA.doSomethingOneForA();
     logger.info("====== using {} doSomethingForC ======", this.serviceB);
+    this.serviceB.doSomethingOneForB();
   }
 }
