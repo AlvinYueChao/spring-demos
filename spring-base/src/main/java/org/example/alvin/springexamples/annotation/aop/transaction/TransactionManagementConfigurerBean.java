@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
-@Component
+//@Component
 public class TransactionManagementConfigurerBean implements TransactionManagementConfigurer {
 
   private final DataSource dataSource;
