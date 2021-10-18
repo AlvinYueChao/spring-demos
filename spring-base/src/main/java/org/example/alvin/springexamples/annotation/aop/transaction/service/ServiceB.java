@@ -1,5 +1,8 @@
 package org.example.alvin.springexamples.annotation.aop.transaction.service;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +23,19 @@ public class ServiceB {
   }
 
   @Transactional
-  public void doSomethingOneForB() {
-    logger.info("====== using {} doSomethingForB ======", this.dataSource);
+  public void doSomethingOneForB() throws SQLException {
+    logger.info("Start inserting record into tableB, current dataSource: {}", this.dataSource);
+    Connection connection = dataSource.getConnection();
+    if (connection.getAutoCommit()) {
+      connection.setAutoCommit(false);
+    }
+
+    String insertQuery = "INSERT INTO tableb (id, name) VALUES (?, ?)";
+    PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+    preparedStatement.setInt(1, 1);
+    preparedStatement.setString(2, "Alvin");
+    preparedStatement.executeUpdate();
+    throw new RuntimeException("manual error occurs");
+//    logger.info("Inserted record into tableB successfully");
   }
 }

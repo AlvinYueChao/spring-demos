@@ -1,5 +1,6 @@
 package org.example.alvin.springexamples.annotation.aop.transaction.service;
 
+import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,15 @@ public class ServiceC {
     this.serviceB = serviceB;
   }
 
-  @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
-  public void doSomethingOneForC() {
-    logger.info("====== using {} doSomethingForC ======", this.serviceA);
-    this.serviceA.doSomethingOneForA();
-    logger.info("====== using {} doSomethingForC ======", this.serviceB);
-    this.serviceB.doSomethingOneForB();
+  @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+  public void doSomethingOneForC() throws SQLException {
+    try {
+      logger.info("====== using {} doSomethingForC ======", this.serviceA);
+      this.serviceA.doSomethingOneForA();
+      logger.info("====== using {} doSomethingForC ======", this.serviceB);
+      this.serviceB.doSomethingOneForB();
+    } catch (RuntimeException e) {
+      logger.warn("cached runtime exception", e);
+    }
   }
 }
