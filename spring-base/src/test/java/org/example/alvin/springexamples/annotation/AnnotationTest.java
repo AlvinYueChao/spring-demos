@@ -3,6 +3,7 @@ package org.example.alvin.springexamples.annotation;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
+import javax.sql.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.alvin.springexamples.annotation.AnnotationBean.InnerBean;
@@ -27,6 +28,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.datasource.ConnectionHolder;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.DataSourceUtils;
+import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.util.ClassUtils;
 
@@ -141,9 +145,12 @@ class AnnotationTest {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
     ServiceC beanC = applicationContext.getBean(ServiceC.class);
     /*
-    即使在 root transaction 中设置 try-cache 将 子事务中的异常提前于 root transaction 事务切面拦截，root transaction最终还是会 rollback
+    在事务方法中手动进行 try-cache 的情况：
+    1. 在 beanC 的事务方法中进行 try-cache：事务最终还是会 rollback
     根本原因: beanC, beanB, beanA 事务方法持有的是同一个 connectionHolder，在 beanB 事务切面处理异常时, 将 connectionHolder 的 rollbackOnly 属性设置为了 true
               所以在 beanC 的事务切面判断是否需要进行全局回滚时，结果为 true，从而进行了全局回滚
+    2. 在 beanB 的事务方法中进行 try-cache：事务最终会提交
+    根本原因：beanB 事务切面中并未对 rollbackOnly 设置 true，所以 beanC 的事务切面认为事务方法执行正常，进行了事务提交
      */
     beanC.doSomethingOneForC();
   }

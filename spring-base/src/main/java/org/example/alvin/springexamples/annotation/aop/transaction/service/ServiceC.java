@@ -25,13 +25,18 @@ public class ServiceC {
 
   @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
   public void doSomethingOneForC() throws SQLException {
-    try {
+    /*try {
       logger.info("====== using {} doSomethingForC ======", this.serviceA);
       this.serviceA.doSomethingOneForA();
       logger.info("====== using {} doSomethingForC ======", this.serviceB);
       this.serviceB.doSomethingOneForB();
     } catch (RuntimeException e) {
       logger.warn("cached runtime exception", e);
-    }
+    }*/
+
+    logger.info("====== using {} doSomethingForC ======", this.serviceA);
+    this.serviceA.doSomethingOneForA();
+    logger.info("====== using {} doSomethingForC ======", this.serviceB);
+    this.serviceB.doSomethingOneForB();
   }
 }

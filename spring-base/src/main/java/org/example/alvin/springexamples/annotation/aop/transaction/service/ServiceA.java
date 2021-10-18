@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,16 +26,15 @@ public class ServiceA {
   @Transactional
   public void doSomethingOneForA() throws SQLException {
     logger.info("Start inserting record into tableA, current dataSource: {}", this.dataSource);
-    Connection connection = dataSource.getConnection();
+    Connection connection = DataSourceUtils.getConnection(dataSource);
     if (connection.getAutoCommit()) {
       connection.setAutoCommit(false);
     }
-
     String insertQuery = "INSERT INTO tablea (id, name) VALUES (?, ?)";
     PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
     preparedStatement.setInt(1, 1);
     preparedStatement.setString(2, "Iphone SE");
-    preparedStatement.executeUpdate();
+    int i = preparedStatement.executeUpdate();
     logger.info("Inserted record into tableA successfully");
   }
 }
