@@ -144,11 +144,6 @@ class AnnotationTest {
   void test13() throws SQLException {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
     ServiceC beanC = applicationContext.getBean(ServiceC.class);
-    DataSource dataSource = applicationContext.getBean(DataSource.class);
-    Connection connection = DataSourceUtils.getConnection(dataSource);
-    if (connection.getAutoCommit()) {
-      connection.setAutoCommit(false);
-    }
     /*
     在事务方法中手动进行 try-cache 的情况：
     1. 在 beanC 的事务方法中进行 try-cache：事务最终还是会 rollback
