@@ -35,6 +35,5 @@ public class ServiceA {
     preparedStatement.setInt(1, 1);
     preparedStatement.setString(2, "Iphone SE");
     int i = preparedStatement.executeUpdate();
-    logger.info("Inserted record into tableA successfully");
   }
 }
