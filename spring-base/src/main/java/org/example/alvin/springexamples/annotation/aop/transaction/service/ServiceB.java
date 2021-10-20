@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -23,26 +24,20 @@ public class ServiceB {
     this.dataSource = dataSource;
   }
 
-  @Transactional
+  @Transactional(propagation = Propagation.NESTED)
   public void doSomethingOneForB() throws SQLException {
-    /*logger.info("Start inserting record into tableB, current dataSource: {}", this.dataSource);
+    logger.info("Start inserting record into tableB, current dataSource: {}", this.dataSource);
     Connection connection = DataSourceUtils.getConnection(dataSource);
-    if (connection.getAutoCommit()) {
-      connection.setAutoCommit(false);
-    }
     String insertQuery = "INSERT INTO tableb (id, name) VALUES (?, ?)";
     PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
     preparedStatement.setInt(1, 1);
     preparedStatement.setString(2, "Alvin");
     int i = preparedStatement.executeUpdate();
-    throw new RuntimeException("manual error occurs");*/
+    throw new RuntimeException("manual error occurs");
 
-    try {
+    /*try {
       logger.info("Start inserting record into tableB, current dataSource: {}", this.dataSource);
       Connection connection = DataSourceUtils.getConnection(dataSource);
-      if (connection.getAutoCommit()) {
-        connection.setAutoCommit(false);
-      }
       String insertQuery = "INSERT INTO tableb (id, name) VALUES (?, ?)";
       PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
       preparedStatement.setInt(1, 1);
@@ -51,6 +46,6 @@ public class ServiceB {
       throw new RuntimeException("manual error occurs");
     } catch (RuntimeException e) {
       logger.warn("cached runtime exception", e);
-    }
+    }*/
   }
 }

@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -23,13 +24,10 @@ public class ServiceA {
     this.dataSource = dataSource;
   }
 
-  @Transactional
+  @Transactional(propagation = Propagation.NESTED)
   public void doSomethingOneForA() throws SQLException {
     logger.info("Start inserting record into tableA, current dataSource: {}", this.dataSource);
     Connection connection = DataSourceUtils.getConnection(dataSource);
-    if (connection.getAutoCommit()) {
-      connection.setAutoCommit(false);
-    }
     String insertQuery = "INSERT INTO tablea (id, name) VALUES (?, ?)";
     PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
     preparedStatement.setInt(1, 1);

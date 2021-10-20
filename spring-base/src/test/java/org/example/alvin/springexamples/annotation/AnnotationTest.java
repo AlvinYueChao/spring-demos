@@ -145,12 +145,23 @@ class AnnotationTest {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
     ServiceC beanC = applicationContext.getBean(ServiceC.class);
     /*
+    propagation = Propagation.REQUIRED
     在事务方法中手动进行 try-cache 的情况：
-    1. 在 beanC 的事务方法中进行 try-cache：事务最终还是会 rollback
-    根本原因: beanC, beanB, beanA 事务方法持有的是同一个 connectionHolder，在 beanB 事务切面处理异常时, 将 connectionHolder 的 rollbackOnly 属性设置为了 true
-              所以在 beanC 的事务切面判断是否需要进行全局回滚时，结果为 true，从而进行了全局回滚
-    2. 在 beanB 的事务方法中进行 try-cache：事务最终会提交
-    根本原因：beanB 事务切面中并未对 rollbackOnly 设置 true，所以 beanC 的事务切面认为事务方法执行正常，进行了事务提交
+    1. 在 serviceC 的事务方法中进行 try-cache：事务最终会 rollback
+    根本原因: serviceC, serviceB, serviceA 事务方法持有的是同一个 connectionHolder，在 beanB 事务切面处理异常时, 将 connectionHolder 的 rollbackOnly 属性设置为了 true
+              所以在 serviceC 的事务切面判断是否需要进行全局回滚时，结果为 true，从而进行了全局回滚
+    2. 在 serviceB 的事务方法中进行 try-cache：事务最终会提交
+    根本原因：serviceB 事务切面中并未对 rollbackOnly 设置 true，所以 serviceC 的事务切面认为事务方法执行正常，进行了事务提交
+    propagation = Propagation.NESTED
+    1. 不进行任何手动的 try-cache：事务最终会 rollback
+    根本原因：serviceA 正常提交之后清除了回滚点，serviceB 事务切面回滚到了当前事务切面开始时设置的回滚点并抛出异常，serviceC 事务切面捕获异常之后进行无回滚点的回滚，因为三个事务切面持有
+              的连接是同一个，所以 serviceA 的事务也被全部回滚
+    2. 在 serviceC 的事务方法中进行 try-cache：事务最终会部分提交
+    根本原因：serviceB 的事务切面捕获了异常，但是由于 serviceB 的事务传播属性是 NESTED，所以 serviceB 的事务切面没有设置 rollbackOnly，而是在设置之前就进入了 NESTED 对应的 rollback 逻辑
+              中，在这个逻辑中进行了事务的回滚，所以 serviceB 的数据库操作被回滚而且此时的 rollbackOnly 的值仍为 false，所以 serviceC 的事务切面进行提交的时候仅有 serviceA 的数据库操作生效，
+              所以只有 tablea 插入了一条数据
+    3. 在 serviceB 的事务方法中进行 try-cache：事务最终会全部提交
+    根本原因：异常从第一次抛出就被吞掉，事务切面没有捕获任何一场，认为执行正常所以进行最终提交
      */
     beanC.doSomethingOneForC();
   }
