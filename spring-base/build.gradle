@@ -25,6 +25,7 @@ dependencies {
 
     // jdbc
     implementation("mysql:mysql-connector-java:8.0.26")
+    implementation("com.mchange:c3p0:0.9.5.5")
 
     // test
     testImplementation("org.junit.jupiter:junit-jupiter-api:${jupiter_version}")
