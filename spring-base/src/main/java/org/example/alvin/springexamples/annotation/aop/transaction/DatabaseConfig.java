@@ -11,6 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
 
 @Component
 @PropertySource(value = "application.properties")
@@ -59,5 +60,12 @@ public class DatabaseConfig {
     DataSourceTransactionManager dtm = new DataSourceTransactionManager();
     dtm.setDataSource(dataSource);
     return dtm;
+  }
+
+  @Bean
+  public TransactionTemplate transactionTemplate(PlatformTransactionManager platformTransactionManager) {
+    TransactionTemplate transactionTemplate = new TransactionTemplate();
+    transactionTemplate.setTransactionManager(platformTransactionManager);
+    return transactionTemplate;
   }
 }
