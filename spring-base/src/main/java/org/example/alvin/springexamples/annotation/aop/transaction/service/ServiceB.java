@@ -36,7 +36,7 @@ public class ServiceB {
     Connection connection = DataSourceUtils.getConnection(dataSource);
     logger.info("connection in method with @Transaction: {}", connection);
 
-    transactionTemplate.execute(status -> {
+    Integer result = transactionTemplate.execute(status -> {
       Connection connection1 = DataSourceUtils.getConnection(dataSource);
       logger.info("connection in programing transaction: {}", connection1);
       String insertQuery = "INSERT INTO tableb (id, name) VALUES (?, ?)";
@@ -46,13 +46,13 @@ public class ServiceB {
         preparedStatement.setInt(1, 1);
         preparedStatement.setString(2, "Alvin");
         affectedRows = preparedStatement.executeUpdate();
-        throw new RuntimeException("manual error occurs");
+//        throw new RuntimeException("manual error occurs");
       } catch (SQLException e) {
         e.printStackTrace();
       }
       return affectedRows;
     });
-
+    logger.info("programing transaction completed, affected rows: {}", result);
     /*try {
       logger.info("Start inserting record into tableB, current dataSource: {}", this.dataSource);
       Connection connection = DataSourceUtils.getConnection(dataSource);

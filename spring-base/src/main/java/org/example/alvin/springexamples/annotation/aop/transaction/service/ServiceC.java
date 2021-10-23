@@ -38,5 +38,6 @@ public class ServiceC {
     this.serviceA.doSomethingOneForA();
     logger.info("====== using {} doSomethingForC ======", this.serviceB);
     this.serviceB.doSomethingOneForB();
+    logger.info("completing hok here");
   }
 }

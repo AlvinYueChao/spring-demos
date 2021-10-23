@@ -162,6 +162,11 @@ class AnnotationTest {
               所以只有 tablea 插入了一条数据
     3. 在 serviceB 的事务方法中进行 try-cache：事务最终会全部提交
     根本原因：异常从第一次抛出就被吞掉，事务切面没有捕获任何一场，认为执行正常所以进行最终提交
+
+    如果将编程式事务嵌套在 @Transaction 方法中，有以下几点需要注意：
+    1) 编程式事务中，连接对象和当前 @Transaction 方法中持有的连接对象是同一个
+    2) 编程式事务相当于在现有 @Transaction 事务切面中嵌套了一个 @Transaction(propagation = Propagation.REQUIRED) 的事务切面
+    3) 编程式事务中抛出 RuntimeTimeException和 Error 及其子类，则编程式事务和当前 Spring 事务切面均进行回滚。因为编程式事务捕获异常并进行 rollback 操作后，会向外抛出该异常
      */
     beanC.doSomethingOneForC();
   }
