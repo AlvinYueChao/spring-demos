@@ -24,10 +24,11 @@ public class ServiceA {
     this.dataSource = dataSource;
   }
 
-  @Transactional(propagation = Propagation.NESTED)
+  @Transactional
   public void doSomethingOneForA() throws SQLException {
     logger.info("Start inserting record into tableA, current dataSource: {}", this.dataSource);
     Connection connection = DataSourceUtils.getConnection(dataSource);
+    logger.info("connection in method with @Transaction: {}", connection);
     String insertQuery = "INSERT INTO tablea (id, name) VALUES (?, ?)";
     PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
     preparedStatement.setInt(1, 1);
