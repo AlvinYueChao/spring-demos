@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.alvin.mybatisexamples.mapper.CommonMapper">
-  <resultMap id="queryContractAndIdCardInfoRM" type="ConsultContractCardInfo">
-
+  <resultMap id="qctcid" type="ConsultContractCardInfo">
+    <id column="CONTRACT_ID" property="contractId"/>
+    <result column="CONTRACT_CODE" property="contractCode"/>
+    <result column="ACTIVETIME" property="activeTime"/>
+    <result column="STATE" property="state"/>
+    <!--    <association property="info" javaType="ConsultIdCardInfo" resultMap="CardIdInfoResultMap"/>-->
+    <collection property="infos" javaType="java.util.List" resultMap="CardIdInfoResultMap"/>
   </resultMap>
+
+  <resultMap id="CardIdInfoResultMap" type="ConsultIdCardInfo">
+    <id column="innerId" property="innerId"/>
+    <result column="PSPTID" property="psptId" jdbcType="VARCHAR"/>
+    <result column="NAME" property="name"/>
+    <result column="Birthday" property="birthday"/>
+    <result column="Sex" property="sex"/>
+    <result column="Address" property="address"/>
+    <result column="activeTime" property="activeTime"/>
+    <result column="picture" property="picture"/>
+    <result column="nation" property="nation"/>
+  </resultMap>
+
+  <select id="queryContractByCardId" resultMap="qctcid">
+    SELECT * FROM consult_contract a JOIN consult_idcardinfo b ON a.psptId = b.psptId
+  </select>
 </mapper>
