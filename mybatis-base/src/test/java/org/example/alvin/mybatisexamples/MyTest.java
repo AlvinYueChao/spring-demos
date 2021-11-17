@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.alvin.mybatisexamples.mapper.CommonMapper;
 import org.example.alvin.mybatisexamples.pojo.ConsultContractCardInfo;
+import org.example.alvin.mybatisexamples.pojo.ConsultRecordCount;
 import org.example.alvin.mybatisexamples.util.DataSourceUtils;
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +34,29 @@ public class MyTest {
       Map<String, String> params = new HashMap<>();
       params.put("psptId", "456979432");
       List<Map<?, ?>> result = commonMapper.queryUserByPsptId(params);
+      logger.info(result);
+    }
+  }
+
+  @Test
+  void test3() {
+    SqlSession sqlSession = DataSourceUtils.getSqlSession();
+    if (sqlSession != null) {
+      CommonMapper commonMapper = sqlSession.getMapper(CommonMapper.class);
+      Map<String, String> params = new HashMap<>();
+      List<ConsultRecordCount> result = commonMapper.queryRecordCount(params);
+      logger.info(result);
+    }
+  }
+
+  @Test
+  void test4() {
+    SqlSession sqlSession = DataSourceUtils.getSqlSession();
+    if (sqlSession != null) {
+      CommonMapper commonMapper = sqlSession.getMapper(CommonMapper.class);
+      Map<String, String> params = new HashMap<>();
+      params.put("psptId", "456979432");
+      List<ConsultRecordCount> result = commonMapper.queryRecordCount(params);
       logger.info(result);
     }
   }

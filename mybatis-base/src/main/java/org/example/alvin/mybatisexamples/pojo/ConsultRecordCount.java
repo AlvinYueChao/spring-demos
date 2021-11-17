@@ -34,4 +34,9 @@ public class ConsultRecordCount {
   public void setUnproduce(Integer unproduce) {
     this.unproduce = unproduce;
   }
+
+  @Override
+  public String toString() {
+    return String.format("ConsultRecordCount[psptId=%s, isproduce=%d, unproduce=%d]", this.psptId, this.isproduce, this.unproduce);
+  }
 }
