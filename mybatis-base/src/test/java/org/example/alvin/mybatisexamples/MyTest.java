@@ -1,6 +1,8 @@
 package org.example.alvin.mybatisexamples;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +27,13 @@ public class MyTest {
 
   @Test
   void test2() {
-
+    SqlSession sqlSession = DataSourceUtils.getSqlSession();
+    if (sqlSession != null) {
+      CommonMapper commonMapper = sqlSession.getMapper(CommonMapper.class);
+      Map<String, String> params = new HashMap<>();
+      params.put("psptId", "456979432");
+      List<Map<?, ?>> result = commonMapper.queryUserByPsptId(params);
+      logger.info(result);
+    }
   }
 }

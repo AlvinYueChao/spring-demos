@@ -22,7 +22,27 @@
     <result column="nation" property="nation"/>
   </resultMap>
 
+  <resultMap id="CountResultMap" type="ConsultRecordCount">
+    <result column="PSPTID" property="psptId" jdbcType="VARCHAR"/>
+    <result column="ISPRODUCE" property="isproduce"/>
+    <result column="UNPRODUCE" property="unproduce"/>
+  </resultMap>
+
   <select id="queryContractByCardId" resultMap="qctcid">
     SELECT * FROM consult_contract a JOIN consult_idcardinfo b ON a.psptId = b.psptId
+  </select>
+
+  <select id="queryUserByPsptId" parameterType="java.util.Map" resultType="java.util.Map">
+    select *,date_format(birthday,'%Y-%m-%d') birthday1,date_format(activeTime,'%Y-%m-%d') activeTime1 from consult_idcardinfo where psptId =
+    #{psptId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="queryRecordCount" parameterType="java.util.Map" resultMap="CountResultMap">
+    select * from consult_recordcount
+    <trim prefix="WHERE" prefixOverrides="AND|OR">
+      <if test="psptId != null and psptId != ''">
+        and psptId = #{psptId,jdbcType=VARCHAR}
+      </if>
+    </trim>
   </select>
 </mapper>
