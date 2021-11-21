@@ -13,7 +13,7 @@
 
   <Loggers>
     <!-- show sql -->
-    <logger name="org.example.alvin.mybatisexamples.mapper" level="DEBUG"/>
+    <logger name="org.example.alvin.mybatisexamples.mapper" level="TRACE"/>
 
     <Root level="INFO">
       <AppenderRef ref="Console"/>

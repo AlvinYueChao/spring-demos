@@ -63,7 +63,7 @@ public class MyTest {
 
   @Test
   void test5() {
-    // Mybatis 的嵌套查询：通过 collection 由一次查询结果触发另一条查询语句. 级联查询会有缓存
+    // Mybatis 的嵌套查询：一条查询语句没结束，通过 collection 触发另一条查询语句
     SqlSession sqlSession = DataSourceUtils.getSqlSession();
     if (sqlSession != null) {
       CommonMapper commonMapper = sqlSession.getMapper(CommonMapper.class);
