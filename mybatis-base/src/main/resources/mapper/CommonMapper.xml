@@ -28,6 +28,14 @@
     <result column="UNPRODUCE" property="unproduce"/>
   </resultMap>
 
+  <resultMap id="nestedQueryMap" type="ConsultContractCardInfo">
+    <id column="CONTRACT_ID" property="contractId"/>
+    <result column="CONTRACT_CODE" property="contractCode"/>
+    <result column="ACTIVETIME" property="activeTime"/>
+    <result column="STATE" property="state"/>
+    <collection property="infos" column="PSPTID" select="queryUserByPsptId2"/>
+  </resultMap>
+
   <select id="queryContractByCardId" resultMap="qctcid">
     SELECT * FROM consult_contract a JOIN consult_idcardinfo b ON a.psptId = b.psptId
   </select>
@@ -44,5 +52,13 @@
         and psptId = #{psptId,jdbcType=VARCHAR}
       </if>
     </trim>
+  </select>
+
+  <select id="getTop4Contracts" parameterType="java.util.Map" resultMap="nestedQueryMap" databaseId="mysql">
+    SELECT * FROM consult_contract LIMIT 4
+  </select>
+
+  <select id="queryUserByPsptId2" parameterType="java.util.Map" resultMap="CardIdInfoResultMap">
+    SELECT * FROM consult_idcardinfo WHERE psptId = #{psptId}
   </select>
 </mapper>

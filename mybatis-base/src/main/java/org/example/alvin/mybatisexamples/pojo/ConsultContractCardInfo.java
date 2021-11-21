@@ -55,4 +55,10 @@ public class ConsultContractCardInfo {
   public void setInfos(List<ConsultIdCardInfo> infos) {
     this.infos = infos;
   }
+
+  @Override
+  public String toString() {
+    return String.format("ConsultContractCardInfo{contractId=%s, contractCode=%s, activeTime=%s, state=%s, infos=%s}", this.contractId, this.contractCode,
+        this.activeTime, this.state, this.infos.toString());
+  }
 }

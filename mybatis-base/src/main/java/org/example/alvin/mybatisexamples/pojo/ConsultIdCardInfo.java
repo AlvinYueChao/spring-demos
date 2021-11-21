@@ -94,4 +94,10 @@ public class ConsultIdCardInfo {
   public void setNation(String nation) {
     this.nation = nation;
   }
+
+  @Override
+  public String toString() {
+    return String.format("ConsultIdCardInfo[innerId=%d, psptId=%s, name=%s, sex=%s, birthday=%s, address=%s, picture=%s, activeTime=%s, nation=%s]",
+        this.innerId, this.psptId, this.name, this.sex, this.birthday, this.address, this.picture, this.activeTime, this.nation);
+  }
 }

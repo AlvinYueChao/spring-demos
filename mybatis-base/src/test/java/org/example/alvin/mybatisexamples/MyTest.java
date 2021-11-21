@@ -60,4 +60,18 @@ public class MyTest {
       logger.info(result);
     }
   }
+
+  @Test
+  void test5() {
+    // Mybatis 的嵌套查询：通过 collection 由一次查询结果触发另一条查询语句. 级联查询会有缓存
+    SqlSession sqlSession = DataSourceUtils.getSqlSession();
+    if (sqlSession != null) {
+      CommonMapper commonMapper = sqlSession.getMapper(CommonMapper.class);
+      Map<String, String> params = new HashMap<>();
+      List<ConsultContractCardInfo> result = commonMapper.getTop4Contracts(params);
+      for (ConsultContractCardInfo consultContractCardInfo : result) {
+        logger.info("result from consult_contract: {}", consultContractCardInfo);
+      }
+    }
+  }
 }

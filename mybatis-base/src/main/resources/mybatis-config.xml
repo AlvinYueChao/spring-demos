@@ -2,17 +2,21 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <properties resource="db.properties"/>
+
   <settings>
     <setting name="logImpl" value="LOG4J2"/>
   </settings>
+
   <typeAliases>
     <package name="org.example.alvin.mybatisexamples"/>
   </typeAliases>
+
   <!--<plugins>
     <plugin interceptor="PagePlugin">
 
     </plugin>
   </plugins>-->
+
   <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC"/>
@@ -24,6 +28,11 @@
       </dataSource>
     </environment>
   </environments>
+
+  <databaseIdProvider type="VENDOR">
+    <property name="MySQL" value="mysql"/>
+  </databaseIdProvider>
+
   <mappers>
     <mapper resource="mapper/CommonMapper.xml"/>
   </mappers>

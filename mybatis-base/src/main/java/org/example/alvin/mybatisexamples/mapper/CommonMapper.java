@@ -12,4 +12,6 @@ public interface CommonMapper {
   List<Map<?, ?>> queryUserByPsptId(Map<?, ?> params);
 
   List<ConsultRecordCount> queryRecordCount(Map<?, ?> params);
+
+  List<ConsultContractCardInfo> getTop4Contracts(Map<?, ?> params);
 }
