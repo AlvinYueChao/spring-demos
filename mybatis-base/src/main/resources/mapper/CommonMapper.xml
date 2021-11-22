@@ -22,7 +22,7 @@
     <result column="nation" property="nation"/>
   </resultMap>
 
-  <resultMap id="CountResultMap" type="ConsultRecordCount">
+  <resultMap id="countResultMap" type="ConsultRecordCount">
     <result column="PSPTID" property="psptId" jdbcType="VARCHAR"/>
     <result column="ISPRODUCE" property="isproduce"/>
     <result column="UNPRODUCE" property="unproduce"/>
@@ -36,6 +36,14 @@
     <collection property="infos" column="PSPTID" select="queryUserByPsptId2"/>
   </resultMap>
 
+  <resultMap id="lazyNestedQueryMap" type="ConsultContractCardInfo">
+    <id column="CONTRACT_ID" property="contractId"/>
+    <result column="CONTRACT_CODE" property="contractCode"/>
+    <result column="ACTIVETIME" property="activeTime"/>
+    <result column="STATE" property="state"/>
+    <collection property="infos" column="PSPTID" fetchType="lazy" select="queryUserByPsptId2"/>
+  </resultMap>
+
   <select id="queryContractByCardId" resultMap="qctcid">
     SELECT * FROM consult_contract a JOIN consult_idcardinfo b ON a.psptId = b.psptId
   </select>
@@ -45,7 +53,7 @@
     #{psptId,jdbcType=VARCHAR}
   </select>
 
-  <select id="queryRecordCount" parameterType="java.util.Map" resultMap="CountResultMap">
+  <select id="queryRecordCount" parameterType="java.util.Map" resultMap="countResultMap">
     select * from consult_recordcount
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       <if test="psptId != null and psptId != ''">
@@ -60,5 +68,9 @@
 
   <select id="queryUserByPsptId2" parameterType="java.util.Map" resultMap="CardIdInfoResultMap">
     SELECT * FROM consult_idcardinfo WHERE psptId = #{psptId}
+  </select>
+
+  <select id="getTop4ContractsLazy" parameterType="java.util.Map" resultMap="lazyNestedQueryMap" databaseId="mysql">
+    SELECT * FROM consult_contract LIMIT 4
   </select>
 </mapper>

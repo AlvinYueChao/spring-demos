@@ -14,4 +14,6 @@ public interface CommonMapper {
   List<ConsultRecordCount> queryRecordCount(Map<?, ?> params);
 
   List<ConsultContractCardInfo> getTop4Contracts(Map<?, ?> params);
+
+  List<ConsultContractCardInfo> getTop4ContractsLazy(Map<?, ?> params);
 }

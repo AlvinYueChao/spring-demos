@@ -74,4 +74,21 @@ public class MyTest {
       }
     }
   }
+
+  @Test
+  void test6() {
+    SqlSession sqlSession = DataSourceUtils.getSqlSession();
+    if (sqlSession != null) {
+      CommonMapper commonMapper = sqlSession.getMapper(CommonMapper.class);
+      Map<String, String> params = new HashMap<>();
+      List<ConsultContractCardInfo> result = commonMapper.getTop4ContractsLazy(params);
+      for (ConsultContractCardInfo consultContractCardInfo : result) {
+        logger.info("ConsultContractCardInfo[contractId={}, contractCode={}, activeTime={}, state={}]", consultContractCardInfo.getContractId(),
+            consultContractCardInfo.getContractCode(), consultContractCardInfo.getActiveTime(), consultContractCardInfo.getState());
+      }
+      for (ConsultContractCardInfo consultContractCardInfo : result) {
+        logger.info("ConsultContractCardInfo[contractId={}, infos={}]", consultContractCardInfo.getContractId(), consultContractCardInfo.getInfos());
+      }
+    }
+  }
 }
