@@ -77,6 +77,7 @@ public class MyTest {
 
   @Test
   void test6() {
+    // Mybatis «∂Ã◊≤È—Ø + ¿¡º”‘ÿ
     SqlSession sqlSession = DataSourceUtils.getSqlSession();
     if (sqlSession != null) {
       CommonMapper commonMapper = sqlSession.getMapper(CommonMapper.class);
