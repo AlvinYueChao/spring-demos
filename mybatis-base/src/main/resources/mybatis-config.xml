@@ -11,11 +11,9 @@
     <package name="org.example.alvin.mybatisexamples"/>
   </typeAliases>
 
-  <!--<plugins>
-    <plugin interceptor="PagePlugin">
-
-    </plugin>
-  </plugins>-->
+  <plugins>
+    <plugin interceptor="org.example.alvin.mybatisexamples.plugin.PagePlugin"/>
+  </plugins>
 
   <environments default="development">
     <environment id="development">
