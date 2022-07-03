@@ -8,6 +8,7 @@
   http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
   <dubbo:application name="dubbo_provider"/>
+  <dubbo:registry address="zookeeper://192.168.20.10:2181" check="false"/>
 
   <bean id="userServiceImpl" class="dubbo.provider.xml.UserServiceImpl"/>
   <dubbo:service interface="dubbo.api.service.UserService" ref="userServiceImpl"/>
