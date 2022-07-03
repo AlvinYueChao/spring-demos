@@ -12,5 +12,7 @@ include 'spring-base'
 include 'cache-annotation'
 include 'easy-cache'
 include 'mybatis-base'
-include 'double-p'
+include 'dubbo-p'
+include 'dubbo-c'
+include 'dubbo-api'
 
