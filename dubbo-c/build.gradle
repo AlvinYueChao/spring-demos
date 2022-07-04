@@ -2,10 +2,19 @@ plugins {
     id 'java'
 }
 
+configurations.all {
+    exclude group: "ch.qos.logback", module: "logback-classic"
+    exclude group: "ch.qos.logback", module: "logback-core"
+    exclude group: "log4j", module: "log4j"
+}
+
 dependencies {
+    implementation project(":dubbo-api")
+
     implementation("com.alibaba:dubbo:2.6.12") {
         exclude group: "org.springframework", module: "spring-context"
     }
+    implementation("org.apache.curator:curator-recipes:${curator_version}")
 
     // spring
     implementation("org.springframework:spring-context:5.3.21")
@@ -17,6 +26,8 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok:${lombok_version}")
 
     // logging
+    implementation("org.slf4j:slf4j-api:1.7.36")
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:${log4j_version}")
     implementation("org.apache.logging.log4j:log4j-api:${log4j_version}")
     implementation("org.apache.logging.log4j:log4j-core:${log4j_version}")
 

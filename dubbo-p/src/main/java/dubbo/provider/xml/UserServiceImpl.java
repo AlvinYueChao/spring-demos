@@ -8,7 +8,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public String queryUser(String userId) {
-    log.info("====== invoke UserService.queryUser ======");
-    return "OK";
+    log.info("====== invoke UserService.queryUser. userId: {} ======", userId);
+    return "OK---" + userId;
   }
 }
