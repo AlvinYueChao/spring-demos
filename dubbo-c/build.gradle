@@ -18,6 +18,7 @@ dependencies {
 
     // spring
     implementation("org.springframework:spring-context:5.3.21")
+    implementation("org.springframework:spring-test:5.3.21")
 
     // lombok
     annotationProcessor("org.projectlombok:lombok:${lombok_version}")
