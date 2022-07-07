@@ -18,7 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ContextConfiguration(classes = {AnnoBean.class})
 class AnnoBeanTest {
 
-  @Reference(check = false)
+  @Reference(check = false, retries = 3, cluster = "failover", loadbalance = "random")
   private UserService userService;
 
   @Test
