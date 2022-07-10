@@ -1,0 +1,2 @@
+map=com.alibaba.dubbo.rpc.cluster.merger.MapMerger
+string=dubbo.consumer.anno.merge.StringMerger
