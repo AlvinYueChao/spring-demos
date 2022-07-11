@@ -8,6 +8,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import dubbo.api.group.Group;
 import dubbo.api.service.UserService;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Random;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,8 +40,7 @@ class AnnoBeanTest {
   private UserService userService;
 
   /**
-   * group = "*": 随机访问任一 provider
-   * group = "groupImpl1": 指定访问 groupImpl1 下的 provider
+   * group = "*": 随机访问任一 provider group = "groupImpl1": 指定访问 groupImpl1 下的 provider
    */
   @Reference(check = false, group = "*", parameters = {"merger", "true"})
   private Group group;
@@ -82,6 +83,10 @@ class AnnoBeanTest {
    */
   @Test
   void testGroupMerge() {
+    // custom merger for String
     log.info(group.doSomething("111"));
+
+    // default merger for double array
+    log.info("merge two double array into ones: {}", Arrays.toString(group.doSomething(new double[]{10.1d})));
   }
 }

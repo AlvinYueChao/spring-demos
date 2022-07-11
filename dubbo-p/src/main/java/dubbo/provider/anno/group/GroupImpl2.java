@@ -13,4 +13,9 @@ public class GroupImpl2 implements Group {
     log.info("====== invoke GroupImpl2.doSomething ======");
     return name + " do something under groupImpl2";
   }
+
+  @Override
+  public double[] doSomething(double[] values) {
+    return values;
+  }
 }
