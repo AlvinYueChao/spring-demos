@@ -1,4 +1,4 @@
-package dubbo.provider.anno.basic;
+package dubbo.provider.anno.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import dubbo.api.service.UserService;
