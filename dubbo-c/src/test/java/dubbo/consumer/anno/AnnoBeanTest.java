@@ -7,9 +7,14 @@ import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.annotation.Reference;
 import dubbo.api.group.Group;
 import dubbo.api.service.UserService;
+import dubbo.api.validation.Validation;
+import dubbo.api.validation.ValidationParameter;
+import dubbo.api.version.Version;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.TemporalUnit;
 import java.util.Arrays;
-import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,6 +49,15 @@ class AnnoBeanTest {
    */
   @Reference(check = false, group = "*", parameters = {"merger", "true"})
   private Group group;
+
+  /**
+   * version = "*": 随机访问任一版本的 provider
+   */
+  @Reference(check = false, version = "1.0.0")
+  private Version version;
+
+  @Reference(check = false, validation = "true")
+  private Validation validation;
 
   @Test
   void testBasic() throws IOException {
@@ -88,5 +102,21 @@ class AnnoBeanTest {
 
     // default merger for double array
     log.info("merge two double array into ones: {}", Arrays.toString(group.doSomething(new double[]{10.1d})));
+  }
+
+  @Test
+  void testVersion() {
+    log.info(version.doSomething("Alvin"));
+  }
+
+  @Test
+  void testValidation() {
+    // validation success
+    ValidationParameter validationParameter = ValidationParameter.builder().age(18).name("Alvin").loginDate(LocalDate.now().minusDays(1)).expiryDate(LocalDate.now().plusDays(1)).build();
+    log.info("validation success: {}", validation.checkBeforeSomething(validationParameter));
+
+    // validation failed
+    ValidationParameter validationParameter1 = ValidationParameter.builder().age(101).name("Alvin").loginDate(LocalDate.now()).expiryDate(LocalDate.now().plusDays(1)).build();
+    log.info("validation failed: {}", validation.checkBeforeSomething(validationParameter1));
   }
 }

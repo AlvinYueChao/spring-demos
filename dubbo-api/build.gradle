@@ -1,11 +1,18 @@
 plugins {
     id 'java'
+    id 'java-library'
 }
 
 dependencies {
-    implementation("javax.validation:validation-api:2.0.1.Final")
-    implementation("org.hibernate.validator:hibernate-validator:8.0.0.CR1")
-    compileOnly("org.projectlombok:lombok:1.18.24")
+    api("javax.validation:validation-api:2.0.1.Final")
+    api("org.hibernate:hibernate-validator:5.2.4.Final")
+    api("org.glassfish.web:javax.el:2.2.4")
+    api("javax.el:javax.el-api:2.2.4")
+    api("javax.xml.bind:jaxb-api:2.2.4")
+    annotationProcessor("org.projectlombok:lombok:${lombok_version}")
+    compileOnly("org.projectlombok:lombok:${lombok_version}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombok_version}")
+    testCompileOnly("org.projectlombok:lombok:${lombok_version}")
 }
 
 test {

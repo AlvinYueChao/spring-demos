@@ -8,9 +8,14 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
+/**
+ * Validation 已知问题: 依赖版本过低，不支持 LocalDate
+ */
 public class ValidationParameter implements Serializable {
 
   @NotNull
