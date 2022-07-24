@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.ConsumerConfig;
 import com.alibaba.dubbo.config.ReferenceConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.rpc.service.GenericService;
 import dubbo.api.group.Group;
 import dubbo.api.service.UserService;
 import dubbo.api.validation.Validation;
@@ -121,5 +122,29 @@ class AnnoBeanTest {
     // validation failed
     ValidationParameter validationParameter1 = ValidationParameter.builder().age(101).name("Alvin").loginDate(LocalDate.now()).expiryDate(LocalDate.now().plusDays(1)).build();
     log.info("validation failed: {}", validation.checkBeforeSomething(validationParameter1));
+  }
+
+  @Test
+  void testGeneric() {
+    // 主要用作测试，实际生产环境不会用到
+    ApplicationConfig applicationConfig = new ApplicationConfig();
+    applicationConfig.setName("dubbo_consumer");
+
+    ConsumerConfig consumerConfig = new ConsumerConfig();
+    consumerConfig.setCheck(false);
+
+    RegistryConfig registryConfig = new RegistryConfig();
+    registryConfig.setAddress("zookeeper://192.168.20.10:2181");
+
+    ReferenceConfig<GenericService> referenceConfig = new ReferenceConfig<>();
+    referenceConfig.setApplication(applicationConfig);
+    referenceConfig.setConsumer(consumerConfig);
+    referenceConfig.setRegistry(registryConfig);
+    referenceConfig.setInterface("dubbo.api.service.UserService");
+    // 必须属性
+    referenceConfig.setGeneric(true);
+    GenericService userService = referenceConfig.get();
+    Object result = userService.$invoke("queryUser", new String[]{"java.lang.String"}, new Object[]{"Alvin"});
+    log.info("use genericService to call queryUser, result: {}", result);
   }
 }
