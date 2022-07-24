@@ -9,6 +9,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.service.GenericService;
 import dubbo.api.async.AsyncService;
+import dubbo.api.callback.CallbackService;
 import dubbo.api.group.Group;
 import dubbo.api.service.UserService;
 import dubbo.api.validation.Validation;
@@ -65,6 +66,9 @@ class AnnoBeanTest {
 
   @Reference(check = false, methods = {@Method(name = "asyncToDo", async = true)})
   private AsyncService asyncService;
+
+  @Reference(check = false)
+  private CallbackService callbackService;
 
   @Test
   void testBasic() throws IOException {
@@ -157,7 +161,14 @@ class AnnoBeanTest {
   void testAsync() throws ExecutionException, InterruptedException {
     String result = asyncService.asyncToDo("Alvin");
     log.info("async result: {}", result);
+    // 阻塞主线程, 性能较低
     Object blockedResult = RpcContext.getContext().getFuture().get();
     log.info("blocked async result: {}", blockedResult);
+  }
+
+  @Test
+  void testParameterCallback() {
+    String result = callbackService.addListener("Alvin", name -> "====== client call doListen ======" + name);
+    log.info("Invoke callbackService result: {}", result);
   }
 }
