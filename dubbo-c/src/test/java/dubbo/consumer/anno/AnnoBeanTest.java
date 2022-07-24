@@ -15,7 +15,6 @@ import dubbo.api.service.UserService;
 import dubbo.api.validation.Validation;
 import dubbo.api.validation.ValidationParameter;
 import dubbo.api.version.Version;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Locale;
@@ -71,7 +70,7 @@ class AnnoBeanTest {
   private CallbackService callbackService;
 
   @Test
-  void testBasic() throws IOException {
+  void testBasic() {
     log.info("invoke result: {}", userService.queryUser("33"));
   }
 
@@ -168,7 +167,9 @@ class AnnoBeanTest {
 
   @Test
   void testParameterCallback() {
-    String result = callbackService.addListener("Alvin", name -> "====== client call doListen ======" + name);
+    String result = callbackService.addListener("Alvin", name -> "====== client call doListen ====== " + name);
     log.info("Invoke callbackService result: {}", result);
   }
+
+
 }

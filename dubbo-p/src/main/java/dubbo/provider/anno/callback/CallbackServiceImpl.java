@@ -8,6 +8,9 @@ import dubbo.api.callback.CallbackService;
 import java.time.OffsetDateTime;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 要使回调生效, callback = true 必不可少
+ */
 @Slf4j
 @Service(methods = {@Method(name = "addListener", arguments = {@Argument(index = 1, callback = true)})})
 public class CallbackServiceImpl implements CallbackService {
