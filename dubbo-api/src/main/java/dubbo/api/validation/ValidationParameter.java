@@ -11,11 +11,11 @@ import javax.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * ValidationMessages 预定义位置: ValidationMessages_zh_CN.properties
+ */
 @Data
 @Builder
-/**
- * Validation 已知问题: 依赖版本过低，不支持 LocalDate
- */
 public class ValidationParameter implements Serializable {
 
   @NotNull

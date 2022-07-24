@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.TemporalUnit;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -111,6 +112,8 @@ class AnnoBeanTest {
 
   @Test
   void testValidation() {
+    // hibernate-validator 参数校验信息有国际化配置文件，可显式指定
+    Locale.setDefault(new Locale("en", "US"));
     // validation success
     ValidationParameter validationParameter = ValidationParameter.builder().age(18).name("Alvin").loginDate(LocalDate.now().minusDays(1)).expiryDate(LocalDate.now().plusDays(1)).build();
     log.info("validation success: {}", validation.checkBeforeSomething(validationParameter));
