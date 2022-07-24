@@ -4,8 +4,11 @@ import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ConsumerConfig;
 import com.alibaba.dubbo.config.ReferenceConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
+import com.alibaba.dubbo.config.annotation.Method;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.service.GenericService;
+import dubbo.api.async.AsyncService;
 import dubbo.api.group.Group;
 import dubbo.api.service.UserService;
 import dubbo.api.validation.Validation;
@@ -13,10 +16,9 @@ import dubbo.api.validation.ValidationParameter;
 import dubbo.api.version.Version;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.temporal.TemporalUnit;
 import java.util.Arrays;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ExecutionException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -60,6 +62,9 @@ class AnnoBeanTest {
 
   @Reference(check = false, validation = "true")
   private Validation validation;
+
+  @Reference(check = false, methods = {@Method(name = "asyncToDo", async = true)})
+  private AsyncService asyncService;
 
   @Test
   void testBasic() throws IOException {
@@ -145,6 +150,14 @@ class AnnoBeanTest {
     referenceConfig.setGeneric(true);
     GenericService userService = referenceConfig.get();
     Object result = userService.$invoke("queryUser", new String[]{"java.lang.String"}, new Object[]{"Alvin"});
-    log.info("use genericService to call queryUser, result: {}", result);
+    log.info("use manual genericService to call queryUser, result: {}", result);
+  }
+
+  @Test
+  void testAsync() throws ExecutionException, InterruptedException {
+    String result = asyncService.asyncToDo("Alvin");
+    log.info("async result: {}", result);
+    Object blockedResult = RpcContext.getContext().getFuture().get();
+    log.info("blocked async result: {}", blockedResult);
   }
 }
