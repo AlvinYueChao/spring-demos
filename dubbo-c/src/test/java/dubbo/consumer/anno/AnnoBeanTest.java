@@ -12,6 +12,7 @@ import dubbo.api.async.AsyncService;
 import dubbo.api.callback.CallbackService;
 import dubbo.api.group.Group;
 import dubbo.api.service.UserService;
+import dubbo.api.stub.StubService;
 import dubbo.api.validation.Validation;
 import dubbo.api.validation.ValidationParameter;
 import dubbo.api.version.Version;
@@ -68,6 +69,9 @@ class AnnoBeanTest {
 
   @Reference(check = false)
   private CallbackService callbackService;
+
+  @Reference(check = false, stub = "dubbo.consumer.anno.stub.LocalStubImpl")
+  private StubService stubService;
 
   @Test
   void testBasic() {
@@ -171,5 +175,8 @@ class AnnoBeanTest {
     log.info("Invoke callbackService result: {}", result);
   }
 
-
+  @Test
+  void testStub() {
+    log.info("Want to buy a ticket, result: {}", stubService.buyTickets("Alvin"));
+  }
 }
