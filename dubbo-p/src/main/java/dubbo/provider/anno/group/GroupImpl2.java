@@ -1,11 +1,11 @@
 package dubbo.provider.anno.group;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import dubbo.api.group.Group;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 
 @Slf4j
-@Service(group = "groupImpl2")
+@DubboService(group = "groupImpl2")
 public class GroupImpl2 implements Group {
 
   @Override

@@ -1,7 +1,7 @@
 package dubbo.consumer.anno.merge;
 
-import com.alibaba.dubbo.rpc.cluster.Merger;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.rpc.cluster.Merger;
 
 @Slf4j
 public class StringMerger implements Merger<String> {

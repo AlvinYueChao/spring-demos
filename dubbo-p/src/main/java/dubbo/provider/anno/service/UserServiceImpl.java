@@ -1,11 +1,11 @@
 package dubbo.provider.anno.service;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import dubbo.api.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 
 @Slf4j
-@Service
+@DubboService
 public class UserServiceImpl implements UserService {
 
   @Override

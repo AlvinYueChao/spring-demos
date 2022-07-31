@@ -1,16 +1,9 @@
 package dubbo.consumer.anno;
 
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.ConsumerConfig;
-import com.alibaba.dubbo.config.ReferenceConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
-import com.alibaba.dubbo.config.annotation.Method;
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.rpc.RpcContext;
-import com.alibaba.dubbo.rpc.service.GenericService;
 import dubbo.api.async.AsyncService;
 import dubbo.api.callback.CallbackService;
 import dubbo.api.group.Group;
+import dubbo.api.mock.MockService;
 import dubbo.api.service.UserService;
 import dubbo.api.stub.StubService;
 import dubbo.api.validation.Validation;
@@ -21,6 +14,14 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.ApplicationConfig;
+import org.apache.dubbo.config.ConsumerConfig;
+import org.apache.dubbo.config.ReferenceConfig;
+import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.Method;
+import org.apache.dubbo.rpc.RpcContext;
+import org.apache.dubbo.rpc.service.GenericService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -46,32 +47,35 @@ class AnnoBeanTest {
    *    - leastactive: 基于最少活跃调用
    * </pre>
    */
-  @Reference(check = false, retries = 3, cluster = "failover", loadbalance = "random")
+  @DubboReference(check = false, retries = 3, cluster = "failover", loadbalance = "random")
   private UserService userService;
 
   /**
    * group = "*": 随机访问任一 provider group = "groupImpl1": 指定访问 groupImpl1 下的 provider
    */
-  @Reference(check = false, group = "*", parameters = {"merger", "true"})
+  @DubboReference(check = false, group = "*", parameters = {"merger", "true"})
   private Group group;
 
   /**
    * version = "*": 随机访问任一版本的 provider
    */
-  @Reference(check = false, version = "1.0.0")
+  @DubboReference(check = false, version = "1.0.0")
   private Version version;
 
-  @Reference(check = false, validation = "true")
+  @DubboReference(check = false, validation = "true")
   private Validation validation;
 
-  @Reference(check = false, methods = {@Method(name = "asyncToDo", async = true)})
+  @DubboReference(check = false, methods = {@Method(name = "asyncToDo", async = true)})
   private AsyncService asyncService;
 
-  @Reference(check = false)
+  @DubboReference(check = false)
   private CallbackService callbackService;
 
-  @Reference(check = false, stub = "dubbo.consumer.anno.stub.LocalStubImpl")
+  @DubboReference(check = false, stub = "dubbo.consumer.anno.stub.LocalStubImpl")
   private StubService stubService;
+
+  @DubboReference(check = false, mock = "true")
+  private MockService mockService;
 
   @Test
   void testBasic() {
@@ -154,7 +158,7 @@ class AnnoBeanTest {
     referenceConfig.setRegistry(registryConfig);
     referenceConfig.setInterface("dubbo.api.service.UserService");
     // 必须属性
-    referenceConfig.setGeneric(true);
+    referenceConfig.setGeneric("true");
     GenericService userService = referenceConfig.get();
     Object result = userService.$invoke("queryUser", new String[]{"java.lang.String"}, new Object[]{"Alvin"});
     log.info("use manual genericService to call queryUser, result: {}", result);
@@ -178,5 +182,10 @@ class AnnoBeanTest {
   @Test
   void testStub() {
     log.info("Want to buy a ticket, result: {}", stubService.buyTickets("Alvin"));
+  }
+
+  @Test
+  void testMock1() {
+    log.info("MockService.mock result: {}", mockService.mock("Alvin"));
   }
 }

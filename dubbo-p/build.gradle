@@ -11,13 +11,11 @@ configurations.all {
 dependencies {
     implementation project(":dubbo-api")
 
-    implementation("com.alibaba:dubbo:2.6.12") {
-        exclude group: "org.springframework", module: "spring-context"
-    }
-    implementation("org.apache.curator:curator-recipes:${curator_version}")
+    implementation("org.apache.dubbo:dubbo:${dubbo_version}")
+    implementation("org.apache.dubbo:dubbo-dependencies-zookeeper:${dubbo_version}")
 
-    // spring
-    implementation("org.springframework:spring-context:5.3.21")
+    /*// spring
+    implementation("org.springframework:spring-context:5.3.21")*/
 
     // lombok
     annotationProcessor("org.projectlombok:lombok:${lombok_version}")

@@ -1,11 +1,11 @@
 package dubbo.provider.anno.stub;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import dubbo.api.stub.StubService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 
 @Slf4j
-@Service
+@DubboService
 public class StubServiceImpl implements StubService {
 
   @Override

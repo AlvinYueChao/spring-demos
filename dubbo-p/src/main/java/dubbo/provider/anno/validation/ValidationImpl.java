@@ -1,12 +1,12 @@
 package dubbo.provider.anno.validation;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import dubbo.api.validation.Validation;
 import dubbo.api.validation.ValidationParameter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 
 @Slf4j
-@Service(validation = "true")
+@DubboService(validation = "true")
 public class ValidationImpl implements Validation {
 
   @Override
