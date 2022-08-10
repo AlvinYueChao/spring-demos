@@ -35,29 +35,29 @@ class AnnoBeanTest {
   /**
    * <pre>
    *   cluster:
-   *    - failover: Ê§°Ü×ªÒÆ¡£µ±³öÏÖÊ§°Ü£¬ÖØÊÔÆäËû·şÎñÆ÷¡£at least once, Í¨³£ÓÃÓÚÃİµÈ¶Á²Ù×÷£¬ÖØÊÔ»á´øÀ´¸ü³¤ÑÓ³Ù£¬¿ÉÍ¨¹ı retries = 2 À´ÉèÖÃÖØÊÔ´ÎÊı£¨²»º¬µÚÒ»´Î£©
-   *    - failfast: ¿ìËÙÊ§°Ü¡£Ö»·¢ÆğÒ»´Îµ÷ÓÃ£¬Ê§°ÜÁ¢¼´±¨´í¡£Í¨³£ÓÃÓÚ·ÇÃİµÈĞ´²Ù×÷
-   *    - failsafe: Ê§°Ü°²È«¡£³öÏÖÒì³£Ê±£¬Ö±½ÓºöÂÔ£¬at most once£¬Í¨³£ÓÃÓÚĞ´ÈëÉó¼ÆÈÕÖ¾µÈ²Ù×÷
-   *    - failback: Ê§°Ü×Ô¶¯»Ö¸´¡£ºóÌ¨¼ÇÂ¼Ê§°ÜÇëÇó£¬¶¨Ê±ÖØ·¢£¬Í¨³£ÓÃÓÚÏûÏ¢Í¨Öª²Ù×÷
-   *    - forking: ²¢ĞĞµ÷ÓÃ¶à¸ö·şÎñ£¬Ö»ÒªÒ»¸ö³É¹¦¼´·µ»Ø¡£Í¨³£ÓÃÓÚÊµÊ±ĞÔÒªÇó½Ï¸ßµÄ¶Á²Ù×÷£¬µ«ĞèÒªÀË·Ñ¸ü¶àµÄ·şÎñÆ÷×ÊÔ´
-   *    - broadcase: ¹ã²¥µ÷ÓÃ¡£Öğ¸öµ÷ÓÃ£¬ÈÎÒâÒ»Ì¨±¨´íÔò±¨´í¡£Í¨³£ÓÃÓÚÍ¨ÖªËùÓĞ·şÎñÌá¹©Ö®¸üĞÂ»º´æ»òÈÕÖ¾µÈ±¾µØ×ÊÔ´ĞÅÏ¢
+   *    - failover: å¤±è´¥è½¬ç§»ã€‚å½“å‡ºç°å¤±è´¥ï¼Œé‡è¯•å…¶ä»–æœåŠ¡å™¨ã€‚at least once, é€šå¸¸ç”¨äºå¹‚ç­‰è¯»æ“ä½œï¼Œé‡è¯•ä¼šå¸¦æ¥æ›´é•¿å»¶è¿Ÿï¼Œå¯é€šè¿‡ retries = 2 æ¥è®¾ç½®é‡è¯•æ¬¡æ•°ï¼ˆä¸å«ç¬¬ä¸€æ¬¡ï¼‰
+   *    - failfast: å¿«é€Ÿå¤±è´¥ã€‚åªå‘èµ·ä¸€æ¬¡è°ƒç”¨ï¼Œå¤±è´¥ç«‹å³æŠ¥é”™ã€‚é€šå¸¸ç”¨äºéå¹‚ç­‰å†™æ“ä½œ
+   *    - failsafe: å¤±è´¥å®‰å…¨ã€‚å‡ºç°å¼‚å¸¸æ—¶ï¼Œç›´æ¥å¿½ç•¥ï¼Œat most onceï¼Œé€šå¸¸ç”¨äºå†™å…¥å®¡è®¡æ—¥å¿—ç­‰æ“ä½œ
+   *    - failback: å¤±è´¥è‡ªåŠ¨æ¢å¤ã€‚åå°è®°å½•å¤±è´¥è¯·æ±‚ï¼Œå®šæ—¶é‡å‘ï¼Œé€šå¸¸ç”¨äºæ¶ˆæ¯é€šçŸ¥æ“ä½œ
+   *    - forking: å¹¶è¡Œè°ƒç”¨å¤šä¸ªæœåŠ¡ï¼Œåªè¦ä¸€ä¸ªæˆåŠŸå³è¿”å›ã€‚é€šå¸¸ç”¨äºå®æ—¶æ€§è¦æ±‚è¾ƒé«˜çš„è¯»æ“ä½œï¼Œä½†éœ€è¦æµªè´¹æ›´å¤šçš„æœåŠ¡å™¨èµ„æº
+   *    - broadcase: å¹¿æ’­è°ƒç”¨ã€‚é€ä¸ªè°ƒç”¨ï¼Œä»»æ„ä¸€å°æŠ¥é”™åˆ™æŠ¥é”™ã€‚é€šå¸¸ç”¨äºé€šçŸ¥æ‰€æœ‰æœåŠ¡æä¾›ä¹‹æ›´æ–°ç¼“å­˜æˆ–æ—¥å¿—ç­‰æœ¬åœ°èµ„æºä¿¡æ¯
    *   loadbalance:
-   *    - random: »ùÓÚÈ¨ÖØËæ»úËã·¨
-   *    - roundrobin: »ùÓÚ¼ÓÈ¨ÂÖÑ¯Ëã·¨
-   *    - leastactive: »ùÓÚ×îÉÙ»îÔ¾µ÷ÓÃ
+   *    - random: åŸºäºæƒé‡éšæœºç®—æ³•
+   *    - roundrobin: åŸºäºåŠ æƒè½®è¯¢ç®—æ³•
+   *    - leastactive: åŸºäºæœ€å°‘æ´»è·ƒè°ƒç”¨
    * </pre>
    */
   @DubboReference(check = false, retries = 3, cluster = "failover", loadbalance = "random")
   private UserService userService;
 
   /**
-   * group = "*": Ëæ»ú·ÃÎÊÈÎÒ» provider group = "groupImpl1": Ö¸¶¨·ÃÎÊ groupImpl1 ÏÂµÄ provider
+   * group = "*": éšæœºè®¿é—®ä»»ä¸€ provider group = "groupImpl1": æŒ‡å®šè®¿é—® groupImpl1 ä¸‹çš„ provider
    */
   @DubboReference(check = false, group = "*", parameters = {"merger", "true"})
   private Group group;
 
   /**
-   * version = "*": Ëæ»ú·ÃÎÊÈÎÒ»°æ±¾µÄ provider
+   * version = "*": éšæœºè®¿é—®ä»»ä¸€ç‰ˆæœ¬çš„ provider
    */
   @DubboReference(check = false, version = "1.0.0")
   private Version version;
@@ -129,7 +129,7 @@ class AnnoBeanTest {
 
   @Test
   void testValidation() {
-    // hibernate-validator ²ÎÊıĞ£ÑéĞÅÏ¢ÓĞ¹ú¼Ê»¯ÅäÖÃÎÄ¼ş£¬¿ÉÏÔÊ½Ö¸¶¨
+    // hibernate-validator å‚æ•°æ ¡éªŒä¿¡æ¯æœ‰å›½é™…åŒ–é…ç½®æ–‡ä»¶ï¼Œå¯æ˜¾å¼æŒ‡å®š
     Locale.setDefault(new Locale("en", "US"));
     // validation success
     ValidationParameter validationParameter = ValidationParameter.builder().age(18).name("Alvin").loginDate(LocalDate.now().minusDays(1)).expiryDate(LocalDate.now().plusDays(1)).build();
@@ -142,7 +142,7 @@ class AnnoBeanTest {
 
   @Test
   void testGeneric() {
-    // Ö÷ÒªÓÃ×÷²âÊÔ£¬Êµ¼ÊÉú²ú»·¾³²»»áÓÃµ½
+    // ä¸»è¦ç”¨ä½œæµ‹è¯•ï¼Œå®é™…ç”Ÿäº§ç¯å¢ƒä¸ä¼šç”¨åˆ°
     ApplicationConfig applicationConfig = new ApplicationConfig();
     applicationConfig.setName("dubbo_consumer");
 
@@ -157,7 +157,7 @@ class AnnoBeanTest {
     referenceConfig.setConsumer(consumerConfig);
     referenceConfig.setRegistry(registryConfig);
     referenceConfig.setInterface("dubbo.api.service.UserService");
-    // ±ØĞëÊôĞÔ
+    // å¿…é¡»å±æ€§
     referenceConfig.setGeneric("true");
     GenericService userService = referenceConfig.get();
     Object result = userService.$invoke("queryUser", new String[]{"java.lang.String"}, new Object[]{"Alvin"});
@@ -168,7 +168,7 @@ class AnnoBeanTest {
   void testAsync() throws ExecutionException, InterruptedException {
     String result = asyncService.asyncToDo("Alvin");
     log.info("async result: {}", result);
-    // ×èÈûÖ÷Ïß³Ì, ĞÔÄÜ½ÏµÍ
+    // é˜»å¡ä¸»çº¿ç¨‹, æ€§èƒ½è¾ƒä½
     Object blockedResult = RpcContext.getContext().getFuture().get();
     log.info("blocked async result: {}", blockedResult);
   }
