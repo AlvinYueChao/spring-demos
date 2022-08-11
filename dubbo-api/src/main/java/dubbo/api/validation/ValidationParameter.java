@@ -12,7 +12,7 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * ValidationMessages Ô¤¶¨ÒåÎ»ÖÃ: ValidationMessages_zh_CN.properties
+ * ValidationMessages é¢„å®šä¹‰ä½ç½®: ValidationMessages_zh_CN.properties
  */
 @Data
 @Builder
