@@ -1,0 +1,24 @@
+[versions]
+commons-lang3 = "3.12.0"
+lombok = "1.18.24"
+spring = "5.3.22"
+spring-boot = "2.7.2"
+jupiter = "5.9.0"
+slf4j = "1.7.30"
+log4j = "2.18.0"
+mybatis = "3.5.10"
+alibaba-druid = "1.2.11"
+mysql-connector-java = "8.0.30"
+
+[libraries]
+spring-framework = { module = "org.springframework:spring-framework-bom", version.ref = "spring" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+log4j-slf4j-impl = { module = "org.apache.logging.log4j:log4j-slf4j-impl", version.ref = "log4j" }
+log4j-core = { module = "org.apache.logging.log4j:log4j-core", version.ref = "log4j" }
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+
+
+[bundles]
+
+
+[plugins]

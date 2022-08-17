@@ -58,7 +58,7 @@ class AnnotationTest {
   @Test
   void test3() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
-    // µ± matches() ·µ»ØÎª false Ê±£¬@Component ËùÔÚµÄ bean ÀàÐÍ²¢Î´±»×¢²áµ½ spring ÈÝÆ÷ÖÐ£¬ËùÒÔ getBean() »á±¨´í
+    // å½“ matches() è¿”å›žä¸º false æ—¶ï¼Œ@Component æ‰€åœ¨çš„ bean ç±»åž‹å¹¶æœªè¢«æ³¨å†Œåˆ° spring å®¹å™¨ä¸­ï¼Œæ‰€ä»¥ getBean() ä¼šæŠ¥é”™
     Assertions.assertThrows(NoSuchBeanDefinitionException.class, () -> applicationContext.getBean(ConditionalBean.class));
 //    ConditionalBean beanWithMatchedCondition = applicationContext.getBean(ConditionalBean.class);
 //    Assertions.assertNotNull(beanWithMatchedCondition);
@@ -75,7 +75,7 @@ class AnnotationTest {
   void test5() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE);
     /*
-    ConditionalOnBean Ê§°ÜÔ­Òò£ºmatches() ·¢ÉúÔÚ beanDefinition ×¢²áÖ®Ç°
+    ConditionalOnBean å¤±è´¥åŽŸå› ï¼šmatches() å‘ç”Ÿåœ¨ beanDefinition æ³¨å†Œä¹‹å‰
      */
     BeansConditionalBean bean = applicationContext.getBean(BeansConditionalBean.class);
     Assertions.assertNotNull(bean);
@@ -98,10 +98,10 @@ class AnnotationTest {
     int hashCode1 = bean1.hashCode();
     InnerBean innerBeanViaFactory = ((InnerBeanFactory) factoryBean).getInnerBean();
     int hashCode2 = innerBeanViaFactory.hashCode();
-    // Íâ²¿ÀàÊ¹ÓÃ @Component Ê±£¬Í¬Ò» beanMethod ²úÉúµÄÁ½¸ö bean µÄ hashCode ²»ÏàÍ¬£¬ÒòÎª·½·¨±»µ÷ÓÃÁËÁ½´Î
+    // å¤–éƒ¨ç±»ä½¿ç”¨ @Component æ—¶ï¼ŒåŒä¸€ beanMethod äº§ç”Ÿçš„ä¸¤ä¸ª bean çš„ hashCode ä¸ç›¸åŒï¼Œå› ä¸ºæ–¹æ³•è¢«è°ƒç”¨äº†ä¸¤æ¬¡
 //    Assertions.assertNotEquals(hashCode1, hashCode2);
-    // Íâ²¿ÀàÊ¹ÓÃ @Configuration Ê±£¬hashCodeÏàÍ¬
-    // @Configuration ÖÐ½âÎö @Bean Ê±£¬»áÊ¹ÓÃÇÐÃæ£¬Òò´Ë¶¼»á´Ó beanFactory ÖÐ»ñÈ¡ bean£¬ËùÒÔÁ½´Îµ÷ÓÃµÃµ½µÄ bean ÊÇÍ¬Ò»¸ö
+    // å¤–éƒ¨ç±»ä½¿ç”¨ @Configuration æ—¶ï¼ŒhashCodeç›¸åŒ
+    // @Configuration ä¸­è§£æž @Bean æ—¶ï¼Œä¼šä½¿ç”¨åˆ‡é¢ï¼Œå› æ­¤éƒ½ä¼šä»Ž beanFactory ä¸­èŽ·å– beanï¼Œæ‰€ä»¥ä¸¤æ¬¡è°ƒç”¨å¾—åˆ°çš„ bean æ˜¯åŒä¸€ä¸ª
     Assertions.assertEquals(hashCode1, hashCode2);
   }
 
@@ -146,27 +146,27 @@ class AnnotationTest {
     ServiceC beanC = applicationContext.getBean(ServiceC.class);
     /*
     propagation = Propagation.REQUIRED
-    ÔÚÊÂÎñ·½·¨ÖÐÊÖ¶¯½øÐÐ try-cache µÄÇé¿ö£º
-    1. ÔÚ serviceC µÄÊÂÎñ·½·¨ÖÐ½øÐÐ try-cache£ºÊÂÎñ×îÖÕ»á rollback
-    ¸ù±¾Ô­Òò: serviceC, serviceB, serviceA ÊÂÎñ·½·¨³ÖÓÐµÄÊÇÍ¬Ò»¸ö connectionHolder£¬ÔÚ beanB ÊÂÎñÇÐÃæ´¦ÀíÒì³£Ê±, ½« connectionHolder µÄ rollbackOnly ÊôÐÔÉèÖÃÎªÁË true
-              ËùÒÔÔÚ serviceC µÄÊÂÎñÇÐÃæÅÐ¶ÏÊÇ·ñÐèÒª½øÐÐÈ«¾Ö»Ø¹öÊ±£¬½á¹ûÎª true£¬´Ó¶ø½øÐÐÁËÈ«¾Ö»Ø¹ö
-    2. ÔÚ serviceB µÄÊÂÎñ·½·¨ÖÐ½øÐÐ try-cache£ºÊÂÎñ×îÖÕ»áÌá½»
-    ¸ù±¾Ô­Òò£ºserviceB ÊÂÎñÇÐÃæÖÐ²¢Î´¶Ô rollbackOnly ÉèÖÃ true£¬ËùÒÔ serviceC µÄÊÂÎñÇÐÃæÈÏÎªÊÂÎñ·½·¨Ö´ÐÐÕý³££¬½øÐÐÁËÊÂÎñÌá½»
+    åœ¨äº‹åŠ¡æ–¹æ³•ä¸­æ‰‹åŠ¨è¿›è¡Œ try-cache çš„æƒ…å†µï¼š
+    1. åœ¨ serviceC çš„äº‹åŠ¡æ–¹æ³•ä¸­è¿›è¡Œ try-cacheï¼šäº‹åŠ¡æœ€ç»ˆä¼š rollback
+    æ ¹æœ¬åŽŸå› : serviceC, serviceB, serviceA äº‹åŠ¡æ–¹æ³•æŒæœ‰çš„æ˜¯åŒä¸€ä¸ª connectionHolderï¼Œåœ¨ beanB äº‹åŠ¡åˆ‡é¢å¤„ç†å¼‚å¸¸æ—¶, å°† connectionHolder çš„ rollbackOnly å±žæ€§è®¾ç½®ä¸ºäº† true
+              æ‰€ä»¥åœ¨ serviceC çš„äº‹åŠ¡åˆ‡é¢åˆ¤æ–­æ˜¯å¦éœ€è¦è¿›è¡Œå…¨å±€å›žæ»šæ—¶ï¼Œç»“æžœä¸º trueï¼Œä»Žè€Œè¿›è¡Œäº†å…¨å±€å›žæ»š
+    2. åœ¨ serviceB çš„äº‹åŠ¡æ–¹æ³•ä¸­è¿›è¡Œ try-cacheï¼šäº‹åŠ¡æœ€ç»ˆä¼šæäº¤
+    æ ¹æœ¬åŽŸå› ï¼šserviceB äº‹åŠ¡åˆ‡é¢ä¸­å¹¶æœªå¯¹ rollbackOnly è®¾ç½® trueï¼Œæ‰€ä»¥ serviceC çš„äº‹åŠ¡åˆ‡é¢è®¤ä¸ºäº‹åŠ¡æ–¹æ³•æ‰§è¡Œæ­£å¸¸ï¼Œè¿›è¡Œäº†äº‹åŠ¡æäº¤
     propagation = Propagation.NESTED
-    1. ²»½øÐÐÈÎºÎÊÖ¶¯µÄ try-cache£ºÊÂÎñ×îÖÕ»á rollback
-    ¸ù±¾Ô­Òò£ºserviceA Õý³£Ìá½»Ö®ºóÇå³ýÁË»Ø¹öµã£¬serviceB ÊÂÎñÇÐÃæ»Ø¹öµ½ÁËµ±Ç°ÊÂÎñÇÐÃæ¿ªÊ¼Ê±ÉèÖÃµÄ»Ø¹öµã²¢Å×³öÒì³££¬serviceC ÊÂÎñÇÐÃæ²¶»ñÒì³£Ö®ºó½øÐÐÎÞ»Ø¹öµãµÄ»Ø¹ö£¬ÒòÎªÈý¸öÊÂÎñÇÐÃæ³ÖÓÐ
-              µÄÁ¬½ÓÊÇÍ¬Ò»¸ö£¬ËùÒÔ serviceA µÄÊÂÎñÒ²±»È«²¿»Ø¹ö
-    2. ÔÚ serviceC µÄÊÂÎñ·½·¨ÖÐ½øÐÐ try-cache£ºÊÂÎñ×îÖÕ»á²¿·ÖÌá½»
-    ¸ù±¾Ô­Òò£ºserviceB µÄÊÂÎñÇÐÃæ²¶»ñÁËÒì³££¬µ«ÊÇÓÉÓÚ serviceB µÄÊÂÎñ´«²¥ÊôÐÔÊÇ NESTED£¬ËùÒÔ serviceB µÄÊÂÎñÇÐÃæÃ»ÓÐÉèÖÃ rollbackOnly£¬¶øÊÇÔÚÉèÖÃÖ®Ç°¾Í½øÈëÁË NESTED ¶ÔÓ¦µÄ rollback Âß¼­
-              ÖÐ£¬ÔÚÕâ¸öÂß¼­ÖÐ½øÐÐÁËÊÂÎñµÄ»Ø¹ö£¬ËùÒÔ serviceB µÄÊý¾Ý¿â²Ù×÷±»»Ø¹ö¶øÇÒ´ËÊ±µÄ rollbackOnly µÄÖµÈÔÎª false£¬ËùÒÔ serviceC µÄÊÂÎñÇÐÃæ½øÐÐÌá½»µÄÊ±ºò½öÓÐ serviceA µÄÊý¾Ý¿â²Ù×÷ÉúÐ§£¬
-              ËùÒÔÖ»ÓÐ tablea ²åÈëÁËÒ»ÌõÊý¾Ý
-    3. ÔÚ serviceB µÄÊÂÎñ·½·¨ÖÐ½øÐÐ try-cache£ºÊÂÎñ×îÖÕ»áÈ«²¿Ìá½»
-    ¸ù±¾Ô­Òò£ºÒì³£´ÓµÚÒ»´ÎÅ×³ö¾Í±»ÍÌµô£¬ÊÂÎñÇÐÃæÃ»ÓÐ²¶»ñÈÎºÎÒ»³¡£¬ÈÏÎªÖ´ÐÐÕý³£ËùÒÔ½øÐÐ×îÖÕÌá½»
+    1. ä¸è¿›è¡Œä»»ä½•æ‰‹åŠ¨çš„ try-cacheï¼šäº‹åŠ¡æœ€ç»ˆä¼š rollback
+    æ ¹æœ¬åŽŸå› ï¼šserviceA æ­£å¸¸æäº¤ä¹‹åŽæ¸…é™¤äº†å›žæ»šç‚¹ï¼ŒserviceB äº‹åŠ¡åˆ‡é¢å›žæ»šåˆ°äº†å½“å‰äº‹åŠ¡åˆ‡é¢å¼€å§‹æ—¶è®¾ç½®çš„å›žæ»šç‚¹å¹¶æŠ›å‡ºå¼‚å¸¸ï¼ŒserviceC äº‹åŠ¡åˆ‡é¢æ•èŽ·å¼‚å¸¸ä¹‹åŽè¿›è¡Œæ— å›žæ»šç‚¹çš„å›žæ»šï¼Œå› ä¸ºä¸‰ä¸ªäº‹åŠ¡åˆ‡é¢æŒæœ‰
+              çš„è¿žæŽ¥æ˜¯åŒä¸€ä¸ªï¼Œæ‰€ä»¥ serviceA çš„äº‹åŠ¡ä¹Ÿè¢«å…¨éƒ¨å›žæ»š
+    2. åœ¨ serviceC çš„äº‹åŠ¡æ–¹æ³•ä¸­è¿›è¡Œ try-cacheï¼šäº‹åŠ¡æœ€ç»ˆä¼šéƒ¨åˆ†æäº¤
+    æ ¹æœ¬åŽŸå› ï¼šserviceB çš„äº‹åŠ¡åˆ‡é¢æ•èŽ·äº†å¼‚å¸¸ï¼Œä½†æ˜¯ç”±äºŽ serviceB çš„äº‹åŠ¡ä¼ æ’­å±žæ€§æ˜¯ NESTEDï¼Œæ‰€ä»¥ serviceB çš„äº‹åŠ¡åˆ‡é¢æ²¡æœ‰è®¾ç½® rollbackOnlyï¼Œè€Œæ˜¯åœ¨è®¾ç½®ä¹‹å‰å°±è¿›å…¥äº† NESTED å¯¹åº”çš„ rollback é€»è¾‘
+              ä¸­ï¼Œåœ¨è¿™ä¸ªé€»è¾‘ä¸­è¿›è¡Œäº†äº‹åŠ¡çš„å›žæ»šï¼Œæ‰€ä»¥ serviceB çš„æ•°æ®åº“æ“ä½œè¢«å›žæ»šè€Œä¸”æ­¤æ—¶çš„ rollbackOnly çš„å€¼ä»ä¸º falseï¼Œæ‰€ä»¥ serviceC çš„äº‹åŠ¡åˆ‡é¢è¿›è¡Œæäº¤çš„æ—¶å€™ä»…æœ‰ serviceA çš„æ•°æ®åº“æ“ä½œç”Ÿæ•ˆï¼Œ
+              æ‰€ä»¥åªæœ‰ tablea æ’å…¥äº†ä¸€æ¡æ•°æ®
+    3. åœ¨ serviceB çš„äº‹åŠ¡æ–¹æ³•ä¸­è¿›è¡Œ try-cacheï¼šäº‹åŠ¡æœ€ç»ˆä¼šå…¨éƒ¨æäº¤
+    æ ¹æœ¬åŽŸå› ï¼šå¼‚å¸¸ä»Žç¬¬ä¸€æ¬¡æŠ›å‡ºå°±è¢«åžæŽ‰ï¼Œäº‹åŠ¡åˆ‡é¢æ²¡æœ‰æ•èŽ·ä»»ä½•ä¸€åœºï¼Œè®¤ä¸ºæ‰§è¡Œæ­£å¸¸æ‰€ä»¥è¿›è¡Œæœ€ç»ˆæäº¤
 
-    Èç¹û½«±à³ÌÊ½ÊÂÎñÇ¶Ì×ÔÚ @Transaction ·½·¨ÖÐ£¬ÓÐÒÔÏÂ¼¸µãÐèÒª×¢Òâ£º
-    1) ±à³ÌÊ½ÊÂÎñÖÐ£¬Á¬½Ó¶ÔÏóºÍµ±Ç° @Transaction ·½·¨ÖÐ³ÖÓÐµÄÁ¬½Ó¶ÔÏóÊÇÍ¬Ò»¸ö
-    2) ±à³ÌÊ½ÊÂÎñÏàµ±ÓÚÔÚÏÖÓÐ @Transaction ÊÂÎñÇÐÃæÖÐÇ¶Ì×ÁËÒ»¸ö @Transaction(propagation = Propagation.REQUIRED) µÄÊÂÎñÇÐÃæ
-    3) ±à³ÌÊ½ÊÂÎñÖÐÅ×³ö RuntimeTimeExceptionºÍ Error ¼°Æä×ÓÀà£¬Ôò±à³ÌÊ½ÊÂÎñºÍµ±Ç° Spring ÊÂÎñÇÐÃæ¾ù½øÐÐ»Ø¹ö¡£ÒòÎª±à³ÌÊ½ÊÂÎñ²¶»ñÒì³£²¢½øÐÐ rollback ²Ù×÷ºó£¬»áÏòÍâÅ×³ö¸ÃÒì³£
+    å¦‚æžœå°†ç¼–ç¨‹å¼äº‹åŠ¡åµŒå¥—åœ¨ @Transaction æ–¹æ³•ä¸­ï¼Œæœ‰ä»¥ä¸‹å‡ ç‚¹éœ€è¦æ³¨æ„ï¼š
+    1) ç¼–ç¨‹å¼äº‹åŠ¡ä¸­ï¼Œè¿žæŽ¥å¯¹è±¡å’Œå½“å‰ @Transaction æ–¹æ³•ä¸­æŒæœ‰çš„è¿žæŽ¥å¯¹è±¡æ˜¯åŒä¸€ä¸ª
+    2) ç¼–ç¨‹å¼äº‹åŠ¡ç›¸å½“äºŽåœ¨çŽ°æœ‰ @Transaction äº‹åŠ¡åˆ‡é¢ä¸­åµŒå¥—äº†ä¸€ä¸ª @Transaction(propagation = Propagation.REQUIRED) çš„äº‹åŠ¡åˆ‡é¢
+    3) ç¼–ç¨‹å¼äº‹åŠ¡ä¸­æŠ›å‡º RuntimeTimeExceptionå’Œ Error åŠå…¶å­ç±»ï¼Œåˆ™ç¼–ç¨‹å¼äº‹åŠ¡å’Œå½“å‰ Spring äº‹åŠ¡åˆ‡é¢å‡è¿›è¡Œå›žæ»šã€‚å› ä¸ºç¼–ç¨‹å¼äº‹åŠ¡æ•èŽ·å¼‚å¸¸å¹¶è¿›è¡Œ rollback æ“ä½œåŽï¼Œä¼šå‘å¤–æŠ›å‡ºè¯¥å¼‚å¸¸
      */
     beanC.doSomethingOneForC();
   }

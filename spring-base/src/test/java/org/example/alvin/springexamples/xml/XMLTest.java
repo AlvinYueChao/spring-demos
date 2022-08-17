@@ -72,10 +72,10 @@ class XMLTest {
     StudentForBeanXmlTag student = beanFactory.getBean(StudentForBeanXmlTag.class);
     beanFactory.destroyBean(student);
     /*
-    ÈİÆ÷¹Ø±ÕÊ±£¬»á´¥·¢destroy·½·¨£¬´¥·¢Ë³Ğò:
-    1. @PreDestroy Ëù±ê×¢µÄ·½·¨
-    2. ÊµÏÖÁË DisposableBean ½Ó¿ÚµÄ bean µÄ destroy()·½·¨
-    3. ÔÚ <bean/> ÖĞÉùÃ÷µÄ destroy-method ·½·¨
+    å®¹å™¨å…³é—­æ—¶ï¼Œä¼šè§¦å‘destroyæ–¹æ³•ï¼Œè§¦å‘é¡ºåº:
+    1. @PreDestroy æ‰€æ ‡æ³¨çš„æ–¹æ³•
+    2. å®ç°äº† DisposableBean æ¥å£çš„ bean çš„ destroy()æ–¹æ³•
+    3. åœ¨ <bean/> ä¸­å£°æ˜çš„ destroy-method æ–¹æ³•
      */
     beanFactory.destroySingletons();
   }
@@ -92,7 +92,7 @@ class XMLTest {
   void test7() {
     ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
     PropertySourcesPlaceholderConfigurer bean = applicationContext.getBean(PropertySourcesPlaceholderConfigurer.class);
-    // Ä¬ÈÏÊôĞÔ¼ÓÔØÓÅÏÈ¼¶: »·¾³±äÁ¿(ÏµÍ³±äÁ¿) > ±¾µØÅäÖÃÎÄ¼ş
+    // é»˜è®¤å±æ€§åŠ è½½ä¼˜å…ˆçº§: ç¯å¢ƒå˜é‡(ç³»ç»Ÿå˜é‡) > æœ¬åœ°é…ç½®æ–‡ä»¶
     PropertySources propertySources = bean.getAppliedPropertySources();
     logger.info("Properties: {}", propertySources);
   }
