@@ -12,12 +12,12 @@ import java.lang.annotation.Target;
 public @interface DI {
 
   /*
-  Ä¬ÈÏÒÀ´Îµ÷ÓÃËùÓĞÊµÏÖÀà
+  é»˜è®¤ä¾æ¬¡è°ƒç”¨æ‰€æœ‰å®ç°ç±»
    */
   String value() default "all";
 
   /*
-  Ö»µ÷ÓÃÖ¸¶¨µÄ¼¸¸öÊµÏÖÀà
+  åªè°ƒç”¨æŒ‡å®šçš„å‡ ä¸ªå®ç°ç±»
    */
   String[] serviceIds() default {};
 

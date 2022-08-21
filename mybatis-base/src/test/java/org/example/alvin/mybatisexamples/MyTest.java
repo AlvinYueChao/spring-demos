@@ -63,7 +63,7 @@ public class MyTest {
 
   @Test
   void test5() {
-    // Mybatis µÄÇ¶Ì×²éÑ¯£ºÒ»Ìõ²éÑ¯Óï¾äÃ»½áÊø£¬Í¨¹ı collection ´¥·¢ÁíÒ»Ìõ²éÑ¯Óï¾ä
+    // Mybatis çš„åµŒå¥—æŸ¥è¯¢ï¼šä¸€æ¡æŸ¥è¯¢è¯­å¥æ²¡ç»“æŸï¼Œé€šè¿‡ collection è§¦å‘å¦ä¸€æ¡æŸ¥è¯¢è¯­å¥
     SqlSession sqlSession = DataSourceUtils.getSqlSession();
     if (sqlSession != null) {
       CommonMapper commonMapper = sqlSession.getMapper(CommonMapper.class);
@@ -77,7 +77,7 @@ public class MyTest {
 
   @Test
   void test6() {
-    // Mybatis Ç¶Ì×²éÑ¯ + ÀÁ¼ÓÔØ
+    // Mybatis åµŒå¥—æŸ¥è¯¢ + æ‡’åŠ è½½
     SqlSession sqlSession = DataSourceUtils.getSqlSession();
     if (sqlSession != null) {
       CommonMapper commonMapper = sqlSession.getMapper(CommonMapper.class);

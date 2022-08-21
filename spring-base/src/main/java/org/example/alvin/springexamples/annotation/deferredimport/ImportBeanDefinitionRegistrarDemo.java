@@ -12,7 +12,7 @@ public class ImportBeanDefinitionRegistrarDemo implements ImportBeanDefinitionRe
 
   @Override
   public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-    // Í¨¹ı AnnotationMetadata ×Ô¶¨Òå BeanDefinition È»ºó×¢²áµ½ BeanDefinitionRegistry ÖĞ
+    // é€šè¿‡ AnnotationMetadata è‡ªå®šä¹‰ BeanDefinition ç„¶åæ³¨å†Œåˆ° BeanDefinitionRegistry ä¸­
     logger.info("Got into ImportBeanDefinitionRegistrarDemo.registerBeanDefinitions()");
   }
 }

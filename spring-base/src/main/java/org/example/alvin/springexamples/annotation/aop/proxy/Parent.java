@@ -23,10 +23,10 @@ public class Parent implements MyInvocationHandler{
   }
 
   private void beforeAdvice() {
-    logger.info("Ğ¡Ã÷µÄ¸¸Ä¸°ïĞ¡Ã÷ÕÒ¶ÔÏó");
+    logger.info("å°æ˜çš„çˆ¶æ¯å¸®å°æ˜æ‰¾å¯¹è±¡");
   }
 
   private void afterAdvice() {
-    logger.info("Ğ¡Ã÷µÄ¸¸Ä¸°ïĞ¡Ã÷ÕÒµ½¶ÔÏóºó£¬¼ÌĞø°ïĞ¡Ã÷²Ù³Ö»éÀñ");
+    logger.info("å°æ˜çš„çˆ¶æ¯å¸®å°æ˜æ‰¾åˆ°å¯¹è±¡åï¼Œç»§ç»­å¸®å°æ˜æ“æŒå©šç¤¼");
   }
 }

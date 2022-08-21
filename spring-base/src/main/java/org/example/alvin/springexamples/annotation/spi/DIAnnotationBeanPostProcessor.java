@@ -39,9 +39,9 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
 /*
-Ä£·Â AutowiredAnnotationBeanPostProcessor ¶Ô @Autowired ºÍ @Value ×¢½âµÄÖ§³Ö
-×¢½âÊÕ¼¯£ºÄ£·Â org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyMergedBeanDefinitionPostProcessors£¬ĞèÒªÊµÏÖ MergedBeanDefinitionPostProcessor ½Ó¿Ú
-ÒÀÀµ×¢Èë£ºÄ£·Â org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean, ĞèÒªÊµÏÖ InstantiationAwareBeanPostProcessor ½Ó¿Ú
+æ¨¡ä»¿ AutowiredAnnotationBeanPostProcessor å¯¹ @Autowired å’Œ @Value æ³¨è§£çš„æ”¯æŒ
+æ³¨è§£æ”¶é›†ï¼šæ¨¡ä»¿ org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyMergedBeanDefinitionPostProcessorsï¼Œéœ€è¦å®ç° MergedBeanDefinitionPostProcessor æ¥å£
+ä¾èµ–æ³¨å…¥ï¼šæ¨¡ä»¿ org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean, éœ€è¦å®ç° InstantiationAwareBeanPostProcessor æ¥å£
  */
 public class DIAnnotationBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter implements MergedBeanDefinitionPostProcessor, BeanFactoryAware, ApplicationContextAware {
 
@@ -75,7 +75,7 @@ public class DIAnnotationBeanPostProcessor extends InstantiationAwareBeanPostPro
           if (metadata != null) {
             metadata.clear(pvs);
           }
-          // ÖØµã¿´
+          // é‡ç‚¹çœ‹
           metadata = buildDIMetadata(clazz);
           this.injectionMetadataCache.put(cacheKey, metadata);
         }
@@ -200,7 +200,7 @@ public class DIAnnotationBeanPostProcessor extends InstantiationAwareBeanPostPro
 
     @Override
     protected void inject(Object bean, @Nullable String requestingBeanName, @Nullable PropertyValues pvs) throws Throwable {
-      // ¸ø field ×¢Èë¶à¸ö´úÀí¶ÔÏóµÄÊµÏÖÂß¼­
+      // ç»™ field æ³¨å…¥å¤šä¸ªä»£ç†å¯¹è±¡çš„å®ç°é€»è¾‘
       Field field = (Field) this.member;
       Object value = null;
       if (field.getType().isInterface()) {

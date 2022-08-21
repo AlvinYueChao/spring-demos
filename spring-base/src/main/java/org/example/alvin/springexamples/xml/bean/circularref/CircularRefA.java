@@ -11,7 +11,7 @@ public class CircularRefA {
 
   private final Logger logger = LogManager.getLogger(CircularRefA.class);
 
-  // ÊôĞÔÒÀÀµ×¢ÈëÊÇÔÊĞíµÄ
+  // å±æ€§ä¾èµ–æ³¨å…¥æ˜¯å…è®¸çš„
   @Autowired
   private CircularRefB circularRefB;
 

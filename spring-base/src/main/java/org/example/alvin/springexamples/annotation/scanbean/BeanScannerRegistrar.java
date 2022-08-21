@@ -37,7 +37,7 @@ public class BeanScannerRegistrar implements ImportBeanDefinitionRegistrar {
     }
 
     if (acceptAllBeans) {
-      // ½«É¨Ãèµ½µÄËùÓÐµÄÀàÈ«¶¼¼ÓÔØµ½ Spring ÈÝÆ÷ÖÐ
+      // å°†æ‰«æåˆ°çš„æ‰€æœ‰çš„ç±»å…¨éƒ½åŠ è½½åˆ° Spring å®¹å™¨ä¸­
       scanner.addIncludeFilter((metadataReader, metadataReaderFactory) -> true);
     }
     scanner.doScan(basePackages.toArray(new String[0]));

@@ -9,6 +9,6 @@ public class XiaoMing implements People{
 
   @Override
   public void findMM() {
-    logger.info("小明没时间找对象");
+    logger.info("灏忔槑娌℃椂闂存壘瀵硅薄");
   }
 }

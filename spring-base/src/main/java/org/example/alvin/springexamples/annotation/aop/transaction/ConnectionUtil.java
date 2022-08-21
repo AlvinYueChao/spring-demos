@@ -19,7 +19,7 @@ public class ConnectionUtil {
     Connection connection = null;
     Class.forName(DB_DRIVER_CLASS);
     connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-    // Èç¹û¶à¸ö DML ²Ù×÷´¦ÓÚÍ¬Ò»¸öÊÂÎñÖĞ£¬ÄÇÃ´ËüÃÇ³ÖÓĞµÄ connection ÊÇÍ¬Ò»¸ö¡£ÔÚÍ¬Ò»¸öÊÂÎñµÄÇ°ÌáÊÇ¹Ø±Õ×Ô¶¯Ìá½»
+    // å¦‚æœå¤šä¸ª DML æ“ä½œå¤„äºåŒä¸€ä¸ªäº‹åŠ¡ä¸­ï¼Œé‚£ä¹ˆå®ƒä»¬æŒæœ‰çš„ connection æ˜¯åŒä¸€ä¸ªã€‚åœ¨åŒä¸€ä¸ªäº‹åŠ¡çš„å‰ææ˜¯å…³é—­è‡ªåŠ¨æäº¤
     logger.info("DB connection established successfully");
     return connection;
   }

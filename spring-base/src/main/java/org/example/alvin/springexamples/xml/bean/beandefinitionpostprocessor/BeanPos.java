@@ -26,7 +26,7 @@ public class BeanPos implements BeanDefinitionRegistryPostProcessor {
   public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
     logger.info("Invoked into postProcessBeanDefinitionRegistry, params: {}", registry);
 
-    // ÔöÉ¾¸Ä²é beanDefinition
+    // å¢åˆ æ”¹æŸ¥ beanDefinition
     GenericBeanDefinition genericBeanDefinition = new GenericBeanDefinition();
     genericBeanDefinition.setBeanClass(BeanWithoutComponent.class);
     MutablePropertyValues propertyValues = genericBeanDefinition.getPropertyValues();
@@ -39,7 +39,7 @@ public class BeanPos implements BeanDefinitionRegistryPostProcessor {
       logger.info("BeanDefinition: {}", beanDefinition);
     }
 
-    // ÅäÖÃÎÄ¼ş + Õ¼Î»·û ÊµÀı»¯ bean
+    // é…ç½®æ–‡ä»¶ + å ä½ç¬¦ å®ä¾‹åŒ– bean
     logger.info("Start initializing custom bean...");
     try {
       Properties properties = PropertiesLoaderUtils.loadAllProperties("application.properties", ClassUtils.getDefaultClassLoader());

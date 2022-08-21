@@ -8,6 +8,13 @@ buildscript {
             url = "https://maven.aliyun.com/repository/jcenter"
         }
     }
+    dependencies {
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.9.1"
+    }
+}
+
+plugins {
+    id 'com.diffplug.spotless' version "6.9.1"
 }
 
 allprojects {

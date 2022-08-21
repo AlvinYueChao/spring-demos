@@ -9,7 +9,7 @@ public class AutoConfig {
 
 //  @Bean
   public DIAnnotationBeanPostProcessor diAnnotationBeanPostProcessor() {
-    // ÎªÁË±ÜÃâÌáÇ°ÊµÀı»¯ DIAnnotationBeanPostProcessor, ½«Ëü²ÉÓÃ import µÄ·½Ê½¼ÓÈëµ½ spring ÈİÆ÷ÖĞ£¬±ÜÃâ¶Ô DatabaseConfig µÄ @Value ½âÎöÔì³É¸ÉÈÅ
+    // ä¸ºäº†é¿å…æå‰å®ä¾‹åŒ– DIAnnotationBeanPostProcessor, å°†å®ƒé‡‡ç”¨ import çš„æ–¹å¼åŠ å…¥åˆ° spring å®¹å™¨ä¸­ï¼Œé¿å…å¯¹ DatabaseConfig çš„ @Value è§£æé€ æˆå¹²æ‰°
     return new DIAnnotationBeanPostProcessor();
   }
 }

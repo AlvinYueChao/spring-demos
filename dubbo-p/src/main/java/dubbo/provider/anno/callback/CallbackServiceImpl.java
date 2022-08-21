@@ -9,7 +9,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.config.annotation.Method;
 
 /**
- * 要使回调生效, callback = true 必不可少
+ * 瑕佷娇鍥炶皟鐢熸晥, callback = true 蹇呬笉鍙皯
  */
 @Slf4j
 @DubboService(methods = {@Method(name = "addListener", arguments = {@Argument(index = 1, callback = true)})})

@@ -12,9 +12,9 @@ public class DeferredImportSelectorDemo implements DeferredImportSelector {
   private final Logger logger = LogManager.getLogger(DeferredImportSelectorDemo.class);
 
   /*
-  ·µ»ØÀàµÄÍêÕûÏŞ¶¨Ãû£¬¸ÃÀà»á±»ÊµÀı»¯²¢½»¸øspring¹ÜÀí
-  MetadataReaderFactory ¸ù¾İÀàµÄÍêÕûÏŞ¶¨Ãû»ñÈ¡ MetadataReader
-  metadataReader.getAnnotationMetadata() ÄÃµ½ AnnotationMetadata ¶ÔÏó£¬È»ºó°ü×°³É SourceClass ¶ÔÏó
+  è¿”å›ç±»çš„å®Œæ•´é™å®šåï¼Œè¯¥ç±»ä¼šè¢«å®ä¾‹åŒ–å¹¶äº¤ç»™springç®¡ç†
+  MetadataReaderFactory æ ¹æ®ç±»çš„å®Œæ•´é™å®šåè·å– MetadataReader
+  metadataReader.getAnnotationMetadata() æ‹¿åˆ° AnnotationMetadata å¯¹è±¡ï¼Œç„¶ååŒ…è£…æˆ SourceClass å¯¹è±¡
    */
   @Override
   public String[] selectImports(AnnotationMetadata importingClassMetadata) {
@@ -32,11 +32,11 @@ public class DeferredImportSelectorDemo implements DeferredImportSelector {
 
     private final Logger logger = LogManager.getLogger(DeferredImportSelectorGroupDemo.class);
 
-    // ¿ÉÄÜ»áÓĞÏß³Ì°²È«ÎÊÌâ
+    // å¯èƒ½ä¼šæœ‰çº¿ç¨‹å®‰å…¨é—®é¢˜
     private final List<Entry> list = new ArrayList<>();
 
     /*
-    ÊÕ¼¯ĞèÒªÊµÀı»¯µÄÀà
+    æ”¶é›†éœ€è¦å®ä¾‹åŒ–çš„ç±»
      */
     @Override
     public void process(AnnotationMetadata metadata, DeferredImportSelector selector) {

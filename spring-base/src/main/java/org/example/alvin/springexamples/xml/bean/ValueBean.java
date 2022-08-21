@@ -18,7 +18,7 @@ public class ValueBean implements EnvironmentAware {
   @Override
   public void setEnvironment(Environment environment) {
     /*
-    @Value ÊôĞÔÀ´Ô´£ºenvironment£¬±¾µØÅäÖÃÎÄ¼ş
+    @Value å±æ€§æ¥æºï¼šenvironmentï¼Œæœ¬åœ°é…ç½®æ–‡ä»¶
      */
     logger.info("value of name: {}", name);
     logger.info("value of propertiesBean.name property: {}", environment.getProperty("propertiesBean.name"));

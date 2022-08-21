@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 public class AnnotationFactoryBean implements FactoryBean<CustomBeanForAnnotation> {
 
   /*
-  ´¥·¢Ìõ¼ş£º
-  1. µ±µ÷ÓÃ getBean(AnnotationFactoryBean.class)Ê±
-  2. µ±µ÷ÓÃ getBean(CustomBean.class) ÇÒ CustomBean ÊÇµ¥Àı¶ÔÏó
+  è§¦å‘æ¡ä»¶ï¼š
+  1. å½“è°ƒç”¨ getBean(AnnotationFactoryBean.class)æ—¶
+  2. å½“è°ƒç”¨ getBean(CustomBean.class) ä¸” CustomBean æ˜¯å•ä¾‹å¯¹è±¡
    */
   @Override
   public CustomBeanForAnnotation getObject() {
