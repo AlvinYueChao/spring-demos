@@ -12,10 +12,10 @@ public class DoSomethingInterceptor1 implements MethodInterceptor {
 
   @Override
   public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-    logger.info("{} Ö´ĞĞÇ°...", method.getName());
-    // ±»´úÀí·½·¨
+    logger.info("{} æ‰§è¡Œå‰...", method.getName());
+    // è¢«ä»£ç†æ–¹æ³•
     Object result = methodProxy.invokeSuper(o, objects);
-    logger.info("{} Ö´ĞĞºó...", method.getName());
+    logger.info("{} æ‰§è¡Œå...", method.getName());
     return result;
   }
 }

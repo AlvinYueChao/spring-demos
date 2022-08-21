@@ -30,7 +30,7 @@ public class MyClassLoader extends ClassLoader {
         while ((length = inputStream.read(buffer)) != -1) {
           byteArrayOutputStream.write(buffer, 0, length);
         }
-        // ½« class ÎÄ¼ş¼ÓÔØ½ø JVM ÄÚ´æÖĞºó£¬·µ»Ø·´Éä¶ÔÏó
+        // å°† class æ–‡ä»¶åŠ è½½è¿› JVM å†…å­˜ä¸­åï¼Œè¿”å›åå°„å¯¹è±¡
         return defineClass("org.example.alvin.springexamples.annotation.aop.proxy." + name, byteArrayOutputStream.toByteArray(), 0,
             byteArrayOutputStream.size());
       } catch (FileNotFoundException e) {

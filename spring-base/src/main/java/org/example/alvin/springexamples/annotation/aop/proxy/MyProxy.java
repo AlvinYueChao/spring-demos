@@ -16,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /*
-Ä£·Â JDK ¶¯Ì¬´úÀí£¬ÊÖĞ´ newProxyInstance() Ö´ĞĞ¹ı³Ì
+æ¨¡ä»¿ JDK åŠ¨æ€ä»£ç†ï¼Œæ‰‹å†™ newProxyInstance() æ‰§è¡Œè¿‡ç¨‹
  */
 public class MyProxy {
 
@@ -25,14 +25,14 @@ public class MyProxy {
   private final static Logger logger = LogManager.getLogger(MyProxy.class);
 
   public static Object newProxyInstance(ClassLoader loader, Class<?>[] interfaces, MyInvocationHandler h) {
-    // 1. Í¨¹ıÆ´´Õ×Ö·û´®µÄĞÎÊ½Æ´´Õ³öÒ»¸ö´úÀíÀà $Proxy0
+    // 1. é€šè¿‡æ‹¼å‡‘å­—ç¬¦ä¸²çš„å½¢å¼æ‹¼å‡‘å‡ºä¸€ä¸ªä»£ç†ç±» $Proxy0
     String javaStr = getJavaStr(interfaces);
-    // 2. ½«Æ´´Õ³öµÄ´úÀíÀàÒÔÁ÷µÄĞÎÊ½Ğ´Èëµ½´ÅÅÌÖĞµÄ $Proxy0.java ÎÄ¼şÖĞ
+    // 2. å°†æ‹¼å‡‘å‡ºçš„ä»£ç†ç±»ä»¥æµçš„å½¢å¼å†™å…¥åˆ°ç£ç›˜ä¸­çš„ $Proxy0.java æ–‡ä»¶ä¸­
     createFile(javaStr);
-    // 3. Ê¹ÓÃÔËĞĞÊ±±àÒë·½·¨£¬½« $Proxy0.java ±àÒë³É $Proxy0.class
+    // 3. ä½¿ç”¨è¿è¡Œæ—¶ç¼–è¯‘æ–¹æ³•ï¼Œå°† $Proxy0.java ç¼–è¯‘æˆ $Proxy0.class
     compiler();
-    // 4. Ê¹ÓÃ×Ô¶¨ÒåÀà¼ÓÔØÆ÷½«±àÒëºÃµÄ $Proxy0.class ¼ÓÔØµ½ JVM ÄÚ´æÖĞ
-    // 5. ÊµÀı»¯ÄÚ´æÖĞµÄ $Proxy0.class£¬È»ºó°ÑÊµÀı·µ»Ø
+    // 4. ä½¿ç”¨è‡ªå®šä¹‰ç±»åŠ è½½å™¨å°†ç¼–è¯‘å¥½çš„ $Proxy0.class åŠ è½½åˆ° JVM å†…å­˜ä¸­
+    // 5. å®ä¾‹åŒ–å†…å­˜ä¸­çš„ $Proxy0.classï¼Œç„¶åæŠŠå®ä¾‹è¿”å›
     MyClassLoader myClassLoader = new MyClassLoader(PATH);
     try {
       Class<?> $Proxy0 = myClassLoader.findClass("$Proxy0");

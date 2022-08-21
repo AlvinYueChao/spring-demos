@@ -26,20 +26,20 @@ public class AspectAnnotation {
 
   @Around("pc1()")
   private Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-    logger.info("====== AspectAnnotation around Ç°ÖÃÍ¨Öª, ±»ÔöÇ¿·½·¨: {} ======", joinPoint.getSignature().getName());
+    logger.info("====== AspectAnnotation around å‰ç½®é€šçŸ¥, è¢«å¢å¼ºæ–¹æ³•: {} ======", joinPoint.getSignature().getName());
     Object result = joinPoint.proceed();
-    logger.info("====== AspectAnnotation around ºóÖÃÍ¨Öª, ±»ÔöÇ¿·½·¨: {} ======", joinPoint.getSignature().getName());
+    logger.info("====== AspectAnnotation around åç½®é€šçŸ¥, è¢«å¢å¼ºæ–¹æ³•: {} ======", joinPoint.getSignature().getName());
     return result;
   }
 
   @Before("pc1()")
   private void before(JoinPoint joinPoint) {
-    logger.info("====== AspectAnnotation before Í¨Öª, ±»ÔöÇ¿·½·¨: {} ======", joinPoint.getSignature().getName());
+    logger.info("====== AspectAnnotation before é€šçŸ¥, è¢«å¢å¼ºæ–¹æ³•: {} ======", joinPoint.getSignature().getName());
   }
 
   @After("pc1()")
   private void after(JoinPoint joinPoint) {
-    logger.info("====== AspectAnnotation after Í¨Öª, ±»ÔöÇ¿·½·¨: {} ======", joinPoint.getSignature().getName());
+    logger.info("====== AspectAnnotation after é€šçŸ¥, è¢«å¢å¼ºæ–¹æ³•: {} ======", joinPoint.getSignature().getName());
   }
 
   @AfterReturning("pc1()")
@@ -47,11 +47,11 @@ public class AspectAnnotation {
     MethodInvocation methodInvocation = ExposeInvocationInterceptor.currentInvocation();
     Object[] arguments = methodInvocation.getArguments();
     Object[] args = joinPoint.getArgs();
-    logger.info("====== AspectAnnotation afterReturning Í¨Öª, ±»ÔöÇ¿·½·¨: {} ======", joinPoint.getSignature().getName());
+    logger.info("====== AspectAnnotation afterReturning é€šçŸ¥, è¢«å¢å¼ºæ–¹æ³•: {} ======", joinPoint.getSignature().getName());
   }
 
   @AfterThrowing("pc1()")
   private void afterThrowing(JoinPoint joinPoint) {
-    logger.info("====== AspectAnnotation after afterThrowing, ±»ÔöÇ¿·½·¨: {} ======", joinPoint.getSignature().getName());
+    logger.info("====== AspectAnnotation after afterThrowing, è¢«å¢å¼ºæ–¹æ³•: {} ======", joinPoint.getSignature().getName());
   }
 }
