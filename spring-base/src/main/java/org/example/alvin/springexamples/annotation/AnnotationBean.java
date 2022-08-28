@@ -17,7 +17,7 @@ public class AnnotationBean {
   }
 
   @Qualifier("innerBean2")
-  @Bean()
+  @Bean
   public InnerBean innerBean2() {
     return new InnerBean();
   }
