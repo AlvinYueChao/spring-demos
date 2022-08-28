@@ -14,26 +14,26 @@ import java.util.Properties;
 
 public class ImportBeanScannerPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
-    @SneakyThrows
-    @Override
-    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+  @SneakyThrows
+  @Override
+  public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 
-        BeanPackageScanner scanner = new BeanPackageScanner(registry);
-        Properties properties = PropertiesLoaderUtils.loadAllProperties("application.properties");
-        String basePackagesStr = properties.getProperty("auto.load.nonannotated.beans.basepackages");
+    BeanPackageScanner scanner = new BeanPackageScanner(registry);
+    Properties properties = PropertiesLoaderUtils.loadAllProperties("application.properties");
+    String basePackagesStr = properties.getProperty("auto.load.nonannotated.beans.basepackages");
 
-        List<String> basePackages = new ArrayList<>(Arrays.asList(basePackagesStr.split(",")));
+    List<String> basePackages = new ArrayList<>(Arrays.asList(basePackagesStr.split(",")));
 
-        // 将扫描到的所有的类全都加载到 Spring 容器中
-        scanner.addIncludeFilter((metadataReader, metadataReaderFactory) -> {
-            var annotation = metadataReader.getAnnotationMetadata().getAnnotations().get(CustomComponent.class);
-            return annotation.isPresent();
-        });
-        scanner.doScan(basePackages.toArray(new String[0]));
-    }
+    // 将扫描到的所有的类全都加载到 Spring 容器中
+    scanner.addIncludeFilter((metadataReader, metadataReaderFactory) -> {
+      var annotation = metadataReader.getAnnotationMetadata().getAnnotations().get(CustomComponent.class);
+      return annotation.isPresent();
+    });
+    scanner.doScan(basePackages.toArray(new String[0]));
+  }
 
-    @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+  @Override
+  public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 
-    }
+  }
 }
