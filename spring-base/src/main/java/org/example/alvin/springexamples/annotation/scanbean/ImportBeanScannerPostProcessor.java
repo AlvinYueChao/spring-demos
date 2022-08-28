@@ -1,15 +1,10 @@
 package org.example.alvin.springexamples.annotation.scanbean;
 
-import lombok.Data;
 import lombok.SneakyThrows;
-import lombok.experimental.SuperBuilder;
-import org.apache.commons.lang3.NotImplementedException;
-import org.example.alvin.springexamples.annotation.spi.DI;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
-import org.springframework.core.annotation.MergedAnnotation;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import java.util.ArrayList;
