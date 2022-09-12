@@ -13,13 +13,13 @@ public class UserService {
     log.info("1");
   }*/
 
+  /*@Autowired
   public UserService(OrderService orderService) {
     this.orderService = orderService;
     log.info("2");
-  }
+  }*/
 
-  public UserService(OrderService orderService, OrderService orderService1) {
-    this.orderService = orderService;
-    log.info("3");
+  public void test() {
+    log.info("=== invoked into test() ====");
   }
 }
