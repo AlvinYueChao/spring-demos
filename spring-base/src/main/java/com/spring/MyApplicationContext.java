@@ -74,7 +74,11 @@ public class MyApplicationContext {
     BeanDefinition beanDefinition = beanDefinitionMap.get(beanName);
     if (beanDefinition.getScope().equalsIgnoreCase(SINGLETON)) {
       // 单例直接从单例池返回
-      return singletonObjects.get(beanName);
+      return singletonObjects.computeIfAbsent(beanName, s -> {
+        Object bean = this.createBean(s, beanDefinition);
+        this.singletonObjects.put(s, bean);
+        return bean;
+      });
     } else {
       // 原型 Bean 每次都创建
       return createBean(beanName, beanDefinition);
