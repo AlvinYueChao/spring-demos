@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -60,9 +61,15 @@ public class MyApplicationContext {
         }
       }
 
-    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      // InitializingBean 初始化 Bean
+      if (newInstance instanceof InitializingBean) {
+        ((InitializingBean) newInstance).afterPropertiesSet();
+      }
+
+    } catch (Exception e) {
       throw new RuntimeException(e);
     }
+
     return newInstance;
   }
 
