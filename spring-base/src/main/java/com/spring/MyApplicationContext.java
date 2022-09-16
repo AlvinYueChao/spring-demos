@@ -2,6 +2,7 @@ package com.spring;
 
 import java.beans.Introspector;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -44,11 +45,25 @@ public class MyApplicationContext {
 
   private Object createBean(String beanName, BeanDefinition beanDefinition) {
     Class<?> aClass = beanDefinition.getType();
+    Object newInstance = null;
     try {
-      return aClass.getConstructor().newInstance();
+      newInstance = aClass.getConstructor().newInstance();
+
+      // 依赖注入之属性注入
+      for (Field field : aClass.getDeclaredFields()) {
+        if (field.isAnnotationPresent(Autowired.class)) {
+          String injectedBeanName = field.getName();
+          // todo: 先根据类型找，再根据名称找
+          Object injectedBeanObj = this.getBean(injectedBeanName);
+          field.setAccessible(true);
+          field.set(newInstance, injectedBeanObj);
+        }
+      }
+
     } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
       throw new RuntimeException(e);
     }
+    return newInstance;
   }
 
   public Object getBean(String beanName) {
