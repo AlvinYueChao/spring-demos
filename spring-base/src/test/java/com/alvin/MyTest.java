@@ -4,6 +4,7 @@ import com.alvin.service.UserService;
 import com.spring.MyApplicationContext;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @Slf4j
 class MyTest {
@@ -21,5 +22,11 @@ class MyTest {
     MyApplicationContext applicationContext = new MyApplicationContext(AppConfig.class);
     UserService userService = (UserService) applicationContext.getBean("userService");
     userService.test1();
+  }
+
+  @Test
+  void test3() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+
   }
 }
