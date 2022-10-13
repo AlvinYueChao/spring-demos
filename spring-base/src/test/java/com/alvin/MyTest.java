@@ -27,6 +27,7 @@ class MyTest {
   @Test
   void test3() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-
+    UserService userService = (UserService) applicationContext.getBean("userService");
+    userService.test1();
   }
 }

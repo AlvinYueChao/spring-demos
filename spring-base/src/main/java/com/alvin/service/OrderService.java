@@ -1,7 +1,7 @@
 package com.alvin.service;
 
-import com.spring.Component;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component

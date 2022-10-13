@@ -1,6 +1,6 @@
 package com.alvin;
 
-import com.spring.ComponentScan;
+import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan("com.alvin.service")
 public class AppConfig {
