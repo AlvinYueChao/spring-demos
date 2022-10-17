@@ -1,16 +1,15 @@
 package com.alvin.service;
 
-import com.spring.Autowired;
-import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
 public class UserService {
 
-//  @Autowired
-  @Resource
+  @Autowired
   private OrderService orderService;
 
   public void test() {
@@ -18,6 +17,11 @@ public class UserService {
   }
 
   public void test1() {
-    log.info("{}", this.orderService);
+    log.info("{}", a());
+  }
+
+  @Lookup("orderService")
+  public OrderService a() {
+    return null;
   }
 }

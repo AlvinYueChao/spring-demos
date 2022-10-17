@@ -29,5 +29,7 @@ class MyTest {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
     UserService userService = (UserService) applicationContext.getBean("userService");
     userService.test1();
+    userService.test1();
+    userService.test1();
   }
 }
