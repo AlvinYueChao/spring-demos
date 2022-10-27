@@ -19,6 +19,7 @@ dependencies {
     implementation("org.springframework:spring-aspects:${spring_version}")
     implementation("org.springframework:spring-tx:${spring_version}")
     implementation("org.springframework:spring-jdbc:${spring_version}")
+    implementation("org.springframework:spring-webflux:${spring_version}")
 
     // logging
     implementation("org.slf4j:slf4j-api:1.7.36")
