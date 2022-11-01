@@ -1,5 +1,6 @@
 package com.alvin;
 
+import com.alvin.service.OrderService;
 import com.alvin.service.UserService;
 import com.spring.MyApplicationContext;
 import lombok.extern.slf4j.Slf4j;
@@ -35,8 +36,16 @@ class MyTest {
 
   @Test
   void test4() {
+    // 由@Bean注入的带有@Configuration注解的类，不会作为配置类(spring-5.3.22及以下)
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-    UserService userService = (UserService) applicationContext.getBean("userService");
-    userService.test();
+    OrderService orderService = (OrderService) applicationContext.getBean("orderService");
+    orderService.test();
+  }
+
+  @Test
+  void test5() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+    UserService userService = applicationContext.getBean(UserService.class);
+    log.info("{}", userService);
   }
 }
