@@ -3,18 +3,16 @@ package org.example.alvin.mybatisexamples;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.example.alvin.mybatisexamples.mapper.CommonMapper;
 import org.example.alvin.mybatisexamples.pojo.ConsultContractCardInfo;
 import org.example.alvin.mybatisexamples.pojo.ConsultRecordCount;
 import org.example.alvin.mybatisexamples.util.DataSourceUtils;
 import org.junit.jupiter.api.Test;
 
+@Slf4j
 public class MyTest {
-
-  private final Logger logger = LogManager.getLogger(MyTest.class);
 
   @Test
   void test1() {
@@ -22,7 +20,7 @@ public class MyTest {
     if (sqlSession != null) {
       CommonMapper commonMapper = sqlSession.getMapper(CommonMapper.class);
       List<ConsultContractCardInfo> result = commonMapper.queryContractByCardId();
-      logger.info(result.size());
+      log.info("{}", result.size());
     }
   }
 
@@ -34,7 +32,7 @@ public class MyTest {
       Map<String, String> params = new HashMap<>();
       params.put("psptId", "456979432");
       List<Map<?, ?>> result = commonMapper.queryUserByPsptId(params);
-      logger.info(result);
+      log.info("{}", result);
     }
   }
 
@@ -45,7 +43,7 @@ public class MyTest {
       CommonMapper commonMapper = sqlSession.getMapper(CommonMapper.class);
       Map<String, String> params = new HashMap<>();
       List<ConsultRecordCount> result = commonMapper.queryRecordCount(params);
-      logger.info(result);
+      log.info("{}", result);
     }
   }
 
@@ -57,7 +55,7 @@ public class MyTest {
       Map<String, String> params = new HashMap<>();
       params.put("psptId", "456979432");
       List<ConsultRecordCount> result = commonMapper.queryRecordCount(params);
-      logger.info(result);
+      log.info("{}", result);
     }
   }
 
@@ -70,7 +68,7 @@ public class MyTest {
       Map<String, String> params = new HashMap<>();
       List<ConsultContractCardInfo> result = commonMapper.getTop4Contracts(params);
       for (ConsultContractCardInfo consultContractCardInfo : result) {
-        logger.info("result from consult_contract: {}", consultContractCardInfo);
+        log.info("result from consult_contract: {}", consultContractCardInfo);
       }
     }
   }
@@ -84,11 +82,11 @@ public class MyTest {
       Map<String, String> params = new HashMap<>();
       List<ConsultContractCardInfo> result = commonMapper.getTop4ContractsLazy(params);
       for (ConsultContractCardInfo consultContractCardInfo : result) {
-        logger.info("ConsultContractCardInfo[contractId={}, contractCode={}, activeTime={}, state={}]", consultContractCardInfo.getContractId(),
+        log.info("ConsultContractCardInfo[contractId={}, contractCode={}, activeTime={}, state={}]", consultContractCardInfo.getContractId(),
             consultContractCardInfo.getContractCode(), consultContractCardInfo.getActiveTime(), consultContractCardInfo.getState());
       }
       for (ConsultContractCardInfo consultContractCardInfo : result) {
-        logger.info("ConsultContractCardInfo[contractId={}, infos={}]", consultContractCardInfo.getContractId(), consultContractCardInfo.getInfos());
+        log.info("ConsultContractCardInfo[contractId={}, infos={}]", consultContractCardInfo.getContractId(), consultContractCardInfo.getInfos());
       }
     }
   }
