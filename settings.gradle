@@ -8,11 +8,11 @@
  */
 
 include 'spring-base'
-/*include 'cache-annotation'
+include 'cache-annotation'
 include 'easy-cache'
 include 'mybatis-base'
 include 'dubbo-p'
 include 'dubbo-c'
-include 'dubbo-api'*/
+include 'dubbo-api'
 
 rootProject.name = 'spring-demos'
