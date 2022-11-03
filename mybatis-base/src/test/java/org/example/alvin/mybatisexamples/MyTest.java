@@ -12,7 +12,7 @@ import org.example.alvin.mybatisexamples.util.DataSourceUtils;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
-public class MyTest {
+class MyTest {
 
   @Test
   void test1() {
