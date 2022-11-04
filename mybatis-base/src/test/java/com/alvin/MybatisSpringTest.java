@@ -1,6 +1,8 @@
 package com.alvin;
 
+import com.alvin.mapper.OrderMapper;
 import com.alvin.mapper.UserMapper;
+import com.alvin.mybatis.spring.MyBatisFactoryBean;
 import com.alvin.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -11,13 +13,20 @@ class MybatisSpringTest {
 
   @Test
   void test1() {
-    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+    context.register(AppConfig.class);
 
-    /*
-    //
-    AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition().getBeanDefinition();
-    beanDefinition.setBeanClass(UserMapper.class);
-    context.registerBeanDefinition("userMapper", beanDefinition);*/
+    AbstractBeanDefinition userMapperBd = BeanDefinitionBuilder.genericBeanDefinition().getBeanDefinition();
+    userMapperBd.setBeanClass(MyBatisFactoryBean.class);
+    userMapperBd.getConstructorArgumentValues().addGenericArgumentValue(UserMapper.class);
+    context.registerBeanDefinition("userMapper", userMapperBd);
+
+    AbstractBeanDefinition orderMapperBd = BeanDefinitionBuilder.genericBeanDefinition().getBeanDefinition();
+    orderMapperBd.setBeanClass(MyBatisFactoryBean.class);
+    orderMapperBd.getConstructorArgumentValues().addGenericArgumentValue(OrderMapper.class);
+    context.registerBeanDefinition("orderMapper", orderMapperBd);
+
+    context.refresh();
 
     UserService userService = (UserService) context.getBean("userService");
     userService.test();
