@@ -17,7 +17,7 @@ public class AppConfig {
   public SqlSessionFactory sqlSessionFactory() {
     InputStream inputStream = null;
     try {
-      inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+      inputStream = Resources.getResourceAsStream("mybatis.xml");
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

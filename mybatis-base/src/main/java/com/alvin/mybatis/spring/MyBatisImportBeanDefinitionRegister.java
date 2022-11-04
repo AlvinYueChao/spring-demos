@@ -3,7 +3,6 @@ package com.alvin.mybatis.spring;
 import java.util.Map;
 import java.util.Objects;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 

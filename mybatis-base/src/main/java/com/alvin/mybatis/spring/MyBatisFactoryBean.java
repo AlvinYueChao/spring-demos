@@ -21,6 +21,7 @@ public class MyBatisFactoryBean implements FactoryBean<Object> {
 
   @Autowired
   public void setSqlSession(SqlSessionFactory sqlSessionFactory) {
+    sqlSessionFactory.getConfiguration().addMapper(this.mapperInterface);
     this.sqlSession = sqlSessionFactory.openSession();
   }
 
