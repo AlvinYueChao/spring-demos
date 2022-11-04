@@ -16,6 +16,7 @@ class MybatisSpringTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
     context.register(AppConfig.class);
 
+    // 手动注册FactoryBean并将生成的UserMapper, OrderMapper代理对象加入spring容器中
     AbstractBeanDefinition userMapperBd = BeanDefinitionBuilder.genericBeanDefinition().getBeanDefinition();
     userMapperBd.setBeanClass(MyBatisFactoryBean.class);
     userMapperBd.getConstructorArgumentValues().addGenericArgumentValue(UserMapper.class);
@@ -26,6 +27,16 @@ class MybatisSpringTest {
     orderMapperBd.getConstructorArgumentValues().addGenericArgumentValue(OrderMapper.class);
     context.registerBeanDefinition("orderMapper", orderMapperBd);
 
+    context.refresh();
+
+    UserService userService = (UserService) context.getBean("userService");
+    userService.test();
+  }
+
+  @Test
+  void test2() {
+    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+    context.register(AppConfig.class);
     context.refresh();
 
     UserService userService = (UserService) context.getBean("userService");
