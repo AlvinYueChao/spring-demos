@@ -4,12 +4,33 @@ import com.alvin.mapper.OrderMapper;
 import com.alvin.mapper.UserMapper;
 import com.alvin.mybatis.spring.MyBatisFactoryBean;
 import com.alvin.service.UserService;
+import java.io.IOException;
+import java.io.InputStream;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+@Slf4j
 class MybatisSpringTest {
+
+  @Test
+  void test0() throws IOException {
+    InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    UserMapper mapper = sqlSession.getMapper(UserMapper.class); // 代理对象
+    String result = mapper.selectUserById();
+
+    sqlSession.commit();
+    sqlSession.flushStatements();
+    sqlSession.close();
+  }
 
   @Test
   void test1() {
