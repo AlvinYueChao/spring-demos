@@ -1,13 +1,10 @@
 package com.alvin.mybatis.spring;
 
-import com.alvin.mapper.UserMapper;
-import java.lang.reflect.Proxy;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Slf4j
 public class MyBatisFactoryBean implements FactoryBean<Object> {
