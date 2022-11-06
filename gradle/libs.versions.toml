@@ -7,6 +7,7 @@ spring-boot = "2.7.2"
 jupiter = "5.9.0"
 slf4j = "1.7.30"
 log4j = "2.18.0"
+mybatis-spring = "2.0.7"
 mybatis = "3.5.10"
 alibaba-druid = "1.2.11"
 mysql-connector-java = "8.0.31"
@@ -48,6 +49,7 @@ lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 mysql-connector-java = { module = "mysql:mysql-connector-java", version.ref = "mysql-connector-java" }
 mchange-c3p0 = { module = "com.mchange:c3p0", version.ref = "c3p0" }
 mybatis = { module = "org.mybatis:mybatis", version.ref = "mybatis" }
+mybatis-spring = {module = "org.mybatis:mybatis-spring", version.ref = "mybatis-spring"}
 alibaba-druid = { module = "com.alibaba:druid", version.ref = "alibaba-druid" }
 
 # plugin

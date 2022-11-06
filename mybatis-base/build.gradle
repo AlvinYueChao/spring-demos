@@ -10,11 +10,13 @@ dependencies {
     testAnnotationProcessor libs.lombok
     testCompileOnly libs.lombok
 
+    implementation libs.mybatis.spring
     implementation libs.mybatis
     implementation libs.mysql.connector.java
 
     implementation libs.spring.aop
     implementation libs.spring.jdbc
+    implementation libs.spring.tx
     implementation libs.spring.context
     implementation libs.spring.webflux
 
