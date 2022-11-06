@@ -12,12 +12,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @ComponentScan("com.alvin")
 //@MyBatisMapperScan("com.alvin.mapper")
 @MapperScan("com.alvin.mapper")
-//@EnableTransactionManagement
+@EnableTransactionManagement
 public class AppConfig {
 
   @Bean
@@ -31,14 +32,18 @@ public class AppConfig {
     return new SqlSessionFactoryBuilder().build(inputStream);
   }
 
-  /*@Bean
+  @Bean
   @Primary
   public DataSource mysqlDataSource() {
-    return null;
+    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/consult");
+    dataSource.setUsername("root");
+    dataSource.setPassword("ZiF6OZ5eB4gW2kN0");
+    return dataSource;
   }
 
   @Bean
   public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource) {
     return new DataSourceTransactionManager(dataSource);
-  }*/
+  }
 }

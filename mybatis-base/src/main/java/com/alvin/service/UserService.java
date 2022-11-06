@@ -22,6 +22,7 @@ public class UserService {
     /**
      * spring和mybatis整合，如果不开启spring事务，mybatis一级缓存会失效
      * 开启事务时，TransactionSynchronizationManager.isSynchronizationActive()返回值为true，否则为false
+     * DefaultSqlSession 是线程不安全的，SqlSessionTemplate是线程安全的，因为将DefaultSqlSession用ThreadLocal进行了封装
      */
     log.info("{}", userMapper.selectUserById());
     log.info("{}", orderMapper.selectOrderById());
