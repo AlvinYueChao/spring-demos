@@ -17,7 +17,10 @@ plugins {
     alias libs.plugins.spotless
 }
 
-allprojects {
+subprojects {
+
+    apply plugin: "java"
+    apply plugin: "java-library"
 
     group = "org.example.alvin"
     version = "1.0.0-SNAPSHOT"
@@ -31,4 +34,6 @@ allprojects {
             url = "https://maven.aliyun.com/repository/jcenter"
         }
     }
+
+    project.compileJava.dependsOn spotlessApply
 }

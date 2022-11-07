@@ -1,8 +1,3 @@
-plugins {
-    id 'java'
-    id 'java-library'
-}
-
 dependencies {
     api libs.hibernate.validator
     api libs.javax.el
