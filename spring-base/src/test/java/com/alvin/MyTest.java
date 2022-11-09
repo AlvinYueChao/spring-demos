@@ -3,8 +3,13 @@ package com.alvin;
 import com.alvin.service.OrderService;
 import com.alvin.service.UserService;
 import com.spring.MyApplicationContext;
+import java.lang.reflect.Method;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.cglib.proxy.Callback;
+import org.springframework.cglib.proxy.Enhancer;
+import org.springframework.cglib.proxy.MethodInterceptor;
+import org.springframework.cglib.proxy.MethodProxy;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @Slf4j
@@ -47,5 +52,35 @@ class MyTest {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
     UserService userService = applicationContext.getBean(UserService.class);
     log.info("{}", userService);
+  }
+
+  @Test
+  void test6() {
+    UserService target = new UserService();
+    Enhancer enhancer = new Enhancer();
+    enhancer.setSuperclass(UserService.class);
+    enhancer.setCallbacks(new Callback[]{
+        (MethodInterceptor) (o, method, objects, methodProxy) -> {
+          log.info("before...");
+          /*
+          o: userService的代理对象 com.alvin.service.UserService@26dcd8c0
+          method: public void com.alvin.service.UserService.test()
+          objects: test()方法入参
+          methodProxy: org.springframework.cglib.proxy.MethodProxy@1a5f7e7c
+          CGLib实现原理：UserServiceProxy extends UserService {}
+           */
+//          Object result = methodProxy.invoke(target, objects);
+          // 和71行代码效果相同
+//          Object result = method.invoke(target, objects);
+          // java.lang.StackOverflowError，cpu占用率100%
+//          Object result = method.invoke(o, objects);
+          // 和71行代码效果相同
+          Object result = methodProxy.invokeSuper(o, objects);
+          log.info("after...");
+          return result;
+        }
+    });
+    UserService proxyInstance = (UserService) enhancer.create();
+    proxyInstance.test();
   }
 }
