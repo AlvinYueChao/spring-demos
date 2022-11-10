@@ -6,10 +6,14 @@ import com.spring.MyApplicationContext;
 import java.lang.reflect.Method;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.aop.AfterAdvice;
+import org.springframework.aop.AfterReturningAdvice;
+import org.springframework.aop.MethodBeforeAdvice;
+import org.springframework.aop.ThrowsAdvice;
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.cglib.proxy.Callback;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
-import org.springframework.cglib.proxy.MethodProxy;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @Slf4j
@@ -82,5 +86,26 @@ class MyTest {
     });
     UserService proxyInstance = (UserService) enhancer.create();
     proxyInstance.test();
+  }
+
+  @Test
+  void test7() {
+    UserService target = new UserService();
+    ProxyFactory proxyFactory = new ProxyFactory();
+    proxyFactory.setTarget(target);
+    proxyFactory.addAdvice((AfterReturningAdvice) (returnValue, method, args, target1) -> {
+      // TODO
+    });
+    proxyFactory.addAdvice((MethodBeforeAdvice) (method, args, target12) -> {
+      // TODO
+    });
+    proxyFactory.addAdvice((MethodBeforeAdvice) (method, args, target13) -> {
+      // TODO
+    });
+    proxyFactory.addAdvice(new ThrowsAdvice() {
+      // TODO
+    });
+    UserService proxy = (UserService) proxyFactory.getProxy();
+    proxy.test();
   }
 }
