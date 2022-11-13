@@ -16,6 +16,7 @@ dependencies {
     implementation libs.spring.tx
     implementation libs.spring.jdbc
     implementation libs.spring.webflux
+    implementation libs.spring.aop
 
     // logging
     implementation libs.slf4j.api

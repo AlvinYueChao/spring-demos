@@ -6,7 +6,6 @@ import com.spring.MyApplicationContext;
 import java.lang.reflect.Method;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.aop.AfterAdvice;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.ThrowsAdvice;
@@ -104,8 +103,25 @@ class MyTest {
     });
     proxyFactory.addAdvice(new ThrowsAdvice() {
       // TODO
+      public void afterThrowing(Method method, Object[] args, Object target, Exception ex) {
+        // TODO
+      }
+    });
+    proxyFactory.addAdvice((org.aopalliance.intercept.MethodInterceptor) invocation -> {
+      // TODO
+      log.info("方法执行前。。。");
+      Object result = invocation.proceed();
+      log.info("方法执行后");
+      return result;
     });
     UserService proxy = (UserService) proxyFactory.getProxy();
     proxy.test();
+  }
+
+  @Test
+  void test8() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+    UserService userService = applicationContext.getBean(UserService.class);
+    userService.test();
   }
 }
