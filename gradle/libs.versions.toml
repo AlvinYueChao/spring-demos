@@ -18,6 +18,9 @@ hibernate-validator = "6.0.0.Final"
 javax-el = "3.0.0"
 
 [libraries]
+# bom
+spring-framework-bom = { module = "org.springframework:spring-framework-bom", version.ref = "spring-framework" }
+
 # utils
 javax-annotation-api = { module = "javax.annotation:javax.annotation-api", version.ref = "javax-annotation-api" }
 commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commons-lang3" }
@@ -49,7 +52,7 @@ lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 mysql-connector-java = { module = "mysql:mysql-connector-java", version.ref = "mysql-connector-java" }
 mchange-c3p0 = { module = "com.mchange:c3p0", version.ref = "c3p0" }
 mybatis = { module = "org.mybatis:mybatis", version.ref = "mybatis" }
-mybatis-spring = {module = "org.mybatis:mybatis-spring", version.ref = "mybatis-spring"}
+mybatis-spring = { module = "org.mybatis:mybatis-spring", version.ref = "mybatis-spring" }
 alibaba-druid = { module = "com.alibaba:druid", version.ref = "alibaba-druid" }
 
 # plugin
