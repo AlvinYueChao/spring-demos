@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomAdvisors {
 
-  @Before("execution(public void com.alvin.service.UserService.test())")
+  @Before("execution(public * com.alvin.service.*.*(..))")
   public void beforeAdvice() {
     log.info("Before: 方法执行前...");
   }
