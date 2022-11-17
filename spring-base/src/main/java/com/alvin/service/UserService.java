@@ -13,6 +13,7 @@ public class UserService {
 
   public void test() {
     log.info("=== invoked test() ===");
+    throw new RuntimeException();
   }
 
   public void test1() {
