@@ -30,6 +30,7 @@ public class AppConfig {
   public PlatformTransactionManager transactionManager(DataSource mysqlDataSource) {
     DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
     transactionManager.setDataSource(mysqlDataSource);
+    transactionManager.setGlobalRollbackOnParticipationFailure(true);
     return transactionManager;
   }
 

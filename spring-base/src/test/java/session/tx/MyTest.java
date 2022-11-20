@@ -12,4 +12,11 @@ class MyTest {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
     log.info("{}", applicationContext);
   }
+
+  @Test
+  void test2() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+    OrderService orderService = applicationContext.getBean(OrderService.class);
+    orderService.test1();
+  }
 }
