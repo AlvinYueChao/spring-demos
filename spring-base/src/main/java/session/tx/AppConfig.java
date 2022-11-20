@@ -30,6 +30,7 @@ public class AppConfig {
   public PlatformTransactionManager transactionManager(DataSource mysqlDataSource) {
     DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
     transactionManager.setDataSource(mysqlDataSource);
+    // 部分失败的情况下全局回滚。在同一个事务的情况下，要不全部回滚，要不全部提交（哪怕抛异常）
     transactionManager.setGlobalRollbackOnParticipationFailure(true);
     return transactionManager;
   }
