@@ -128,9 +128,6 @@ class MyTest {
 
   @Test
   void test9() {
-    AnnotationConfigWebApplicationContext webApplicationContext = new AnnotationConfigWebApplicationContext();
-    webApplicationContext.scan("com.alvin");
-    webApplicationContext.refresh();
-    webApplicationContext.start();
+
   }
 }
