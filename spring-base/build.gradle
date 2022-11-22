@@ -5,8 +5,6 @@ dependencies {
     // utils
     implementation libs.javax.annotation.api
     implementation libs.commons.lang3
-    implementation libs.reactor.netty.http
-    implementation libs.jakarta.servlet.api
 
     // spring
     implementation libs.spring.context
