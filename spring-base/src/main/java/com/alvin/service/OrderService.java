@@ -10,4 +10,8 @@ public class OrderService {
   public void test() {
     log.info("=== invoked test() ===");
   }
+
+  public String getOrderInfo() {
+    return "Simple Order";
+  }
 }

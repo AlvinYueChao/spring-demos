@@ -14,6 +14,7 @@ import org.springframework.cglib.proxy.Callback;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 @Slf4j
 class MyTest {
@@ -123,5 +124,13 @@ class MyTest {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
     UserService userService = applicationContext.getBean(UserService.class);
     userService.test();
+  }
+
+  @Test
+  void test9() {
+    AnnotationConfigWebApplicationContext webApplicationContext = new AnnotationConfigWebApplicationContext();
+    webApplicationContext.scan("com.alvin");
+    webApplicationContext.refresh();
+    webApplicationContext.start();
   }
 }
