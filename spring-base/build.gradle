@@ -6,12 +6,6 @@ dependencies {
     implementation libs.javax.annotation.api
     implementation libs.commons.lang3
 
-    // lombok
-    annotationProcessor libs.lombok
-    compileOnly libs.lombok
-    testAnnotationProcessor libs.lombok
-    testCompileOnly libs.lombok
-
     // spring
     implementation libs.spring.context
     implementation libs.spring.aspects
@@ -19,19 +13,9 @@ dependencies {
     implementation libs.spring.jdbc
     implementation libs.spring.webflux
 
-    // logging
-    implementation libs.slf4j.api
-    implementation libs.log4j.core
-    implementation libs.log4j.slf4j.impl
-
     // jdbc
     implementation libs.mysql.connector.java
     implementation libs.mchange.c3p0
-
-    // test
-    testImplementation libs.junit.jupiter.api
-    testRuntimeOnly libs.junit.jupiter.engine
-    testImplementation libs.junit.jupiter.params
 }
 
 test {

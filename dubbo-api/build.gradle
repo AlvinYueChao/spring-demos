@@ -1,13 +1,4 @@
 dependencies {
     api libs.hibernate.validator
     api libs.javax.el
-
-    annotationProcessor libs.lombok
-    compileOnly libs.lombok
-    testAnnotationProcessor libs.lombok
-    testCompileOnly libs.lombok
-}
-
-test {
-    useJUnitPlatform()
 }

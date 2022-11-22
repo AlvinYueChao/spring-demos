@@ -14,5 +14,6 @@ include 'mybatis-base'
 include 'dubbo-p'
 include 'dubbo-c'
 include 'dubbo-api'
+include 'micro-service'
 
 rootProject.name = 'spring-demos'
