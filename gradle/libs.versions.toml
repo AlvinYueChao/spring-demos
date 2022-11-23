@@ -16,6 +16,7 @@ spotless-plugin = "6.11.0"
 apache-dubbo = "3.0.8"
 hibernate-validator = "6.0.0.Final"
 javax-el = "3.0.0"
+tomcat-embed = "9.0.65"
 
 [libraries]
 # bom
@@ -26,6 +27,9 @@ javax-annotation-api = { module = "javax.annotation:javax.annotation-api", versi
 commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commons-lang3" }
 hibernate-validator = { module = "org.hibernate.validator:hibernate-validator", version.ref = "hibernate-validator" }
 javax-el = { module = "org.glassfish:javax.el", version.ref = "javax-el" }
+tomcat-embed-core = { module = "org.apache.tomcat.embed:tomcat-embed-core", version.ref = "tomcat-embed" }
+tomcat-embed-el = { module = "org.apache.tomcat.embed:tomcat-embed-el", version.ref = "tomcat-embed" }
+tomcat-embed-websocket = { module = "org.apache.tomcat.embed:tomcat-embed-websocket", version.ref = "tomcat-embed" }
 
 # spring-framework
 spring-context = { module = "org.springframework:spring-context", version.ref = "spring-framework" }
@@ -35,6 +39,7 @@ spring-jdbc = { module = "org.springframework:spring-jdbc", version.ref = "sprin
 spring-webflux = { module = "org.springframework:spring-webflux", version.ref = "spring-framework" }
 spring-test = { module = "org.springframework:spring-test", version.ref = "spring-framework" }
 spring-aop = { module = "org.springframework:spring-aop", version.ref = "spring-framework" }
+spring-webmvc = { module = "org.springframework:spring-webmvc", version.ref = "spring-framework" }
 
 # dubbo
 apache-dubbo = { module = "org.apache.dubbo:dubbo", version.ref = "apache-dubbo" }
@@ -64,7 +69,7 @@ junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", vers
 junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "jupiter" }
 
 [bundles]
-
+tomcat-embed = ["tomcat-embed-core", "tomcat-embed-el", "tomcat-embed-websocket"]
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless-plugin" }
