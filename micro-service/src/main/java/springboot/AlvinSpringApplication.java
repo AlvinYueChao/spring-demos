@@ -12,6 +12,7 @@ import org.apache.catalina.startup.Tomcat;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+import springboot.web.server.WebServer;
 
 @Slf4j
 public class AlvinSpringApplication {
@@ -21,7 +22,13 @@ public class AlvinSpringApplication {
     applicationContext.register(clazz);
     applicationContext.refresh();
 
-    startTomcat(applicationContext);
+    WebServer webServer = getWebServer(applicationContext);
+    webServer.start();
+  }
+
+  private static WebServer getWebServer(WebApplicationContext applicationContext) {
+    // 判断依赖的是Tomcat还是Netty
+    return applicationContext.getBean(WebServer.class);
   }
 
   private static void startTomcat(WebApplicationContext applicationContext) {
@@ -61,6 +68,6 @@ public class AlvinSpringApplication {
   }
 
   public static void run(Class<?> clazz, String[] args) {
-
+    throw new UnsupportedOperationException();
   }
 }

@@ -17,6 +17,7 @@ apache-dubbo = "3.0.8"
 hibernate-validator = "6.0.0.Final"
 javax-el = "3.0.0"
 tomcat-embed = "9.0.65"
+reactor-netty-http = "1.0.21"
 
 [libraries]
 # bom
@@ -30,6 +31,7 @@ javax-el = { module = "org.glassfish:javax.el", version.ref = "javax-el" }
 tomcat-embed-core = { module = "org.apache.tomcat.embed:tomcat-embed-core", version.ref = "tomcat-embed" }
 tomcat-embed-el = { module = "org.apache.tomcat.embed:tomcat-embed-el", version.ref = "tomcat-embed" }
 tomcat-embed-websocket = { module = "org.apache.tomcat.embed:tomcat-embed-websocket", version.ref = "tomcat-embed" }
+reactor-netty-http = { module = "io.projectreactor.netty:reactor-netty-http", version.ref = "reactor-netty-http" }
 
 # spring-framework
 spring-context = { module = "org.springframework:spring-context", version.ref = "spring-framework" }

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Configuration
-@ComponentScan
+@ComponentScan("springboot")
 public @interface AlvinSpringBootApplication {
 
 }
