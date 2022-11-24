@@ -1,0 +1,2 @@
+springboot.autoconfigure.AspectJAutoConfiguration
+springboot.autoconfigure.TransactionAutoConfiguration

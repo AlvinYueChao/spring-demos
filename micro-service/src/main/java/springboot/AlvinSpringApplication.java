@@ -34,9 +34,9 @@ public class AlvinSpringApplication {
     // 判断依赖的是Tomcat还是Netty,在不加@Primary情况下，只能有一个WebServer类型的bean
     Map<String, WebServer> webServers = applicationContext.getBeansOfType(WebServer.class);
     if (webServers.isEmpty()) {
-      throw new NullPointerException();
+      throw new NullPointerException("没有找到WebServer");
     } else if (webServers.size() > 1) {
-      throw new IllegalStateException();
+      throw new IllegalStateException("找到多个WebServer");
     } else {
       return applicationContext.getBean(WebServer.class);
     }
