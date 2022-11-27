@@ -6,4 +6,6 @@ dependencies {
 
     implementation libs.bundles.tomcat.embed
     implementation libs.reactor.netty.http
+
+    implementation libs.spring.boot.starter.webflux
 }
