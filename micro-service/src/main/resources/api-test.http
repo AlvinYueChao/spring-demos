@@ -1,1 +1,5 @@
+###
+GET localhost:8081/getUserById?userId=100
+
+###
 GET localhost:8081/test
