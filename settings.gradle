@@ -7,6 +7,8 @@
  * in the user manual at https://docs.gradle.org/7.1/userguide/multi_project_builds.html
  */
 
+rootProject.name = 'spring-demos'
+
 include 'spring-base'
 include 'cache-annotation'
 include 'easy-cache'
@@ -15,5 +17,4 @@ include 'dubbo-p'
 include 'dubbo-c'
 include 'dubbo-api'
 include 'micro-service'
-
-rootProject.name = 'spring-demos'
+include 'spring-cloud-provider'
