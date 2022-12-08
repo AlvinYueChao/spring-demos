@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: Gateway
+  cloud:
+    gateway:
+      routes:
+        - id: AddRequestHeader_Route
+          uri: http://www.phei.com.cn
+          predicates:
+            - Method=GET
+          filters:
+            - AddRequestParameter=key_name,key_value
+
+server:
+  port: 8220
