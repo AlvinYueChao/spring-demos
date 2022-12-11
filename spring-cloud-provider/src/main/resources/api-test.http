@@ -1,0 +1,5 @@
+###
+GET http://localhost:8220/hello
+
+###
+GET http://localhost:8220/helloworld

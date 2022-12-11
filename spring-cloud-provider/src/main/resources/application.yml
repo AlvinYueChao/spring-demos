@@ -4,12 +4,14 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: AddRequestHeader_Route
+        - id: hello Route
           uri: http://www.phei.com.cn
           predicates:
-            - Method=GET
-          filters:
-            - AddRequestParameter=key_name,key_value
+            - Path=/hello
+        - id: Fault-Tolerance Routing
+          uri: forward:/notfound
+          predicates:
+            - Path=/**
 
 server:
   port: 8220
