@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: Fault-Tolerance Routing Sentinel
+  cloud:
+    consul:
+      discovery:
+        register: false
+      host: 192.168.20.10
+      port: 8500
+    gateway:
+      routes:
+        - id: Sentinel Routing
+          uri: lb://service-provider
+          predicates:
+            - Path=/hello
+
+server:
+  port: 8221
+
+feign:
+  sentinel:
+    enabled: true

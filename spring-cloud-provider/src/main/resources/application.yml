@@ -1,17 +1,15 @@
 spring:
   application:
-    name: Gateway
+    name: service-provider
   cloud:
-    gateway:
-      routes:
-        - id: hello Route
-          uri: http://www.phei.com.cn
-          predicates:
-            - Path=/hello
-        - id: Fault-Tolerance Routing
-          uri: forward:/notfound
-          predicates:
-            - Path=/**
+    provider:
+      name: p1
+    consul:
+      discovery:
+        heartbeat:
+          enabled: true
+      host: 192.168.20.10
+      port: 8500
 
 server:
   port: 8220

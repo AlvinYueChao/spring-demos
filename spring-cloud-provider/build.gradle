@@ -1,4 +1,5 @@
 dependencies {
     implementation platform(libs.spring.cloud.dependencies)
-    implementation libs.spring.cloud.starter.gateway
+    implementation libs.spring.cloud.starter.consul.discovery
+    implementation libs.spring.boot.starter.webflux
 }
