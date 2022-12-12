@@ -1,6 +1,9 @@
 spring:
   application:
-    name: Fault-Tolerance Routing Sentinel
+    name: Gateway Limiter
+  redis:
+    database: 1
+    host: 192.168.20.10
   cloud:
     consul:
       discovery:
@@ -8,15 +11,31 @@ spring:
       host: 192.168.20.10
       port: 8500
     gateway:
+      discovery:
+        locator:
+          enabled: true
       routes:
-        - id: Sentinel Routing
+        - id: test-ip
           uri: lb://service-provider
           predicates:
-            - Path=/hello
+            - Path=/hello/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter:
+                  replenishRate: 1
+                  burstCapacity: 2
+                key-resolver: "#{@ipKeyResolver}"
 
 server:
   port: 8221
 
-feign:
-  sentinel:
-    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+
+#feign:
+#  sentinel:
+#    enabled: false

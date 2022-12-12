@@ -96,3 +96,48 @@ GET http://localhost:8220/helloworld
 15:28:41.815 [reactor-http-nio-3] DEBUG o.s.c.g.h.RoutePredicateHandlerMapping - Route matched: Fault-Tolerance Routing
 15:28:41.815 [reactor-http-nio-3] DEBUG o.s.c.g.h.RoutePredicateHandlerMapping - Mapping [Exchange: GET http://localhost:8220/helloworld] to Route{id='Fault-Tolerance Routing', uri=forward:/notfound, order=0, predicate=Paths: [/**], match trailing slash: true, gatewayFilters=[], metadata={}}
 ```
+## Gateway Limit
+```yaml
+spring:
+  application:
+    name: Gateway Limiter
+  redis:
+    database: 1
+    host: 192.168.20.10
+  cloud:
+    consul:
+      discovery:
+        register: false
+      host: 192.168.20.10
+      port: 8500
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: test-ip
+          uri: lb://service-provider
+          predicates:
+            - Path=/hello/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter:
+                  replenishRate: 1
+                  burstCapacity: 2
+                key-resolver: "#{@ipKeyResolver}"
+
+server:
+  port: 8221
+```
+
+### execution
+#### request
+```http request
+GET http://localhost:8221/hello
+```
+#### result
+```text
+21:45:18.858 [lettuce-nioEventLoop-5-1] DEBUG o.s.c.g.f.r.RedisRateLimiter - response: Response{allowed=false, headers={X-RateLimit-Remaining=0, X-RateLimit-Requested-Tokens=1, X-RateLimit-Burst-Capacity=2, X-RateLimit-Replenish-Rate=1}, tokensRemaining=-1}
+21:45:18.858 [lettuce-nioEventLoop-5-1] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [dcf226d2-17] Completed 429 TOO_MANY_REQUESTS
+```
