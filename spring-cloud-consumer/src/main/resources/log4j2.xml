@@ -15,5 +15,11 @@
         <Root level="debug">
             <AppenderRef ref="Console"/>
         </Root>
+        <Logger name="org.springframework.cloud.openfeign" level="debug">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="org.springframework.cloud.sleuth" level="debug">
+            <AppenderRef ref="Console"/>
+        </Logger>
     </Loggers>
 </Configuration>

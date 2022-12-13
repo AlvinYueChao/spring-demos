@@ -55,6 +55,7 @@ spring-cloud-dependencies = { module = "org.springframework.cloud:spring-cloud-d
 spring-cloud-starter-gateway = { module = "org.springframework.cloud:spring-cloud-starter-gateway" }
 spring-cloud-starter-consul-discovery = { module = "org.springframework.cloud:spring-cloud-starter-consul-discovery" }
 spring-cloud-starter-openfeign = { module = "org.springframework.cloud:spring-cloud-starter-openfeign" }
+spring-cloud-starter-zipkin = { module = "org.springframework.cloud:spring-cloud-starter-zipkin", version = "2.2.8.RELEASE" }
 
 # spring-cloud-alibaba
 spring-cloud-starter-alibaba-sentinel = { module = "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel", version.ref = "spring-cloud-alibaba" }
