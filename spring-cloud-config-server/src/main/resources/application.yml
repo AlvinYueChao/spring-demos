@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: native
+  application:
+    name: spring-cloud-config-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:D:/WorkSpace/Java/Gradle/spring-demos/spring-cloud-config-server/properties/
+
+server:
+  port: 8001
+
+encrypt:
+  key-store:
+    alias: alias test
+    location: test.jks
+    secret: ${keypass}
+    password: ${storepass}

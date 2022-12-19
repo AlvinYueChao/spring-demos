@@ -19,3 +19,6 @@ include 'dubbo-api'
 include 'micro-service'
 include 'spring-cloud-consumer'
 include 'spring-cloud-provider'
+include 'spring-cloud-config-server'
+include 'spring-cloud-config-client'
+

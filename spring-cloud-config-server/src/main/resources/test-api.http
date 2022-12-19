@@ -1,0 +1,19 @@
+POST http://localhost:8001/encrypt
+Content-Type: application/x-www-form-urlencoded
+
+alvin
+
+###
+POST http://localhost:8001/decrypt
+Content-Type: application/x-www-form-urlencoded
+
+AQBG0Ht0jMwzfh/CpnlhI3IYmA0FvCjjZnuAqe0AU2K9hHuTbCRdciTVQKb7f3s+HQ6/rZoKWlFT56CqQovpp97Ui1cKp9j5jfiPucUttlcIAZnjXOdYDxBP7vxxC1UoznpI6YRCGTX8fp2erzp2w30VIAbi4dZvTJvskxDUagOafw1vh1m5+Yz+1KamRr1rkNcJQhh+ZAfbiHVbppT+7KqJhkbpMOSPlDRADntzAmYLyChakFMKjkRc/6e7c40kpbhcm+k32DCuI6J2g73hjkCYQ18g/AzVLdkcGQe0d0luBS2y4PuR1dYkuivjGu+HQREFB8KNO3+r7S6BCVxM1WdzFLaqf+eBYip2Qpr+m6vFanEOYv9vxPjBuELOuhNdC28=
+
+###
+GET http://localhost:8001/config/dev
+
+###
+GET http://localhost:8001/config/prod
+
+###
+GET http://localhost:8001/config/qa

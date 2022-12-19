@@ -56,6 +56,9 @@ spring-cloud-starter-gateway = { module = "org.springframework.cloud:spring-clou
 spring-cloud-starter-consul-discovery = { module = "org.springframework.cloud:spring-cloud-starter-consul-discovery" }
 spring-cloud-starter-openfeign = { module = "org.springframework.cloud:spring-cloud-starter-openfeign" }
 spring-cloud-starter-zipkin = { module = "org.springframework.cloud:spring-cloud-starter-zipkin", version = "2.2.8.RELEASE" }
+spring-cloud-config-server = { module = "org.springframework.cloud:spring-cloud-config-server", version = "3.1.5" }
+spring-cloud-starter-config = { module = "org.springframework.cloud:spring-cloud-starter-config", version = "3.1.5" }
+spring-cloud-starter-bootstrap = { module = "org.springframework.cloud:spring-cloud-starter-bootstrap", version = "3.1.5" }
 
 # spring-cloud-alibaba
 spring-cloud-starter-alibaba-sentinel = { module = "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel", version.ref = "spring-cloud-alibaba" }

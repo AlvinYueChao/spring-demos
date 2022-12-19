@@ -1,0 +1,11 @@
+app:
+  version: qa
+message: Spring Cloud Config Demo
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+server:
+  port: 8008
