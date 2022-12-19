@@ -12,6 +12,9 @@ spring:
     sampler:
       probability: 1.0
   cloud:
+    sentinel:
+      transport:
+        dashboard: http://192.168.20.10:8080
     consul:
       discovery:
         register: false
@@ -43,6 +46,6 @@ management:
       exposure:
         include: gateway
 
-#feign:
-#  sentinel:
-#    enabled: false
+feign:
+  sentinel:
+    enabled: true
