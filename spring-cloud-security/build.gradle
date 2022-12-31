@@ -1,4 +1,0 @@
-dependencies {
-    implementation platform(libs.spring.cloud.dependencies)
-    implementation libs.spring.cloud.security
-}
