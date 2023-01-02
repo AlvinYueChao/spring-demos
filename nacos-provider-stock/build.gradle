@@ -1,0 +1,4 @@
+dependencies {
+    implementation platform(libs.spring.cloud.dependencies)
+    implementation libs.spring.cloud.starter.alibaba.nacos.discovery
+}

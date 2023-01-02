@@ -66,6 +66,7 @@ spring-cloud-starter-oauth2 = { module = "org.springframework.cloud:spring-cloud
 
 # spring-cloud-alibaba
 spring-cloud-starter-alibaba-sentinel = { module = "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel", version.ref = "spring-cloud-alibaba" }
+spring-cloud-starter-alibaba-nacos-discovery = { module = "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery", version.ref = "spring-cloud-alibaba" }
 
 # dubbo
 apache-dubbo = { module = "org.apache.dubbo:dubbo", version.ref = "apache-dubbo" }

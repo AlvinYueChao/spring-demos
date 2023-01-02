@@ -22,4 +22,5 @@ include 'spring-cloud-provider'
 include 'spring-cloud-config-server'
 include 'spring-cloud-config-client'
 include 'spring-security'
+include 'nacos-provider-stock'
 
