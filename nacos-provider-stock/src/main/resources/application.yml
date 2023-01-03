@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: stock-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8850
+#        ephemeral: false
+
+server:
+  port: 9000
