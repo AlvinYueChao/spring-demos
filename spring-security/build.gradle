@@ -1,8 +1,0 @@
-dependencies {
-    implementation platform(libs.spring.cloud.dependencies)
-//    implementation libs.spring.cloud.security
-//    implementation libs.spring.cloud.starter.oauth2
-    implementation libs.spring.boot.starter.oauth2.client
-    implementation libs.spring.boot.starter.security
-    implementation libs.spring.boot.starter.webflux
-}
