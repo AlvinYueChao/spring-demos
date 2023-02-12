@@ -2,10 +2,10 @@
 GET https://api.github.com/user
 Accept: application/vnd.github+json
 X-GitHub-Api-Version: 2022-11-28
-Authorization: Bearer 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
+Authorization: Bearer
 
 ###
 GET https://api.github.com/app
 Accept: application/vnd.github+json
 X-GitHub-Api-Version: 2022-11-28
-Authorization: Bearer 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
+Authorization: Bearer
