@@ -9,9 +9,3 @@ GET https://api.github.com/app
 Accept: application/vnd.github+json
 X-GitHub-Api-Version: 2022-11-28
 Authorization: Bearer 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
-
-###
-# https://github.com/login/oauth/authorize?client_id=b2210198ee128d2b5b6b
-# code: 9a1bc864a4c494dd3fa6
-POST https://github.com/login/oauth/access_token?client_id=b2210198ee128d2b5b6b&client_secret=66231b7a944b96355c22a04bfccff9094ee33a28&code=9a1bc864a4c494dd3fa6
-Accept: application/json
