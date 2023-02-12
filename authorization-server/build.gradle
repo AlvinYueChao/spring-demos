@@ -1,0 +1,7 @@
+dependencies {
+    implementation platform(libs.spring.framework.bom)
+
+    implementation libs.spring.boot.starter.security
+    implementation libs.spring.security.oauth2.authorization.server
+    implementation libs.spring.security.oauth2.resource.server
+}

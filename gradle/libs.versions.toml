@@ -45,6 +45,8 @@ spring-webflux = { module = "org.springframework:spring-webflux", version.ref = 
 spring-test = { module = "org.springframework:spring-test", version.ref = "spring-framework" }
 spring-aop = { module = "org.springframework:spring-aop", version.ref = "spring-framework" }
 spring-webmvc = { module = "org.springframework:spring-webmvc", version.ref = "spring-framework" }
+spring-security-oauth2-authorization-server = { module = "org.springframework.security:spring-security-oauth2-authorization-server", version = "0.4.0" }
+spring-security-oauth2-resource-server = { module = "org.springframework.security:spring-security-oauth2-resource-server", version = "5.8.0" }
 
 # spring-boot
 spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux", version.ref = "spring-boot" }
