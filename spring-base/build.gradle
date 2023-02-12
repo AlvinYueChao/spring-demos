@@ -5,6 +5,7 @@ dependencies {
     // utils
     implementation libs.javax.annotation.api
     implementation libs.commons.lang3
+    compileOnly libs.findbugs.jsr305
 
     // spring
     implementation libs.spring.context
