@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: authorization-server
+
+server:
+  port: 9000
