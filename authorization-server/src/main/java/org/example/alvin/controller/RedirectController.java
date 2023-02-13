@@ -1,4 +1,4 @@
-package org.example.alvin.config.controller;
+package org.example.alvin.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

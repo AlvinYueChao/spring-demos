@@ -10,7 +10,6 @@ import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -40,9 +39,6 @@ import org.springframework.security.web.authentication.LoginUrlAuthenticationEnt
 @Configuration
 public class SecurityConfig {
 
-  @Value("${login.password}")
-  private String rawPassword;
-
   @Bean
   @Order(1)
   public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -71,8 +67,9 @@ public class SecurityConfig {
 
   @Bean
   public UserDetailsService userDetailsService() {
+    // todo: get UserDetails from external storage. such as redis, mysql and so on
     PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    UserDetails userDetails = User.withUsername("admin").password(encoder.encode(this.rawPassword)).roles("USER").build();
+    UserDetails userDetails = User.withUsername("admin").password(encoder.encode("admin123")).roles("USER").build();
     return new InMemoryUserDetailsManager(userDetails);
   }
 
