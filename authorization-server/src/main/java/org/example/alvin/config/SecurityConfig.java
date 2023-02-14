@@ -9,7 +9,10 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.Arrays;
+import java.util.Set;
 import java.util.UUID;
+import java.util.function.Consumer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -77,9 +80,10 @@ public class SecurityConfig {
   public RegisteredClientRepository registeredClientRepository() {
     RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString()).clientId("messaging-client").clientSecret("{noop}secret")
         .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC).authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN).authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-        .redirectUri("http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc").redirectUri("http://127.0.0.1:8080/authorized").scope(OidcScopes.OPENID)
-        .scope(OidcScopes.PROFILE).scope("message.read").scope("message.write").clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build()).build();
+        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN).authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS).redirectUris(
+            strings -> strings.addAll(Arrays.asList("http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc", "http://127.0.0.1:8080/authorized", "http://www.baidu.com")))
+        .scope(OidcScopes.OPENID).scope(OidcScopes.PROFILE).scope("message.read").scope("message.write")
+        .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build()).build();
 
     return new InMemoryRegisteredClientRepository(registeredClient);
   }
