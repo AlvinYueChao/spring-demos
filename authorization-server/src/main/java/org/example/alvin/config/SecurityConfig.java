@@ -10,9 +10,7 @@ import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Arrays;
-import java.util.Set;
 import java.util.UUID;
-import java.util.function.Consumer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -47,9 +45,11 @@ public class SecurityConfig {
   public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
     OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
     http.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults());  // Enable OpenID Connect 1.0
-    http
-        // Redirect to the login page when not authenticated from the
-        // authorization endpoint
+    http.logout().permitAll().and()
+        // allow anyone to use /oauth/** and /order/** uri without authorization
+        .authorizeHttpRequests().requestMatchers("/oauth/**", "/order/**").permitAll().and()
+        .authorizeHttpRequests().anyRequest().authenticated().and()
+        // Redirect to the login page when not authenticated from the authorization endpoint
         .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")))
         // Accept access tokens for User Info and/or Client Registration
         .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
