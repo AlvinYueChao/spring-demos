@@ -45,12 +45,7 @@ public class SecurityConfig {
   public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
     OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
     http.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults());  // Enable OpenID Connect 1.0
-    http.logout().permitAll().and()
-        // allow anyone to use /oauth/** and /order/** uri without authorization
-        .authorizeHttpRequests().requestMatchers("/oauth/**", "/order/**").permitAll().and()
-        .authorizeHttpRequests().anyRequest().authenticated().and()
-        // Redirect to the login page when not authenticated from the authorization endpoint
-        .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")))
+    http.exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")))
         // Accept access tokens for User Info and/or Client Registration
         .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
 
@@ -60,9 +55,10 @@ public class SecurityConfig {
   @Bean
   @Order(2)
   public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
-        // Form login handles the redirect to the login page from the
-        // authorization server filter chain
+    http.logout().permitAll().and()
+        .authorizeHttpRequests().requestMatchers("/order/**").permitAll().and()
+        .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
+        // Form login handles the redirect to the login page from the authorization server filter chain
         .formLogin(Customizer.withDefaults());
 
     return http.build();
@@ -80,7 +76,10 @@ public class SecurityConfig {
   public RegisteredClientRepository registeredClientRepository() {
     RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString()).clientId("messaging-client").clientSecret("{noop}secret")
         .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC).authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN).authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS).redirectUris(
+        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN).authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+        // force to use default token generator, alg: base64
+//        .tokenSettings(TokenSettings.builder().accessTokenFormat(OAuth2TokenFormat.REFERENCE).build())
+        .redirectUris(
             strings -> strings.addAll(Arrays.asList("http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc", "http://127.0.0.1:8080/authorized", "http://www.baidu.com")))
         .scope(OidcScopes.OPENID).scope(OidcScopes.PROFILE).scope("message.read").scope("message.write")
         .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build()).build();
