@@ -10,11 +10,13 @@ buildscript {
     }
     dependencies {
         classpath libs.spotless.plugin
+        classpath libs.nebula.ospackage.plugin
     }
 }
 
 plugins {
     alias libs.plugins.spotless
+    alias libs.plugins.nebula.ospackage
 }
 
 subprojects {
@@ -23,7 +25,7 @@ subprojects {
     apply plugin: "java-library"
 
     group = "org.example.alvin"
-    version = "1.0.0-SNAPSHOT"
+    version = "1.0.0"
 
     repositories {
         maven {
@@ -63,4 +65,39 @@ subprojects {
     }
 
     project.compileJava.dependsOn spotlessApply
+
+    tasks.withType(Jar).configureEach {
+        archiveFileName = project.name + '.jar'
+    }
+
+    def copySubJar = tasks.register('copySubJar', Copy) {
+        from(project.layout.buildDirectory.dir('libs'))
+        include('**/*.jar')
+        into(rootProject.layout.buildDirectory.dir("libs/${project.name}"))
+    }
+
+    def copySubScripts = tasks.register('copySubScripts', Copy) {
+        from(project.layout.projectDirectory.dir('scripts'))
+        include('**/*.*')
+        into(rootProject.layout.buildDirectory.dir("libs/${project.name}"))
+    }
+
+    tasks.build.finalizedBy copySubJar
+    tasks.copySubJar.finalizedBy copySubScripts
+}
+
+ospackage {
+    packageName = project.name
+    version = '1.0.0'
+    release = '1'
+    arch = 'x86_64'
+    os = 'LINUX'
+}
+
+buildRpm {
+    from(project.layout.buildDirectory.dir('libs')) {
+        include('**/*.*')
+        into('/usr/local/' + project.name)
+        fileMode = 0755
+    }
 }
