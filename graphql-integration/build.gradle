@@ -1,0 +1,6 @@
+dependencies {
+    implementation libs.spring.boot.starter.graphql
+//    implementation libs.graphql.dgs.spring.boot.starter
+    implementation libs.spring.boot.starter.webflux
+    implementation libs.spring.boot.starter.data.mongodb
+}

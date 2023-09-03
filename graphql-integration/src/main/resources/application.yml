@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: easy-event-service
+  data:
+    mongodb:
+      host: 192.168.20.10
+      port: 27017
+      database: test
+      username: ${mongo_username}
+      password: ${mongo_password}
