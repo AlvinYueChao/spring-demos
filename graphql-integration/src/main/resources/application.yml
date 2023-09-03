@@ -8,3 +8,4 @@ spring:
       database: test
       username: ${mongo_username}
       password: ${mongo_password}
+      authentication-database: admin

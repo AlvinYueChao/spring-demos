@@ -1,6 +1,27 @@
+buildscript {
+    dependencies {
+        classpath libs.dgs.codegen.gradle.plugin
+    }
+}
+
+plugins {
+    alias libs.plugins.dgs.codegen
+}
+
+/*configurations.configureEach {
+    exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+}*/
+
 dependencies {
-    implementation libs.spring.boot.starter.graphql
-//    implementation libs.graphql.dgs.spring.boot.starter
-    implementation libs.spring.boot.starter.webflux
+//    implementation libs.spring.boot.starter.graphql
+    implementation libs.graphql.dgs.spring.boot.starter
+//    implementation libs.spring.boot.starter.webflux
     implementation libs.spring.boot.starter.data.mongodb
+    implementation libs.spring.security.crypto
+}
+
+generateJava {
+    schemaPaths = [ "${projectDir}/src/main/resources/schema" ]
+    packageName = "org.example.alvin.model.graphql"
+    generateClient = true
 }

@@ -21,6 +21,7 @@ javax-el = "3.0.0"
 tomcat-embed = "9.0.65"
 reactor-netty-http = "1.0.21"
 rpm-plugin = "9.1.1"
+dgs-codegen-plugin = "5.7.2"
 
 [libraries]
 # bom
@@ -48,6 +49,7 @@ spring-aop = { module = "org.springframework:spring-aop", version.ref = "spring-
 spring-webmvc = { module = "org.springframework:spring-webmvc", version.ref = "spring-framework" }
 spring-security-oauth2-authorization-server = { module = "org.springframework.security:spring-security-oauth2-authorization-server", version = "0.4.0" }
 spring-security-oauth2-resource-server = { module = "org.springframework.security:spring-security-oauth2-resource-server", version = "5.8.0" }
+spring-security-crypto = { module = "org.springframework.security:spring-security-crypto", version = "5.8.0" }
 
 # spring-boot
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "spring-boot" }
@@ -59,7 +61,7 @@ spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-
 spring-boot-starter-graphql = { module = "org.springframework.boot:spring-boot-starter-graphql", version.ref = "spring-boot" }
 spring-boot-starter-data-mongodb = { module = "org.springframework.boot:spring-boot-starter-data-mongodb", version.ref = "spring-boot" }
 
-graphql-dgs-spring-boot-starter = { module = "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter", version = "5.5.5" }
+graphql-dgs-spring-boot-starter = { module = "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter", version = "5.5.4" }
 
 # spring-cloud
 spring-cloud-dependencies = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
@@ -99,6 +101,7 @@ alibaba-druid = { module = "com.alibaba:druid", version.ref = "alibaba-druid" }
 # plugin
 spotless-plugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless-plugin" }
 nebula-ospackage-plugin = { module = "nebula.ospackage:nebula.ospackage.gradle.plugin", version.ref = "rpm-plugin" }
+dgs-codegen-gradle-plugin = { module = "com.netflix.dgs.codegen:com.netflix.dgs.codegen.gradle.plugin", version.ref = "dgs-codegen-plugin" }
 
 # test
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
@@ -111,3 +114,4 @@ tomcat-embed = ["tomcat-embed-core", "tomcat-embed-el", "tomcat-embed-websocket"
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless-plugin" }
 nebula-ospackage = { id = "nebula.ospackage", version.ref = "rpm-plugin" }
+dgs-codegen = { id = "com.netflix.dgs.codegen", version.ref = "dgs-codegen-plugin" }
