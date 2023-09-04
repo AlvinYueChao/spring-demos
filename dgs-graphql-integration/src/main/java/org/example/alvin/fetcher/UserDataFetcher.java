@@ -1,13 +1,13 @@
 package org.example.alvin.fetcher;
 
-import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsMutation;
-import com.netflix.graphql.dgs.DgsQuery;
-import com.netflix.graphql.dgs.InputArgument;
+import com.netflix.graphql.dgs.*;
 import lombok.extern.slf4j.Slf4j;
+import org.example.alvin.model.dao.EventObj;
 import org.example.alvin.model.dao.UserObj;
+import org.example.alvin.model.graphql.Event;
 import org.example.alvin.model.graphql.User;
 import org.example.alvin.model.graphql.UserInput;
+import org.example.alvin.repository.EventRepository;
 import org.example.alvin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,11 +20,13 @@ import java.util.stream.Collectors;
 public class UserDataFetcher {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
+  private final EventRepository eventRepository;
 
   @Autowired
-  public UserDataFetcher(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+  public UserDataFetcher(UserRepository userRepository, PasswordEncoder passwordEncoder, EventRepository eventRepository) {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
+    this.eventRepository = eventRepository;
   }
 
   @DgsQuery
@@ -43,5 +45,12 @@ public class UserDataFetcher {
     User createdUser = User.fromUserObj(createdUserObj);
     log.info("user created successfully, userId: {}, email: {}", createdUser.getId(), createdUser.getEmail());
     return createdUser;
+  }
+
+  @DgsData(parentType = "User", field = "createdEvents")
+  public List<Event> createdEvents(DgsDataFetchingEnvironment dfe) {
+    User user = dfe.getSource();
+    List<EventObj> eventObjs = eventRepository.findByCreatorId(user.getId());
+    return eventObjs.stream().map(Event::fromEventObj).collect(Collectors.toList());
   }
 }
