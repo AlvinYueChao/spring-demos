@@ -62,6 +62,7 @@ spring-boot-starter-graphql = { module = "org.springframework.boot:spring-boot-s
 spring-boot-starter-data-mongodb = { module = "org.springframework.boot:spring-boot-starter-data-mongodb", version.ref = "spring-boot" }
 
 graphql-dgs-spring-boot-starter = { module = "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter", version = "5.5.4" }
+graphql-java = { module = "com.graphql-java:graphql-java", version = "230521-nf-execution" }
 
 # spring-cloud
 spring-cloud-dependencies = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }

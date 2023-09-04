@@ -23,5 +23,5 @@ include 'spring-cloud-config-server'
 include 'spring-cloud-config-client'
 include 'nacos-provider-stock'
 include 'authorization-server'
-include 'graphql-integration'
+include 'dgs-graphql-integration'
 
