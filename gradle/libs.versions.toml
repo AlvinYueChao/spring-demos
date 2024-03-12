@@ -22,6 +22,7 @@ tomcat-embed = "9.0.65"
 reactor-netty-http = "1.0.21"
 rpm-plugin = "9.1.1"
 dgs-codegen-plugin = "5.7.2"
+dynamic-datasource = "4.3.0"
 
 [libraries]
 # bom
@@ -63,6 +64,7 @@ spring-boot-starter-data-mongodb = { module = "org.springframework.boot:spring-b
 
 graphql-dgs-spring-boot-starter = { module = "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter", version = "5.5.4" }
 graphql-java = { module = "com.graphql-java:graphql-java", version = "230521-nf-execution" }
+dynamic-datasource-spring-boot-starter = { module = "com.baomidou:dynamic-datasource-spring-boot-starter", version.ref = "dynamic-datasource" }
 
 # spring-cloud
 spring-cloud-dependencies = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }

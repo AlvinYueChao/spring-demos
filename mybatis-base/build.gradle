@@ -10,4 +10,6 @@ dependencies {
     implementation libs.spring.tx
     implementation libs.spring.context
     implementation libs.spring.webflux
+
+    implementation libs.dynamic.datasource.spring.boot.starter
 }

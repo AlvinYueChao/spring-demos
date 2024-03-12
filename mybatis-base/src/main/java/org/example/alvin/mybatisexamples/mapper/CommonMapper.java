@@ -2,9 +2,12 @@ package org.example.alvin.mybatisexamples.mapper;
 
 import java.util.List;
 import java.util.Map;
+
+import com.baomidou.dynamic.datasource.annotation.DS;
 import org.example.alvin.mybatisexamples.pojo.ConsultContractCardInfo;
 import org.example.alvin.mybatisexamples.pojo.ConsultRecordCount;
 
+@DS("")
 public interface CommonMapper {
 
   List<ConsultContractCardInfo> queryContractByCardId();
