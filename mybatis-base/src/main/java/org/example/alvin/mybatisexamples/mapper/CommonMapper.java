@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
+import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import org.example.alvin.mybatisexamples.pojo.ConsultContractCardInfo;
 import org.example.alvin.mybatisexamples.pojo.ConsultRecordCount;
 
 @DS("")
+@DSTransactional
 public interface CommonMapper {
 
   List<ConsultContractCardInfo> queryContractByCardId();
