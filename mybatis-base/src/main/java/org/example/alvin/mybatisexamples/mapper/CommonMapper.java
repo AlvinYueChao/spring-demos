@@ -8,8 +8,8 @@ import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import org.example.alvin.mybatisexamples.pojo.ConsultContractCardInfo;
 import org.example.alvin.mybatisexamples.pojo.ConsultRecordCount;
 
-@DS("")
-@DSTransactional
+//@DS("")
+//@DSTransactional
 public interface CommonMapper {
 
   List<ConsultContractCardInfo> queryContractByCardId();
