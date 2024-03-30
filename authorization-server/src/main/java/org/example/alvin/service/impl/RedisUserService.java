@@ -16,7 +16,6 @@ public class RedisUserService implements UserService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    UserDetails userDetails = User.withUsername("admin").password(encoder.encode("admin123")).roles("USER").build();
-    return userDetails;
+    return User.withUsername("admin").password(encoder.encode("admin123")).roles("USER").build();
   }
 }
