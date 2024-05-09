@@ -18,4 +18,6 @@ public class RedisUserService implements UserService {
     PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
     return User.withUsername("admin").password(encoder.encode("admin123")).roles("USER").build();
   }
+
+  // Generate a function to load user by age
 }
