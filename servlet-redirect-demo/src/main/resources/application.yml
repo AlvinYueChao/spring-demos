@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: servlet-redirect-demo
+
+server:
+  port: 8081

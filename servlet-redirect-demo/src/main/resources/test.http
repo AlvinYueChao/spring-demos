@@ -1,0 +1,13 @@
+GET http://localhost:8081/api/special1
+
+###
+
+GET http://localhost:8081/api/special2
+
+###
+
+GET http://localhost:8081/api/helloServlet
+
+###
+
+GET http://localhost:8081/rest/hello?name=Alvin

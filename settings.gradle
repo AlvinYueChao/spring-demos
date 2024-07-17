@@ -24,4 +24,5 @@ include 'spring-cloud-config-client'
 include 'nacos-provider-stock'
 include 'authorization-server'
 include 'dgs-graphql-integration'
+include 'servlet-redirect-demo'
 
