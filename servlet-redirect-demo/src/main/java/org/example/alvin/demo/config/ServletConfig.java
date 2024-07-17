@@ -12,6 +12,7 @@ public class ServletConfig {
   public ServletRegistrationBean<MyServlet> servletRegistrationBean() {
     ServletRegistrationBean<MyServlet> servletRegistrationBean = new ServletRegistrationBean<>(new MyServlet(), "/api/*");
     servletRegistrationBean.setEnabled(true);
+    servletRegistrationBean.setLoadOnStartup(Integer.MAX_VALUE);
     return servletRegistrationBean;
   }
 }

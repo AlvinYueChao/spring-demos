@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MyController {
-  @GetMapping(value = {"/api/special1", "/api/special2"})
+  @GetMapping(value = {"/rest/special1", "/rest/special2"})
   public String specialEndpoint() {
     return "Hello World";
   }
